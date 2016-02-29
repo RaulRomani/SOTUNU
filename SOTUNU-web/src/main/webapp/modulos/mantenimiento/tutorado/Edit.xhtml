@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="TutoradoEditDlg" widgetVar="TutoradoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTutoradoTitle}">
+      <h:form id="TutoradoEditForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{tutoradoController.selected != null}">
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_idTutorado}" for="idTutorado" />
+            <p:inputText id="idTutorado" value="#{tutoradoController.selected.idTutorado}" title="#{bundle.EditTutoradoTitle_idTutorado}" required="true" requiredMessage="#{bundle.EditTutoradoRequiredMessage_idTutorado}"/>
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_nombre}" for="nombre" />
+            <p:inputText id="nombre" value="#{tutoradoController.selected.nombre}" title="#{bundle.EditTutoradoTitle_nombre}" required="true" requiredMessage="#{bundle.EditTutoradoRequiredMessage_nombre}"/>
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_direccion}" for="direccion" />
+            <p:inputText id="direccion" value="#{tutoradoController.selected.direccion}" title="#{bundle.EditTutoradoTitle_direccion}" required="true" requiredMessage="#{bundle.EditTutoradoRequiredMessage_direccion}"/>
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_apellido}" for="apellido" />
+            <p:inputText id="apellido" value="#{tutoradoController.selected.apellido}" title="#{bundle.EditTutoradoTitle_apellido}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_foto}" for="foto" />
+            <p:inputText id="foto" value="#{tutoradoController.selected.foto}" title="#{bundle.EditTutoradoTitle_foto}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_fechaNacimiento}" for="fechaNacimiento" />
+            <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{tutoradoController.selected.fechaNacimiento}" title="#{bundle.EditTutoradoTitle_fechaNacimiento}"  showOn="button"/>
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_telefono}" for="telefono" />
+            <p:inputText id="telefono" value="#{tutoradoController.selected.telefono}" title="#{bundle.EditTutoradoTitle_telefono}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_celular}" for="celular" />
+            <p:inputText id="celular" value="#{tutoradoController.selected.celular}" title="#{bundle.EditTutoradoTitle_celular}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_rpm}" for="rpm" />
+            <p:inputText id="rpm" value="#{tutoradoController.selected.rpm}" title="#{bundle.EditTutoradoTitle_rpm}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_telefonoEmergencia}" for="telefonoEmergencia" />
+            <p:inputText id="telefonoEmergencia" value="#{tutoradoController.selected.telefonoEmergencia}" title="#{bundle.EditTutoradoTitle_telefonoEmergencia}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_email}" for="email" />
+            <p:inputText id="email" value="#{tutoradoController.selected.email}" title="#{bundle.EditTutoradoTitle_email}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_caracteristicaParticular}" for="caracteristicaParticular" />
+            <p:inputText id="caracteristicaParticular" value="#{tutoradoController.selected.caracteristicaParticular}" title="#{bundle.EditTutoradoTitle_caracteristicaParticular}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_areasProblema}" for="areasProblema" />
+            <p:inputText id="areasProblema" value="#{tutoradoController.selected.areasProblema}" title="#{bundle.EditTutoradoTitle_areasProblema}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_observaciones}" for="observaciones" />
+            <p:inputText id="observaciones" value="#{tutoradoController.selected.observaciones}" title="#{bundle.EditTutoradoTitle_observaciones}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_idEscuelaProfesional}" for="idEscuelaProfesional" />
+            <p:selectOneMenu id="idEscuelaProfesional" value="#{tutoradoController.selected.idEscuelaProfesional}" required="true" requiredMessage="#{bundle.EditTutoradoRequiredMessage_idEscuelaProfesional}">
+              <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+              <f:selectItems value="#{escuelaprofesionalController.itemsAvailableSelectOne}"
+                             var="idEscuelaProfesionalItem"
+                             itemValue="#{idEscuelaProfesionalItem}"/>
+            </p:selectOneMenu>
+          </p:panelGrid>
+          <p:commandButton actionListener="#{tutoradoController.update}" value="#{bundle.Save}" update="display,:TutoradoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TutoradoEditDialog');"/>
+          <p:commandButton value="#{bundle.Cancel}" onclick="TutoradoEditDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

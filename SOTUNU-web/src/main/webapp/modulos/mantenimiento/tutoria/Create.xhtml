@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="TutoriaCreateDlg" widgetVar="TutoriaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTutoriaTitle}">
+      <h:form id="TutoriaCreateForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{tutoriaController.selected != null}">
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_idTutoria}" for="idTutoria" />
+            <p:inputText id="idTutoria" value="#{tutoriaController.selected.idTutoria}" title="#{bundle.CreateTutoriaTitle_idTutoria}" required="true" requiredMessage="#{bundle.CreateTutoriaRequiredMessage_idTutoria}"/>
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_fecha}" for="fecha" />
+            <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{tutoriaController.selected.fecha}" title="#{bundle.EditTutoriaTitle_fecha}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_fecha}" showOn="button"/>
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_horaInicio}" for="horaInicio" />
+            <p:calendar id="horaInicio" pattern="HH:mm:ss" value="#{tutoriaController.selected.horaInicio}" title="#{bundle.EditTutoriaTitle_horaInicio}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_horaInicio}" showOn="button"/>
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_horaFin}" for="horaFin" />
+            <p:calendar id="horaFin" pattern="HH:mm:ss" value="#{tutoriaController.selected.horaFin}" title="#{bundle.EditTutoriaTitle_horaFin}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_horaFin}" showOn="button"/>
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_atencion}" for="atencion" />
+            <p:inputText id="atencion" value="#{tutoriaController.selected.atencion}" title="#{bundle.CreateTutoriaTitle_atencion}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_refDocente}" for="refDocente" />
+            <p:inputText id="refDocente" value="#{tutoriaController.selected.refDocente}" title="#{bundle.CreateTutoriaTitle_refDocente}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_refAsignatura}" for="refAsignatura" />
+            <p:inputText id="refAsignatura" value="#{tutoriaController.selected.refAsignatura}" title="#{bundle.CreateTutoriaTitle_refAsignatura}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_refDato}" for="refDato" />
+            <p:inputText id="refDato" value="#{tutoriaController.selected.refDato}" title="#{bundle.CreateTutoriaTitle_refDato}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_notas}" for="notas" />
+            <p:inputText id="notas" value="#{tutoriaController.selected.notas}" title="#{bundle.CreateTutoriaTitle_notas}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_asistencia}" for="asistencia" />
+            <p:inputText id="asistencia" value="#{tutoriaController.selected.asistencia}" title="#{bundle.CreateTutoriaTitle_asistencia}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_observaciones}" for="observaciones" />
+            <p:inputText id="observaciones" value="#{tutoriaController.selected.observaciones}" title="#{bundle.CreateTutoriaTitle_observaciones}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_idProgramacion}" for="idProgramacion" />
+            <p:selectOneMenu id="idProgramacion" value="#{tutoriaController.selected.idProgramacion}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_idProgramacion}">
+              <f:selectItems value="#{programacionController.itemsAvailableSelectOne}"
+                             var="idProgramacionItem"
+                             itemValue="#{idProgramacionItem}"/>
+            </p:selectOneMenu>
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_idUsuario}" for="idUsuario" />
+            <p:selectOneMenu id="idUsuario" value="#{tutoriaController.selected.idUsuario}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_idUsuario}">
+              <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                             var="idUsuarioItem"
+                             itemValue="#{idUsuarioItem}"/>
+            </p:selectOneMenu>
+          </p:panelGrid>
+          <p:commandButton actionListener="#{tutoriaController.create}" value="#{bundle.Save}" update="display,:TutoriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'TutoriaCreateDialog');"/>
+          <p:commandButton value="#{bundle.Cancel}" onclick="TutoriaCreateDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

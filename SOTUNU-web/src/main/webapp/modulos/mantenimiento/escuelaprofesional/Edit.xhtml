@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="EscuelaprofesionalEditDlg" widgetVar="EscuelaprofesionalEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEscuelaprofesionalTitle}">
+      <h:form id="EscuelaprofesionalEditForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{escuelaprofesionalController.selected != null}">
+            <p:outputLabel value="#{bundle.EditEscuelaprofesionalLabel_idEscuelaProfesional}" for="idEscuelaProfesional" />
+            <p:inputText id="idEscuelaProfesional" value="#{escuelaprofesionalController.selected.idEscuelaProfesional}" title="#{bundle.EditEscuelaprofesionalTitle_idEscuelaProfesional}" required="true" requiredMessage="#{bundle.EditEscuelaprofesionalRequiredMessage_idEscuelaProfesional}"/>
+            <p:outputLabel value="#{bundle.EditEscuelaprofesionalLabel_nombre}" for="nombre" />
+            <p:inputText id="nombre" value="#{escuelaprofesionalController.selected.nombre}" title="#{bundle.EditEscuelaprofesionalTitle_nombre}" required="true" requiredMessage="#{bundle.EditEscuelaprofesionalRequiredMessage_nombre}"/>
+            <p:outputLabel value="#{bundle.EditEscuelaprofesionalLabel_facultad}" for="facultad" />
+            <p:inputText id="facultad" value="#{escuelaprofesionalController.selected.facultad}" title="#{bundle.EditEscuelaprofesionalTitle_facultad}" required="true" requiredMessage="#{bundle.EditEscuelaprofesionalRequiredMessage_facultad}"/>
+            <p:outputLabel value="#{bundle.EditEscuelaprofesionalLabel_especialidad}" for="especialidad" />
+            <p:inputText id="especialidad" value="#{escuelaprofesionalController.selected.especialidad}" title="#{bundle.EditEscuelaprofesionalTitle_especialidad}" required="true" requiredMessage="#{bundle.EditEscuelaprofesionalRequiredMessage_especialidad}"/>
+          </p:panelGrid>
+          <p:commandButton actionListener="#{escuelaprofesionalController.update}" value="#{bundle.Save}" update="display,:EscuelaprofesionalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EscuelaprofesionalEditDialog');"/>
+          <p:commandButton value="#{bundle.Cancel}" onclick="EscuelaprofesionalEditDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="ProgramacionEditDlg" widgetVar="ProgramacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProgramacionTitle}">
+      <h:form id="ProgramacionEditForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{programacionController.selected != null}">
+            <p:outputLabel value="#{bundle.EditProgramacionLabel_idProgramacion}" for="idProgramacion" />
+            <p:inputText id="idProgramacion" value="#{programacionController.selected.idProgramacion}" title="#{bundle.EditProgramacionTitle_idProgramacion}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_idProgramacion}"/>
+            <p:outputLabel value="#{bundle.EditProgramacionLabel_ciclo}" for="ciclo" />
+            <p:inputText id="ciclo" value="#{programacionController.selected.ciclo}" title="#{bundle.EditProgramacionTitle_ciclo}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_ciclo}"/>
+            <p:outputLabel value="#{bundle.EditProgramacionLabel_salon}" for="salon" />
+            <p:inputText id="salon" value="#{programacionController.selected.salon}" title="#{bundle.EditProgramacionTitle_salon}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_salon}"/>
+            <p:outputLabel value="#{bundle.EditProgramacionLabel_pabellon}" for="pabellon" />
+            <p:inputText id="pabellon" value="#{programacionController.selected.pabellon}" title="#{bundle.EditProgramacionTitle_pabellon}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_pabellon}"/>
+            <p:outputLabel value="#{bundle.EditProgramacionLabel_nroEstudiantes}" for="nroEstudiantes" />
+            <p:inputText id="nroEstudiantes" value="#{programacionController.selected.nroEstudiantes}" title="#{bundle.EditProgramacionTitle_nroEstudiantes}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_nroEstudiantes}"/>
+            <p:outputLabel value="#{bundle.EditProgramacionLabel_delegado}" for="delegado" />
+            <p:inputText id="delegado" value="#{programacionController.selected.delegado}" title="#{bundle.EditProgramacionTitle_delegado}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_delegado}"/>
+            <p:outputLabel value="#{bundle.EditProgramacionLabel_idUsuario}" for="idUsuario" />
+            <p:selectOneMenu id="idUsuario" value="#{programacionController.selected.idUsuario}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_idUsuario}">
+              <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+              <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                             var="idUsuarioItem"
+                             itemValue="#{idUsuarioItem}"/>
+            </p:selectOneMenu>
+          </p:panelGrid>
+          <p:commandButton actionListener="#{programacionController.update}" value="#{bundle.Save}" update="display,:ProgramacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProgramacionEditDialog');"/>
+          <p:commandButton value="#{bundle.Cancel}" onclick="ProgramacionEditDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

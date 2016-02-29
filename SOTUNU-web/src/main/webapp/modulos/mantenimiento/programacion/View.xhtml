@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="ProgramacionViewDlg" widgetVar="ProgramacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewProgramacionTitle}">
+      <h:form id="ProgramacionViewForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{programacionController.selected != null}">
+            <h:outputText value="#{bundle.ViewProgramacionLabel_idProgramacion}"/>
+            <h:outputText value="#{programacionController.selected.idProgramacion}" title="#{bundle.ViewProgramacionTitle_idProgramacion}"/>
+            <h:outputText value="#{bundle.ViewProgramacionLabel_ciclo}"/>
+            <h:outputText value="#{programacionController.selected.ciclo}" title="#{bundle.ViewProgramacionTitle_ciclo}"/>
+            <h:outputText value="#{bundle.ViewProgramacionLabel_salon}"/>
+            <h:outputText value="#{programacionController.selected.salon}" title="#{bundle.ViewProgramacionTitle_salon}"/>
+            <h:outputText value="#{bundle.ViewProgramacionLabel_pabellon}"/>
+            <h:outputText value="#{programacionController.selected.pabellon}" title="#{bundle.ViewProgramacionTitle_pabellon}"/>
+            <h:outputText value="#{bundle.ViewProgramacionLabel_nroEstudiantes}"/>
+            <h:outputText value="#{programacionController.selected.nroEstudiantes}" title="#{bundle.ViewProgramacionTitle_nroEstudiantes}"/>
+            <h:outputText value="#{bundle.ViewProgramacionLabel_delegado}"/>
+            <h:outputText value="#{programacionController.selected.delegado}" title="#{bundle.ViewProgramacionTitle_delegado}"/>
+            <h:outputText value="#{bundle.ViewProgramacionLabel_idUsuario}"/>
+            <h:outputText value="#{programacionController.selected.idUsuario}" title="#{bundle.ViewProgramacionTitle_idUsuario}"/>
+          </p:panelGrid>
+          <p:commandButton value="#{bundle.Close}" onclick="ProgramacionViewDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

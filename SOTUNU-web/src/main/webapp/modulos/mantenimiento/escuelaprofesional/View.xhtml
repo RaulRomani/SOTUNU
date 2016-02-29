@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="EscuelaprofesionalViewDlg" widgetVar="EscuelaprofesionalViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEscuelaprofesionalTitle}">
+      <h:form id="EscuelaprofesionalViewForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{escuelaprofesionalController.selected != null}">
+            <h:outputText value="#{bundle.ViewEscuelaprofesionalLabel_idEscuelaProfesional}"/>
+            <h:outputText value="#{escuelaprofesionalController.selected.idEscuelaProfesional}" title="#{bundle.ViewEscuelaprofesionalTitle_idEscuelaProfesional}"/>
+            <h:outputText value="#{bundle.ViewEscuelaprofesionalLabel_nombre}"/>
+            <h:outputText value="#{escuelaprofesionalController.selected.nombre}" title="#{bundle.ViewEscuelaprofesionalTitle_nombre}"/>
+            <h:outputText value="#{bundle.ViewEscuelaprofesionalLabel_facultad}"/>
+            <h:outputText value="#{escuelaprofesionalController.selected.facultad}" title="#{bundle.ViewEscuelaprofesionalTitle_facultad}"/>
+            <h:outputText value="#{bundle.ViewEscuelaprofesionalLabel_especialidad}"/>
+            <h:outputText value="#{escuelaprofesionalController.selected.especialidad}" title="#{bundle.ViewEscuelaprofesionalTitle_especialidad}"/>
+          </p:panelGrid>
+          <p:commandButton value="#{bundle.Close}" onclick="EscuelaprofesionalViewDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+  <h:head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    
+
+    <!-- Bootstrap Core CSS -->
+    <h:outputStylesheet name="./plantilla/css/bootstrap.min.css"/>
+
+    
+
+    <!-- Morris Charts CSS -->
+    <!--<h:outputStylesheet name="./plantilla/css/plugins/morris.css"/>-->
+
+    <!-- Custom Fonts -->
+    <h:outputStylesheet name="./plantilla/font-awesome/css/font-awesome.min.css"/>
+    
+    <!-- Custom resources -->
+    <ui:insert name="resources">
+      
+    </ui:insert>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <title><ui:insert name="title">Sistema de orientación y tutoria UNU</ui:insert></title>
+
+  </h:head>
+
+  <h:body>
+    <!-- Custom CSS -->
+    <h:outputStylesheet name="/css/custom.css"/>
+    
+
+    <h:form>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!--<a class="navbar-brand" href="/index.xhtml">Clinica Dental</a>-->
+          <h:link class="navbar-brand" outcome="/index" value="SOT"/>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+
+            <!--
+            <li class="active">
+              <a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+            </li> -->
+            
+            
+            
+            <li>
+              <h:link outcome="/modulos/historia/historiaclinica"><i class="fa fa-fw fa-history"></i> Programación</h:link>
+            </li>
+            
+            <li>
+              <h:link outcome="/modulos/historia/historiaclinica"><i class="fa fa-fw fa-history"></i> Tutoria</h:link>
+            </li>
+
+            
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                 aria-expanded="false"><i class="fa fa-fw fa-wrench  "></i> Mantenimiento <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><h:link outcome="/modulos/mantenimiento/escuelaprofesional/List">Escuela Profesional</h:link></li>
+                <li><h:link outcome="/modulos/mantenimiento/personal/List">Personal</h:link></li>
+                <li><h:link outcome="/modulos/mantenimiento/programacion/List">Programación</h:link></li>
+                <li><h:link outcome="/modulos/mantenimiento/tutorado/List">Tutorado</h:link></li>
+                <li><h:link outcome="/modulos/mantenimiento/tutoria/List">Tutoria</h:link></li>
+                <li><h:link outcome="/modulos/mantenimiento/usuario/List">Usuario</h:link></li>
+              </ul>
+            </li>
+
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <!--<li><a href="#">Link</a></li>-->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                 aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user"></i>&nbsp;
+                <!--<h:outputLabel value="#loginController.personal.nombres}"/>--> <span class="caret"></span></a>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                </li>
+
+                <li>
+                  <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <p:commandLink actionListener="#loginController.logout()}" ajax="false">
+                      <i class="fa fa-fw fa-power-off"></i> Cerrar sesión
+                  </p:commandLink>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>  
+    </h:form>
+
+    <p:growl id="growl" life="3000" />
+    
+    <ui:insert name="body"></ui:insert>
+    
+    
+    <div class="container-fluid footer">
+      <div class="row">
+        <p align="center">Todos los derechos reservados.</p>
+        
+      </div>
+    </div>
+    
+    
+
+
+    <!-- jQuery -->
+    <!--<h:outputScript name="./plantilla/js/jquery.js"/>-->
+
+    <!-- Bootstrap Core JavaScript -->
+    <h:outputScript name="./plantilla/js/bootstrap.min.js"/>
+
+
+
+
+  </h:body>
+
+</html>
+
+
+

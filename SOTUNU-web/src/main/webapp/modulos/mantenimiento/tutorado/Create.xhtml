@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="TutoradoCreateDlg" widgetVar="TutoradoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTutoradoTitle}">
+      <h:form id="TutoradoCreateForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{tutoradoController.selected != null}">
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_idTutorado}" for="idTutorado" />
+            <p:inputText id="idTutorado" value="#{tutoradoController.selected.idTutorado}" title="#{bundle.CreateTutoradoTitle_idTutorado}" required="true" requiredMessage="#{bundle.CreateTutoradoRequiredMessage_idTutorado}"/>
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_nombre}" for="nombre" />
+            <p:inputText id="nombre" value="#{tutoradoController.selected.nombre}" title="#{bundle.CreateTutoradoTitle_nombre}" required="true" requiredMessage="#{bundle.CreateTutoradoRequiredMessage_nombre}"/>
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_direccion}" for="direccion" />
+            <p:inputText id="direccion" value="#{tutoradoController.selected.direccion}" title="#{bundle.CreateTutoradoTitle_direccion}" required="true" requiredMessage="#{bundle.CreateTutoradoRequiredMessage_direccion}"/>
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_apellido}" for="apellido" />
+            <p:inputText id="apellido" value="#{tutoradoController.selected.apellido}" title="#{bundle.CreateTutoradoTitle_apellido}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_foto}" for="foto" />
+            <p:inputText id="foto" value="#{tutoradoController.selected.foto}" title="#{bundle.CreateTutoradoTitle_foto}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_fechaNacimiento}" for="fechaNacimiento" />
+            <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{tutoradoController.selected.fechaNacimiento}" title="#{bundle.EditTutoradoTitle_fechaNacimiento}"  showOn="button"/>
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_telefono}" for="telefono" />
+            <p:inputText id="telefono" value="#{tutoradoController.selected.telefono}" title="#{bundle.CreateTutoradoTitle_telefono}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_celular}" for="celular" />
+            <p:inputText id="celular" value="#{tutoradoController.selected.celular}" title="#{bundle.CreateTutoradoTitle_celular}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_rpm}" for="rpm" />
+            <p:inputText id="rpm" value="#{tutoradoController.selected.rpm}" title="#{bundle.CreateTutoradoTitle_rpm}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_telefonoEmergencia}" for="telefonoEmergencia" />
+            <p:inputText id="telefonoEmergencia" value="#{tutoradoController.selected.telefonoEmergencia}" title="#{bundle.CreateTutoradoTitle_telefonoEmergencia}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_email}" for="email" />
+            <p:inputText id="email" value="#{tutoradoController.selected.email}" title="#{bundle.CreateTutoradoTitle_email}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_caracteristicaParticular}" for="caracteristicaParticular" />
+            <p:inputText id="caracteristicaParticular" value="#{tutoradoController.selected.caracteristicaParticular}" title="#{bundle.CreateTutoradoTitle_caracteristicaParticular}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_areasProblema}" for="areasProblema" />
+            <p:inputText id="areasProblema" value="#{tutoradoController.selected.areasProblema}" title="#{bundle.CreateTutoradoTitle_areasProblema}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_observaciones}" for="observaciones" />
+            <p:inputText id="observaciones" value="#{tutoradoController.selected.observaciones}" title="#{bundle.CreateTutoradoTitle_observaciones}" />
+            <p:outputLabel value="#{bundle.CreateTutoradoLabel_idEscuelaProfesional}" for="idEscuelaProfesional" />
+            <p:selectOneMenu id="idEscuelaProfesional" value="#{tutoradoController.selected.idEscuelaProfesional}" required="true" requiredMessage="#{bundle.EditTutoradoRequiredMessage_idEscuelaProfesional}">
+              <f:selectItems value="#{escuelaprofesionalController.itemsAvailableSelectOne}"
+                             var="idEscuelaProfesionalItem"
+                             itemValue="#{idEscuelaProfesionalItem}"/>
+            </p:selectOneMenu>
+          </p:panelGrid>
+          <p:commandButton actionListener="#{tutoradoController.create}" value="#{bundle.Save}" update="display,:TutoradoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TutoradoCreateDialog');"/>
+          <p:commandButton value="#{bundle.Cancel}" onclick="TutoradoCreateDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

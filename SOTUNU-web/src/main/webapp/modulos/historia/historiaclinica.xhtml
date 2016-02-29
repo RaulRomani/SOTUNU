@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+
+  <h:body>
+    <ui:composition template="/templates/templateCool.xhtml">
+      <ui:define name="resources">
+        <h:outputScript name="/js/scripts.js"/>
+        
+      </ui:define>
+      <ui:define name="body">
+
+        
+        <div class="container main-content">
+          <h1 class="row" style="color: #269abc">Historia Clinica</h1>
+          <h:form id="formId" enctype="multipart/form-data">
+
+            <div class="row">
+              <h2>Datos personales</h2>
+              <div class="col-lg-3">
+
+                <p:growl id="messages" showDetail="true" />
+                <h:graphicImage url="/resources/fotos/foto.jpg" alt="Foto" id="blah" height="150px" width="200px" />
+
+
+                <p:fileUpload id="imgTmp"
+                              value="#{historia.file}" 
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                              mode="simple" skinSimple="true"
+                              label="Elegir"/>
+
+                <!--<p:commandButton value="Submit" ajax="false" actionListener=" # historia.upload()}"  />-->
+
+
+
+              </div>
+
+              <div class="col-lg-4">
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Nombre</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Apellidos</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">DNI</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Dirección</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Lugar de nacimiento</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Edad</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Celular</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Sexo</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Edad</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Raza</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Grado de institución</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Ocupación</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Religión</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Estado civil</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Fecha de apertura</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+
+
+
+              </div>
+
+              <div class="col-lg-offset-1"/>
+            </div>
+
+            
+
+            <div class="row historia-clinica">
+              <h2>Datos de historia clinica</h2>
+              <div class="col-lg-6">
+                <!--<div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Fecha de atención</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>-->
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Antecedentes familiares</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Antecedentes personales</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Diagnostico presuntivo</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Diagnostico definitivo</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                
+              </div>
+
+              <div class="col-lg-6">
+
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Plan de trabajo</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Pronóstico</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Tratamiento/Recomendaciones</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Alta del pacientes</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="inputEmail3" />
+                  </div>
+                </div>
+
+                
+              </div>
+            </div>
+          
+              
+            <div class="row enfermedad">
+              <div class="col-lg-12">
+
+                <p>Agregar enfermedad: 
+                  <p:commandButton id="createButton" icon="ui-icon-plus"   
+                                   value="Agregar"
+                                   oncomplete="PF('EnfermedadCreateDialog').show()"/>
+                </p>
+
+              </div>
+              <div class="col-lg-12">
+                <p:dataTable id="datalist" value="#{historia.enfermedades}" var="item">
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListEnfermedadTitle_datosInformante}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.datosInformante}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListEnfermedadTitle_motivoConsulta}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.motivoConsulta}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListEnfermedadTitle_tiempoEnfermedad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tiempoEnfermedad}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListEnfermedadTitle_signosSintomas}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.signosSintomas}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListEnfermedadTitle_relatoCronologico}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.relatoCronologico}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListEnfermedadTitle_funcionesBiologiacas}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.funcionesBiologiacas}"/>
+                  </p:column>
+                </p:dataTable>
+
+              </div>
+            </div>
+
+
+
+            <div class="row exporacion-fisica">
+              <div class="col-lg-12">
+                <p>Agregar exploración física:  
+                  <p:commandButton id="addExploracion" icon="ui-icon-plus"   
+                                   value="Agregar"
+                                   oncomplete="PF('ExploracionfisicaCreateDialog').show()"/>
+                </p>
+              </div>
+              <div class="col-lg-12">
+                <p:dataTable id="datalistExploracion" value="#{historia.exploraciones}" var="item">
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListExploracionfisicaTitle_signosVitales}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.signosVitales}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListExploracionfisicaTitle_pulso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.pulso}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListExploracionfisicaTitle_temperatura}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.temperatura}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListExploracionfisicaTitle_fc}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fc}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListExploracionfisicaTitle_frecuenciaRespiratoria}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.frecuenciaRespiratoria}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListExploracionfisicaTitle_examenClinicoGeneral}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.examenClinicoGeneral}"/>
+                  </p:column>
+                  <p:column>
+                    <f:facet name="header">
+                      <h:outputText value="#{bundle.ListExploracionfisicaTitle_odontoestomatologico}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.odontoestomatologico}"/>
+                  </p:column>
+                </p:dataTable>
+              </div>
+            </div>
+          </h:form>
+        </div>
+
+        
+        <!--<ui:include src="addEnfermedad.xhtml"/>-->
+        
+        <p:dialog id="EnfermedadCreateDlg" 
+              widgetVar="EnfermedadCreateDialog" 
+              modal="true" resizable="false" 
+              appendTo="@(body)" 
+              header="#{bundle.CreateEnfermedadTitle}">
+      
+      <h:form id="enfermedadForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" >
+            <p:outputLabel value="#{bundle.CreateEnfermedadLabel_datosInformante}" for="datosInformante" />
+            <p:inputText id="datosInformante" value="#{historia.enfermedad.datosInformante}" title="#{bundle.CreateEnfermedadTitle_datosInformante}" required="true" requiredMessage="#{bundle.CreateEnfermedadRequiredMessage_datosInformante}"/>
+            <p:outputLabel value="#{bundle.CreateEnfermedadLabel_motivoConsulta}" for="motivoConsulta" />
+            <p:inputText id="motivoConsulta" value="#{historia.enfermedad.motivoConsulta}" title="#{bundle.CreateEnfermedadTitle_motivoConsulta}" required="true" requiredMessage="#{bundle.CreateEnfermedadRequiredMessage_motivoConsulta}"/>
+            <p:outputLabel value="#{bundle.CreateEnfermedadLabel_tiempoEnfermedad}" for="tiempoEnfermedad" />
+            <p:inputText id="tiempoEnfermedad" value="#{historia.enfermedad.tiempoEnfermedad}" title="#{bundle.CreateEnfermedadTitle_tiempoEnfermedad}" required="true" requiredMessage="#{bundle.CreateEnfermedadRequiredMessage_tiempoEnfermedad}"/>
+            <p:outputLabel value="#{bundle.CreateEnfermedadLabel_signosSintomas}" for="signosSintomas" />
+            <p:inputText id="signosSintomas" value="#{historia.enfermedad.signosSintomas}" title="#{bundle.CreateEnfermedadTitle_signosSintomas}" required="true" requiredMessage="#{bundle.CreateEnfermedadRequiredMessage_signosSintomas}"/>
+            <p:outputLabel value="#{bundle.CreateEnfermedadLabel_relatoCronologico}" for="relatoCronologico" />
+            <p:inputText id="relatoCronologico" value="#{historia.enfermedad.relatoCronologico}" title="#{bundle.CreateEnfermedadTitle_relatoCronologico}" required="true" requiredMessage="#{bundle.CreateEnfermedadRequiredMessage_relatoCronologico}"/>
+            <p:outputLabel value="#{bundle.CreateEnfermedadLabel_funcionesBiologiacas}" for="funcionesBiologiacas" />
+            <p:inputText id="funcionesBiologiacas" value="#{historia.enfermedad.funcionesBiologiacas}" title="#{bundle.CreateEnfermedadTitle_funcionesBiologiacas}" required="true" requiredMessage="#{bundle.CreateEnfermedadRequiredMessage_funcionesBiologiacas}"/>
+            
+          </p:panelGrid>
+          <p:commandButton actionListener="#{historia.addEnfermedad}" value="#{bundle.Save}" update="display,:formId:datalist,:growl" />
+          <p:commandButton value="#{bundle.Cancel}" oncomplete="PF('EnfermedadCreateDialog').hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+        <ui:include src="addExploracion.xhtml"/>
+        
+
+      </ui:define>
+    </ui:composition>
+  </h:body>
+</html>
+

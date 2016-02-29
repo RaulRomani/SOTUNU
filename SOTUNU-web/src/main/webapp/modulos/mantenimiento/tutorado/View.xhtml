@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="TutoradoViewDlg" widgetVar="TutoradoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTutoradoTitle}">
+      <h:form id="TutoradoViewForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{tutoradoController.selected != null}">
+            <h:outputText value="#{bundle.ViewTutoradoLabel_idTutorado}"/>
+            <h:outputText value="#{tutoradoController.selected.idTutorado}" title="#{bundle.ViewTutoradoTitle_idTutorado}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_nombre}"/>
+            <h:outputText value="#{tutoradoController.selected.nombre}" title="#{bundle.ViewTutoradoTitle_nombre}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_direccion}"/>
+            <h:outputText value="#{tutoradoController.selected.direccion}" title="#{bundle.ViewTutoradoTitle_direccion}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_apellido}"/>
+            <h:outputText value="#{tutoradoController.selected.apellido}" title="#{bundle.ViewTutoradoTitle_apellido}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_foto}"/>
+            <h:outputText value="#{tutoradoController.selected.foto}" title="#{bundle.ViewTutoradoTitle_foto}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_fechaNacimiento}"/>
+            <h:outputText value="#{tutoradoController.selected.fechaNacimiento}" title="#{bundle.ViewTutoradoTitle_fechaNacimiento}">
+              <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_telefono}"/>
+            <h:outputText value="#{tutoradoController.selected.telefono}" title="#{bundle.ViewTutoradoTitle_telefono}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_celular}"/>
+            <h:outputText value="#{tutoradoController.selected.celular}" title="#{bundle.ViewTutoradoTitle_celular}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_rpm}"/>
+            <h:outputText value="#{tutoradoController.selected.rpm}" title="#{bundle.ViewTutoradoTitle_rpm}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_telefonoEmergencia}"/>
+            <h:outputText value="#{tutoradoController.selected.telefonoEmergencia}" title="#{bundle.ViewTutoradoTitle_telefonoEmergencia}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_email}"/>
+            <h:outputText value="#{tutoradoController.selected.email}" title="#{bundle.ViewTutoradoTitle_email}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_caracteristicaParticular}"/>
+            <h:outputText value="#{tutoradoController.selected.caracteristicaParticular}" title="#{bundle.ViewTutoradoTitle_caracteristicaParticular}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_areasProblema}"/>
+            <h:outputText value="#{tutoradoController.selected.areasProblema}" title="#{bundle.ViewTutoradoTitle_areasProblema}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_observaciones}"/>
+            <h:outputText value="#{tutoradoController.selected.observaciones}" title="#{bundle.ViewTutoradoTitle_observaciones}"/>
+            <h:outputText value="#{bundle.ViewTutoradoLabel_idEscuelaProfesional}"/>
+            <h:outputText value="#{tutoradoController.selected.idEscuelaProfesional}" title="#{bundle.ViewTutoradoTitle_idEscuelaProfesional}"/>
+          </p:panelGrid>
+          <p:commandButton value="#{bundle.Close}" onclick="TutoradoViewDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="ExploracionfisicaCreateDlg" widgetVar="ExploracionfisicaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateExploracionfisicaTitle}">
+      <h:form id="ExploracionfisicaCreateForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" >
+            <p:outputLabel value="#{bundle.CreateExploracionfisicaLabel_signosVitales}" for="signosVitales" />
+            <p:inputText id="signosVitales" value="#{historia.exploracion.signosVitales}" title="#{bundle.CreateExploracionfisicaTitle_signosVitales}" required="true" requiredMessage="#{bundle.CreateExploracionfisicaRequiredMessage_signosVitales}"/>
+            <p:outputLabel value="#{bundle.CreateExploracionfisicaLabel_pulso}" for="pulso" />
+            <p:inputText id="pulso" value="#{historia.exploracion.pulso}" title="#{bundle.CreateExploracionfisicaTitle_pulso}" required="true" requiredMessage="#{bundle.CreateExploracionfisicaRequiredMessage_pulso}"/>
+            <p:outputLabel value="#{bundle.CreateExploracionfisicaLabel_temperatura}" for="temperatura" />
+            <p:inputText id="temperatura" value="#{historia.exploracion.temperatura}" title="#{bundle.CreateExploracionfisicaTitle_temperatura}" required="true" requiredMessage="#{bundle.CreateExploracionfisicaRequiredMessage_temperatura}"/>
+            <p:outputLabel value="#{bundle.CreateExploracionfisicaLabel_fc}" for="fc" />
+            <p:inputText id="fc" value="#{historia.exploracion.fc}" title="#{bundle.CreateExploracionfisicaTitle_fc}" required="true" requiredMessage="#{bundle.CreateExploracionfisicaRequiredMessage_fc}"/>
+            <p:outputLabel value="#{bundle.CreateExploracionfisicaLabel_frecuenciaRespiratoria}" for="frecuenciaRespiratoria" />
+            <p:inputText id="frecuenciaRespiratoria" value="#{historia.exploracion.frecuenciaRespiratoria}" title="#{bundle.CreateExploracionfisicaTitle_frecuenciaRespiratoria}" required="true" requiredMessage="#{bundle.CreateExploracionfisicaRequiredMessage_frecuenciaRespiratoria}"/>
+            <p:outputLabel value="#{bundle.CreateExploracionfisicaLabel_examenClinicoGeneral}" for="examenClinicoGeneral" />
+            <p:inputText id="examenClinicoGeneral" value="#{historia.exploracion.examenClinicoGeneral}" title="#{bundle.CreateExploracionfisicaTitle_examenClinicoGeneral}" required="true" requiredMessage="#{bundle.CreateExploracionfisicaRequiredMessage_examenClinicoGeneral}"/>
+            <p:outputLabel value="#{bundle.CreateExploracionfisicaLabel_odontoestomatologico}" for="odontoestomatologico" />
+            <p:inputText id="odontoestomatologico" value="#{historia.exploracion.odontoestomatologico}" title="#{bundle.CreateExploracionfisicaTitle_odontoestomatologico}" required="true" requiredMessage="#{bundle.CreateExploracionfisicaRequiredMessage_odontoestomatologico}"/>
+            
+            
+          </p:panelGrid>
+          <p:commandButton actionListener="#{historia.addExploracionFisica()}" value="#{bundle.Save}" update="display,:formId:datalistExploracion,:growl" />
+          <p:commandButton value="Cerrar" oncomplete="PF('ExploracionfisicaCreateDialog').hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

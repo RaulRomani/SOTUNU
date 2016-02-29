@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+  <h:body>
+    <ui:composition template="./templates/templateCool.xhtml">
+      <ui:define name="body">
+
+        Bienvenido!
+        <br />
+        <h:link outcome="/modulos/mantenimiento/escuelaprofesional/List" value="Mostrar lista de escuelaprofesional"/>
+        <br />
+        <h:link outcome="/modulos/mantenimiento/personal/List" value="Mostrar lista de personal"/>
+        <br />
+        <h:link outcome="/modulos/mantenimiento/programacion/List" value="Mostrar lista de progrmacion"/>
+        <br />
+        <h:link outcome="/modulos/mantenimiento/tutorado/List" value="Mostrar lista de tutorado"/>
+        <br />
+        <h:link outcome="/modulos/mantenimiento/tutoria/List" value="Mostrar lista de tutoria"/>
+        <br />
+        <h:link outcome="/modulos/mantenimiento/usuario/List" value="Mostrar lista de usuario"/>
+        
+      </ui:define>
+    </ui:composition>
+  </h:body>
+</html>
+
