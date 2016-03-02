@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
   <h:head>
@@ -37,6 +38,8 @@
     <![endif]-->
 
     <title><ui:insert name="title">Sistema de orientación y tutoria UNU</ui:insert></title>
+    
+    <f:event type="preRenderView" listener="#{loginController.checkSession()}" />
 
   </h:head>
 
@@ -103,7 +106,8 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
                  aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user"></i>&nbsp;
-                <!--<h:outputLabel value="#loginController.personal.nombres}"/>--> <span class="caret"></span></a>
+                <h:outputLabel value="#{loginController.personal.nombre}"/>&nbsp;
+                <h:outputLabel value="#{loginController.personal.apellido}"/> <span class="caret"></span></a>
 
               <ul class="dropdown-menu">
                 <li>
@@ -115,7 +119,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                  <p:commandLink actionListener="#loginController.logout()}" ajax="false">
+                  <p:commandLink actionListener="#{loginController.logout()}" ajax="false">
                       <i class="fa fa-fw fa-power-off"></i> Cerrar sesión
                   </p:commandLink>
                 </li>
