@@ -98,7 +98,7 @@ public class LoginController implements Serializable {
         //mensaje = "Permisos insuficientes, por favor inicie sesión";
         
         logger.info("exito -- seguridad last");
-        context.getExternalContext().redirect("login.xhtml");
+        context.getExternalContext().redirect("/appunu/faces/login.xhtml");
         
       } else {
         //FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");

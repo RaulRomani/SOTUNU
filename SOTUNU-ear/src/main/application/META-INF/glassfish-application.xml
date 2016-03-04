@@ -5,7 +5,7 @@
   <module>
       <web>
           <web-uri>SOTUNU-web-1.0.war</web-uri>
-          <context-root>appunu</context-root>
+          <context-root>/</context-root>
       </web>
   </module>
 </glassfish-application>

@@ -25,6 +25,8 @@ public interface ProgramacionFacadeLocal {
   Programacion find(Object id);
 
   List<Programacion> findAll();
+  
+  List<Programacion> findByCiclo(String ciclo);
 
   List<Programacion> findRange(int[] range);
 

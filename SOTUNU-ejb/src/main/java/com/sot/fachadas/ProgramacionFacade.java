@@ -6,9 +6,13 @@
 package com.sot.fachadas;
 
 import com.sot.entidades.Programacion;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,5 +31,22 @@ public class ProgramacionFacade extends AbstractFacade<Programacion> implements 
   public ProgramacionFacade() {
     super(Programacion.class);
   }
+
+  @Override
+  public List<Programacion> findByCiclo(String ciclo) {
+    //Query q = getEntityManager().createNamedQuery("Programacion.findByCiclo");
+    
+    TypedQuery<Programacion> q = getEntityManager().createNamedQuery("Programacion.findByCiclo", Programacion.class);
+    q.setParameter("ciclo", ciclo);
+    List<Programacion> list;
+    try {
+      list = q.getResultList();
+      
+    } catch (NoResultException e) {
+      list = null;
+    }
+    return list;
+  }
   
+    
 }
