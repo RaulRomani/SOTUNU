@@ -5,7 +5,7 @@
  */
 package com.sot.fachadas;
 
-import com.sot.entidades.Usuario;
+import com.sot.entidades.Cicloacademico;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,22 +14,20 @@ import javax.ejb.Local;
  * @author Raul
  */
 @Local
-public interface UsuarioFacadeLocal {
+public interface CicloacademicoFacadeLocal {
 
-  void create(Usuario usuario);
+  void create(Cicloacademico cicloacademico);
 
-  void edit(Usuario usuario);
+  void edit(Cicloacademico cicloacademico);
 
-  void remove(Usuario usuario);
+  void remove(Cicloacademico cicloacademico);
 
-  Usuario find(Object id);
+  Cicloacademico find(Object id);
 
-  List<Usuario> findAll();
+  List<Cicloacademico> findAll();
 
-  List<Usuario> findRange(int[] range);
+  List<Cicloacademico> findRange(int[] range);
 
   int count();
-  
-  public Usuario validar(String u, String p) ;
   
 }

@@ -41,6 +41,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>SOTUNU-ejb</artifactId>
+      <scope>provided</scope>
       <version>${project.version}</version>
     </dependency>
         

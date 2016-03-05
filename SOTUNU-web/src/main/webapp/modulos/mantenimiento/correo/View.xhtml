@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="CorreoViewDlg" widgetVar="CorreoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCorreoTitle}">
+      <h:form id="CorreoViewForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{correoController.selected != null}">
+            <h:outputText value="#{bundle.ViewCorreoLabel_idCorreo}"/>
+            <h:outputText value="#{correoController.selected.idCorreo}" title="#{bundle.ViewCorreoTitle_idCorreo}"/>
+            <h:outputText value="#{bundle.ViewCorreoLabel_email}"/>
+            <h:outputText value="#{correoController.selected.email}" title="#{bundle.ViewCorreoTitle_email}"/>
+            <h:outputText value="#{bundle.ViewCorreoLabel_nombre}"/>
+            <h:outputText value="#{correoController.selected.nombre}" title="#{bundle.ViewCorreoTitle_nombre}"/>
+            <h:outputText value="#{bundle.ViewCorreoLabel_apellido}"/>
+            <h:outputText value="#{correoController.selected.apellido}" title="#{bundle.ViewCorreoTitle_apellido}"/>
+            <h:outputText value="#{bundle.ViewCorreoLabel_idUsuario}"/>
+            <h:outputText value="#{correoController.selected.idUsuario}" title="#{bundle.ViewCorreoTitle_idUsuario}"/>
+          </p:panelGrid>
+          <p:commandButton value="#{bundle.Close}" onclick="CorreoViewDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

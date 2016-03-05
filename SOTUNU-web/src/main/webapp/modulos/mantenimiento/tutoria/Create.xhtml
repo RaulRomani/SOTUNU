@@ -20,6 +20,8 @@
             <p:calendar id="horaInicio" pattern="HH:mm:ss" value="#{tutoriaController.selected.horaInicio}" title="#{bundle.EditTutoriaTitle_horaInicio}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_horaInicio}" showOn="button"/>
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_horaFin}" for="horaFin" />
             <p:calendar id="horaFin" pattern="HH:mm:ss" value="#{tutoriaController.selected.horaFin}" title="#{bundle.EditTutoriaTitle_horaFin}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_horaFin}" showOn="button"/>
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_tema}" for="tema" />
+            <p:inputText id="tema" value="#{tutoriaController.selected.tema}" title="#{bundle.CreateTutoriaTitle_tema}" />
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_atencion}" for="atencion" />
             <p:inputText id="atencion" value="#{tutoriaController.selected.atencion}" title="#{bundle.CreateTutoriaTitle_atencion}" />
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_refDocente}" for="refDocente" />

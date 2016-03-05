@@ -41,12 +41,12 @@
     </plugins>
   </build>
   <dependencies>
-    <!--<dependency>
-        <groupId>com.clinica</groupId>
+    <dependency>
+        <groupId>com.sot</groupId>
         <artifactId>SOTUNU-ejb</artifactId>
         <version>1.0</version>
         <type>ejb</type>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>com.sot</groupId>
       <artifactId>SOTUNU-web</artifactId>

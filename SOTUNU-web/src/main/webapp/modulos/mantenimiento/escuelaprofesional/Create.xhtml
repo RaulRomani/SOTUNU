@@ -16,10 +16,14 @@
             <p:inputText id="idEscuelaProfesional" value="#{escuelaprofesionalController.selected.idEscuelaProfesional}" title="#{bundle.CreateEscuelaprofesionalTitle_idEscuelaProfesional}" required="true" requiredMessage="#{bundle.CreateEscuelaprofesionalRequiredMessage_idEscuelaProfesional}"/>
             <p:outputLabel value="#{bundle.CreateEscuelaprofesionalLabel_nombre}" for="nombre" />
             <p:inputText id="nombre" value="#{escuelaprofesionalController.selected.nombre}" title="#{bundle.CreateEscuelaprofesionalTitle_nombre}" required="true" requiredMessage="#{bundle.CreateEscuelaprofesionalRequiredMessage_nombre}"/>
-            <p:outputLabel value="#{bundle.CreateEscuelaprofesionalLabel_facultad}" for="facultad" />
-            <p:inputText id="facultad" value="#{escuelaprofesionalController.selected.facultad}" title="#{bundle.CreateEscuelaprofesionalTitle_facultad}" required="true" requiredMessage="#{bundle.CreateEscuelaprofesionalRequiredMessage_facultad}"/>
             <p:outputLabel value="#{bundle.CreateEscuelaprofesionalLabel_especialidad}" for="especialidad" />
-            <p:inputText id="especialidad" value="#{escuelaprofesionalController.selected.especialidad}" title="#{bundle.CreateEscuelaprofesionalTitle_especialidad}" required="true" requiredMessage="#{bundle.CreateEscuelaprofesionalRequiredMessage_especialidad}"/>
+            <p:inputText id="especialidad" value="#{escuelaprofesionalController.selected.especialidad}" title="#{bundle.CreateEscuelaprofesionalTitle_especialidad}" />
+            <p:outputLabel value="#{bundle.CreateEscuelaprofesionalLabel_idFacultad}" for="idFacultad" />
+            <p:selectOneMenu id="idFacultad" value="#{escuelaprofesionalController.selected.idFacultad}" required="true" requiredMessage="#{bundle.EditEscuelaprofesionalRequiredMessage_idFacultad}">
+              <f:selectItems value="#{facultadController.itemsAvailableSelectOne}"
+                             var="idFacultadItem"
+                             itemValue="#{idFacultadItem}"/>
+            </p:selectOneMenu>
           </p:panelGrid>
           <p:commandButton actionListener="#{escuelaprofesionalController.create}" value="#{bundle.Save}" update="display,:EscuelaprofesionalListForm:datalist,:growl" oncomplete="handleSubmit(args,'EscuelaprofesionalCreateDialog');"/>
           <p:commandButton value="#{bundle.Cancel}" onclick="EscuelaprofesionalCreateDialog.hide()"/>

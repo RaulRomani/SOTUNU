@@ -20,6 +20,8 @@
             <p:inputText id="clave" value="#{usuarioController.selected.clave}" title="#{bundle.EditUsuarioTitle_clave}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_clave}"/>
             <p:outputLabel value="#{bundle.EditUsuarioLabel_rol}" for="rol" />
             <p:inputText id="rol" value="#{usuarioController.selected.rol}" title="#{bundle.EditUsuarioTitle_rol}" />
+            <p:outputLabel value="#{bundle.EditUsuarioLabel_estado}" for="estado" />
+            <p:inputText id="estado" value="#{usuarioController.selected.estado}" title="#{bundle.EditUsuarioTitle_estado}" />
             <p:outputLabel value="#{bundle.EditUsuarioLabel_idPersonal}" for="idPersonal" />
             <p:selectOneMenu id="idPersonal" value="#{usuarioController.selected.idPersonal}" >
               <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

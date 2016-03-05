@@ -38,8 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
   @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = :usuario"),
   @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave"),
   @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM Usuario u WHERE u.rol = :rol"),
+  @NamedQuery(name = "Usuario.findByEstado", query = "SELECT u FROM Usuario u WHERE u.estado = :estado"),
   @NamedQuery(name = "Usuario.validar", query = "SELECT u FROM Usuario u WHERE u.clave = :clave and u.usuario = :usuario")})
-
 public class Usuario implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
@@ -60,6 +60,9 @@ public class Usuario implements Serializable {
   @Size(max = 13)
   @Column(name = "rol")
   private String rol;
+  @Size(max = 8)
+  @Column(name = "estado")
+  private String estado;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
   private List<Tutoria> tutoriaList;
   @JoinColumn(name = "idPersonal", referencedColumnName = "idPersonal")
@@ -67,6 +70,8 @@ public class Usuario implements Serializable {
   private Personal idPersonal;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
   private List<Programacion> programacionList;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+  private List<Correo> correoList;
 
   public Usuario() {
   }
@@ -113,6 +118,14 @@ public class Usuario implements Serializable {
     this.rol = rol;
   }
 
+  public String getEstado() {
+    return estado;
+  }
+
+  public void setEstado(String estado) {
+    this.estado = estado;
+  }
+
   @XmlTransient
   public List<Tutoria> getTutoriaList() {
     return tutoriaList;
@@ -137,6 +150,15 @@ public class Usuario implements Serializable {
 
   public void setProgramacionList(List<Programacion> programacionList) {
     this.programacionList = programacionList;
+  }
+
+  @XmlTransient
+  public List<Correo> getCorreoList() {
+    return correoList;
+  }
+
+  public void setCorreoList(List<Correo> correoList) {
+    this.correoList = correoList;
   }
 
   @Override

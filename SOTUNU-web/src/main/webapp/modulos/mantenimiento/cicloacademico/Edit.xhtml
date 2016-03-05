@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="CicloacademicoEditDlg" widgetVar="CicloacademicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCicloacademicoTitle}">
+      <h:form id="CicloacademicoEditForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{cicloacademicoController.selected != null}">
+            <p:outputLabel value="#{bundle.EditCicloacademicoLabel_idCicloAcademico}" for="idCicloAcademico" />
+            <p:inputText id="idCicloAcademico" value="#{cicloacademicoController.selected.idCicloAcademico}" title="#{bundle.EditCicloacademicoTitle_idCicloAcademico}" required="true" requiredMessage="#{bundle.EditCicloacademicoRequiredMessage_idCicloAcademico}"/>
+            <p:outputLabel value="#{bundle.EditCicloacademicoLabel_año}" for="año" />
+            <p:inputText id="año" value="#{cicloacademicoController.selected.año}" title="#{bundle.EditCicloacademicoTitle_año}" required="true" requiredMessage="#{bundle.EditCicloacademicoRequiredMessage_año}"/>
+            <p:outputLabel value="#{bundle.EditCicloacademicoLabel_periodo}" for="periodo" />
+            <p:inputText id="periodo" value="#{cicloacademicoController.selected.periodo}" title="#{bundle.EditCicloacademicoTitle_periodo}" required="true" requiredMessage="#{bundle.EditCicloacademicoRequiredMessage_periodo}"/>
+          </p:panelGrid>
+          <p:commandButton actionListener="#{cicloacademicoController.update}" value="#{bundle.Save}" update="display,:CicloacademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CicloacademicoEditDialog');"/>
+          <p:commandButton value="#{bundle.Cancel}" onclick="CicloacademicoEditDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

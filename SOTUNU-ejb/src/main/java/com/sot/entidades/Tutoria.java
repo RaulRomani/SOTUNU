@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
   @NamedQuery(name = "Tutoria.findByFecha", query = "SELECT t FROM Tutoria t WHERE t.fecha = :fecha"),
   @NamedQuery(name = "Tutoria.findByHoraInicio", query = "SELECT t FROM Tutoria t WHERE t.horaInicio = :horaInicio"),
   @NamedQuery(name = "Tutoria.findByHoraFin", query = "SELECT t FROM Tutoria t WHERE t.horaFin = :horaFin"),
+  @NamedQuery(name = "Tutoria.findByTema", query = "SELECT t FROM Tutoria t WHERE t.tema = :tema"),
   @NamedQuery(name = "Tutoria.findByAtencion", query = "SELECT t FROM Tutoria t WHERE t.atencion = :atencion"),
   @NamedQuery(name = "Tutoria.findByRefDocente", query = "SELECT t FROM Tutoria t WHERE t.refDocente = :refDocente"),
   @NamedQuery(name = "Tutoria.findByRefAsignatura", query = "SELECT t FROM Tutoria t WHERE t.refAsignatura = :refAsignatura"),
@@ -66,6 +67,9 @@ public class Tutoria implements Serializable {
   @Column(name = "horaFin")
   @Temporal(TemporalType.TIME)
   private Date horaFin;
+  @Size(max = 50)
+  @Column(name = "tema")
+  private String tema;
   @Size(max = 10)
   @Column(name = "atencion")
   private String atencion;
@@ -138,6 +142,14 @@ public class Tutoria implements Serializable {
 
   public void setHoraFin(Date horaFin) {
     this.horaFin = horaFin;
+  }
+
+  public String getTema() {
+    return tema;
+  }
+
+  public void setTema(String tema) {
+    this.tema = tema;
   }
 
   public String getAtencion() {

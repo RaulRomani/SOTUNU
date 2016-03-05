@@ -24,6 +24,18 @@
             <p:inputText id="nroEstudiantes" value="#{programacionController.selected.nroEstudiantes}" title="#{bundle.CreateProgramacionTitle_nroEstudiantes}" required="true" requiredMessage="#{bundle.CreateProgramacionRequiredMessage_nroEstudiantes}"/>
             <p:outputLabel value="#{bundle.CreateProgramacionLabel_delegado}" for="delegado" />
             <p:inputText id="delegado" value="#{programacionController.selected.delegado}" title="#{bundle.CreateProgramacionTitle_delegado}" required="true" requiredMessage="#{bundle.CreateProgramacionRequiredMessage_delegado}"/>
+            <p:outputLabel value="#{bundle.CreateProgramacionLabel_idEscuelaProfesional}" for="idEscuelaProfesional" />
+            <p:selectOneMenu id="idEscuelaProfesional" value="#{programacionController.selected.idEscuelaProfesional}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_idEscuelaProfesional}">
+              <f:selectItems value="#{escuelaprofesionalController.itemsAvailableSelectOne}"
+                             var="idEscuelaProfesionalItem"
+                             itemValue="#{idEscuelaProfesionalItem}"/>
+            </p:selectOneMenu>
+            <p:outputLabel value="#{bundle.CreateProgramacionLabel_idCicloAcademico}" for="idCicloAcademico" />
+            <p:selectOneMenu id="idCicloAcademico" value="#{programacionController.selected.idCicloAcademico}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_idCicloAcademico}">
+              <f:selectItems value="#{cicloacademicoController.itemsAvailableSelectOne}"
+                             var="idCicloAcademicoItem"
+                             itemValue="#{idCicloAcademicoItem}"/>
+            </p:selectOneMenu>
             <p:outputLabel value="#{bundle.CreateProgramacionLabel_idUsuario}" for="idUsuario" />
             <p:selectOneMenu id="idUsuario" value="#{programacionController.selected.idUsuario}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_idUsuario}">
               <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"

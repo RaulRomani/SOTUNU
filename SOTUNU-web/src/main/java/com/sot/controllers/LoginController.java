@@ -75,37 +75,35 @@ public class LoginController implements Serializable {
 
     FacesContext context = FacesContext.getCurrentInstance();
     
-    try {
+    Usuario u = (Usuario) context.getExternalContext().getSessionMap().get("user");
+    if(u == null){
       
-      Usuario u = (Usuario) context.getExternalContext().getSessionMap().get("user");
-      //if (usuario.getIdUsuario() != null && usuario.getIdUsuario() != 0) {
-      if(u == null){
-        
-        
-        
-        context.getExternalContext().getRequestMap().put("mensaje", "Permisos insuficientes, por favor inicie sesión");
-        
-        context.getExternalContext().getFlash().setKeepMessages(true);
-        context.getExternalContext().getFlash().setRedirect(true);
-        
+      
+      
+      context.getExternalContext().getRequestMap().put("mensaje", "Permisos insuficientes, por favor inicie sesión");
+      
+      context.getExternalContext().getFlash().setKeepMessages(true);
+      context.getExternalContext().getFlash().setRedirect(true);
+      
 //        Flash flash = context.getExternalContext().getFlash();
 //        flash.setKeepMessages(true);
 //        flash.setRedirect(true);
-        
-        RequestContext.getCurrentInstance().update("growl");
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Permisos insuficientes, por favor inicie sesión"));
-        
-        //mensaje = "Permisos insuficientes, por favor inicie sesión";
-        
-        logger.info("exito -- seguridad last");
-        context.getExternalContext().redirect("/appunu/faces/login.xhtml");
-        
-      } else {
-        //FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
-        
-      }  
-    } catch (IOException ex) {
-      //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+      
+      RequestContext.getCurrentInstance().update("growl");
+      context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Permisos insuficientes, por favor inicie sesión"));
+      
+      //mensaje = "Permisos insuficientes, por favor inicie sesión";
+      
+      logger.info("exito -- seguridad last");
+      //String contextPath = FacesContext.getCurrentInstance().getExternalContext().getContextName();
+      //context.getExternalContext().redirect(contextPath + "/faces/login.xhtml");
+      
+      context.getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "/login?faces-redirect=true");
+      
+    } else {
+      logger.info("Sesion de usuario existente!");
+      //FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+      
     }
 
   }

@@ -46,7 +46,9 @@ import javax.xml.bind.annotation.XmlRootElement;
   @NamedQuery(name = "Tutorado.findByEmail", query = "SELECT t FROM Tutorado t WHERE t.email = :email"),
   @NamedQuery(name = "Tutorado.findByCaracteristicaParticular", query = "SELECT t FROM Tutorado t WHERE t.caracteristicaParticular = :caracteristicaParticular"),
   @NamedQuery(name = "Tutorado.findByAreasProblema", query = "SELECT t FROM Tutorado t WHERE t.areasProblema = :areasProblema"),
-  @NamedQuery(name = "Tutorado.findByObservaciones", query = "SELECT t FROM Tutorado t WHERE t.observaciones = :observaciones")})
+  @NamedQuery(name = "Tutorado.findByObservaciones", query = "SELECT t FROM Tutorado t WHERE t.observaciones = :observaciones"),
+  @NamedQuery(name = "Tutorado.findByEstado", query = "SELECT t FROM Tutorado t WHERE t.estado = :estado"),
+  @NamedQuery(name = "Tutorado.findByNivelTutoria", query = "SELECT t FROM Tutorado t WHERE t.nivelTutoria = :nivelTutoria")})
 public class Tutorado implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
@@ -98,6 +100,15 @@ public class Tutorado implements Serializable {
   @Size(max = 400)
   @Column(name = "observaciones")
   private String observaciones;
+  @Size(max = 8)
+  @Column(name = "estado")
+  private String estado;
+  @Size(max = 20)
+  @Column(name = "nivelTutoria")
+  private String nivelTutoria;
+  @JoinColumn(name = "idCicloAcademico", referencedColumnName = "idCicloAcademico")
+  @ManyToOne(optional = false)
+  private Cicloacademico idCicloAcademico;
   @JoinColumn(name = "idEscuelaProfesional", referencedColumnName = "idEscuelaProfesional")
   @ManyToOne(optional = false)
   private Escuelaprofesional idEscuelaProfesional;
@@ -225,6 +236,30 @@ public class Tutorado implements Serializable {
 
   public void setObservaciones(String observaciones) {
     this.observaciones = observaciones;
+  }
+
+  public String getEstado() {
+    return estado;
+  }
+
+  public void setEstado(String estado) {
+    this.estado = estado;
+  }
+
+  public String getNivelTutoria() {
+    return nivelTutoria;
+  }
+
+  public void setNivelTutoria(String nivelTutoria) {
+    this.nivelTutoria = nivelTutoria;
+  }
+
+  public Cicloacademico getIdCicloAcademico() {
+    return idCicloAcademico;
+  }
+
+  public void setIdCicloAcademico(Cicloacademico idCicloAcademico) {
+    this.idCicloAcademico = idCicloAcademico;
   }
 
   public Escuelaprofesional getIdEscuelaProfesional() {

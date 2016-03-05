@@ -73,6 +73,12 @@ public class Programacion implements Serializable {
   private String delegado;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProgramacion")
   private List<Tutoria> tutoriaList;
+  @JoinColumn(name = "idEscuelaProfesional", referencedColumnName = "idEscuelaProfesional")
+  @ManyToOne(optional = false)
+  private Escuelaprofesional idEscuelaProfesional;
+  @JoinColumn(name = "idCicloAcademico", referencedColumnName = "idCicloAcademico")
+  @ManyToOne(optional = false)
+  private Cicloacademico idCicloAcademico;
   @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
   @ManyToOne(optional = false)
   private Usuario idUsuario;
@@ -148,6 +154,22 @@ public class Programacion implements Serializable {
 
   public void setTutoriaList(List<Tutoria> tutoriaList) {
     this.tutoriaList = tutoriaList;
+  }
+
+  public Escuelaprofesional getIdEscuelaProfesional() {
+    return idEscuelaProfesional;
+  }
+
+  public void setIdEscuelaProfesional(Escuelaprofesional idEscuelaProfesional) {
+    this.idEscuelaProfesional = idEscuelaProfesional;
+  }
+
+  public Cicloacademico getIdCicloAcademico() {
+    return idCicloAcademico;
+  }
+
+  public void setIdCicloAcademico(Cicloacademico idCicloAcademico) {
+    this.idCicloAcademico = idCicloAcademico;
   }
 
   public Usuario getIdUsuario() {

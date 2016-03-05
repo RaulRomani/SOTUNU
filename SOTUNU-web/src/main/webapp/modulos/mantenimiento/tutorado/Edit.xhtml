@@ -40,6 +40,17 @@
             <p:inputText id="areasProblema" value="#{tutoradoController.selected.areasProblema}" title="#{bundle.EditTutoradoTitle_areasProblema}" />
             <p:outputLabel value="#{bundle.EditTutoradoLabel_observaciones}" for="observaciones" />
             <p:inputText id="observaciones" value="#{tutoradoController.selected.observaciones}" title="#{bundle.EditTutoradoTitle_observaciones}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_estado}" for="estado" />
+            <p:inputText id="estado" value="#{tutoradoController.selected.estado}" title="#{bundle.EditTutoradoTitle_estado}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_nivelTutoria}" for="nivelTutoria" />
+            <p:inputText id="nivelTutoria" value="#{tutoradoController.selected.nivelTutoria}" title="#{bundle.EditTutoradoTitle_nivelTutoria}" />
+            <p:outputLabel value="#{bundle.EditTutoradoLabel_idCicloAcademico}" for="idCicloAcademico" />
+            <p:selectOneMenu id="idCicloAcademico" value="#{tutoradoController.selected.idCicloAcademico}" required="true" requiredMessage="#{bundle.EditTutoradoRequiredMessage_idCicloAcademico}">
+              <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+              <f:selectItems value="#{cicloacademicoController.itemsAvailableSelectOne}"
+                             var="idCicloAcademicoItem"
+                             itemValue="#{idCicloAcademicoItem}"/>
+            </p:selectOneMenu>
             <p:outputLabel value="#{bundle.EditTutoradoLabel_idEscuelaProfesional}" for="idEscuelaProfesional" />
             <p:selectOneMenu id="idEscuelaProfesional" value="#{tutoradoController.selected.idEscuelaProfesional}" required="true" requiredMessage="#{bundle.EditTutoradoRequiredMessage_idEscuelaProfesional}">
               <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

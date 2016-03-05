@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
   @NamedQuery(name = "Escuelaprofesional.findAll", query = "SELECT e FROM Escuelaprofesional e"),
   @NamedQuery(name = "Escuelaprofesional.findByIdEscuelaProfesional", query = "SELECT e FROM Escuelaprofesional e WHERE e.idEscuelaProfesional = :idEscuelaProfesional"),
   @NamedQuery(name = "Escuelaprofesional.findByNombre", query = "SELECT e FROM Escuelaprofesional e WHERE e.nombre = :nombre"),
-  @NamedQuery(name = "Escuelaprofesional.findByFacultad", query = "SELECT e FROM Escuelaprofesional e WHERE e.facultad = :facultad"),
   @NamedQuery(name = "Escuelaprofesional.findByEspecialidad", query = "SELECT e FROM Escuelaprofesional e WHERE e.especialidad = :especialidad")})
 public class Escuelaprofesional implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -48,20 +49,18 @@ public class Escuelaprofesional implements Serializable {
   @Size(min = 1, max = 50)
   @Column(name = "nombre")
   private String nombre;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 50)
-  @Column(name = "facultad")
-  private String facultad;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 50)
+  @Size(max = 50)
   @Column(name = "especialidad")
   private String especialidad;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscuelaProfesional")
   private List<Tutorado> tutoradoList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscuelaProfesional")
   private List<Personal> personalList;
+  @JoinColumn(name = "idFacultad", referencedColumnName = "idFacultad")
+  @ManyToOne(optional = false)
+  private Facultad idFacultad;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscuelaProfesional")
+  private List<Programacion> programacionList;
 
   public Escuelaprofesional() {
   }
@@ -70,11 +69,9 @@ public class Escuelaprofesional implements Serializable {
     this.idEscuelaProfesional = idEscuelaProfesional;
   }
 
-  public Escuelaprofesional(Integer idEscuelaProfesional, String nombre, String facultad, String especialidad) {
+  public Escuelaprofesional(Integer idEscuelaProfesional, String nombre) {
     this.idEscuelaProfesional = idEscuelaProfesional;
     this.nombre = nombre;
-    this.facultad = facultad;
-    this.especialidad = especialidad;
   }
 
   public Integer getIdEscuelaProfesional() {
@@ -91,14 +88,6 @@ public class Escuelaprofesional implements Serializable {
 
   public void setNombre(String nombre) {
     this.nombre = nombre;
-  }
-
-  public String getFacultad() {
-    return facultad;
-  }
-
-  public void setFacultad(String facultad) {
-    this.facultad = facultad;
   }
 
   public String getEspecialidad() {
@@ -125,6 +114,23 @@ public class Escuelaprofesional implements Serializable {
 
   public void setPersonalList(List<Personal> personalList) {
     this.personalList = personalList;
+  }
+
+  public Facultad getIdFacultad() {
+    return idFacultad;
+  }
+
+  public void setIdFacultad(Facultad idFacultad) {
+    this.idFacultad = idFacultad;
+  }
+
+  @XmlTransient
+  public List<Programacion> getProgramacionList() {
+    return programacionList;
+  }
+
+  public void setProgramacionList(List<Programacion> programacionList) {
+    this.programacionList = programacionList;
   }
 
   @Override

@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-  <ui:composition template="/templates/templateCool.xhtml">
+  <ui:composition template="/template.xhtml">
 
 
     <ui:define name="title">
@@ -62,6 +62,18 @@
                 <h:outputText value="#{bundle.ListProgramacionTitle_delegado}"/>
               </f:facet>
               <h:outputText value="#{item.delegado}"/>
+            </p:column>
+            <p:column>
+              <f:facet name="header">
+                <h:outputText value="#{bundle.ListProgramacionTitle_idEscuelaProfesional}"/>
+              </f:facet>
+              <h:outputText value="#{item.idEscuelaProfesional}"/>
+            </p:column>
+            <p:column>
+              <f:facet name="header">
+                <h:outputText value="#{bundle.ListProgramacionTitle_idCicloAcademico}"/>
+              </f:facet>
+              <h:outputText value="#{item.idCicloAcademico}"/>
             </p:column>
             <p:column>
               <f:facet name="header">
