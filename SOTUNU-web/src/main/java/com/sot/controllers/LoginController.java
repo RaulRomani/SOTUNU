@@ -54,6 +54,7 @@ public class LoginController implements Serializable {
   private Personal personal;
   
   private String mensaje = null;
+  private String mensajeError = null;
 
   @PostConstruct
   void init() {
@@ -111,7 +112,11 @@ public class LoginController implements Serializable {
   public String validar() {
 
     Usuario u = null;
-    u = ejbFacade.validar(usuario.getUsuario(), usuario.getClave());
+    try{
+      u = ejbFacade.validar(usuario.getUsuario(), usuario.getClave());
+    } catch (Exception e){
+      mensajeError = e.getMessage();
+    }
     if (u != null) {
       setUsuario(u);
       personal = u.getIdPersonal();//ejbFacadePersonal.find(u.getIdPersonal());
@@ -180,6 +185,16 @@ public class LoginController implements Serializable {
   public String getMensaje() {
     return mensaje;
   }
+
+  public String getMensajeError() {
+    return mensajeError;
+  }
+
+  public void setMensajeError(String mensajeError) {
+    this.mensajeError = mensajeError;
+  }
+  
+  
   
 
 }

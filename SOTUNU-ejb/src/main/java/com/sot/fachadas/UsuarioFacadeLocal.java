@@ -30,6 +30,6 @@ public interface UsuarioFacadeLocal {
 
   int count();
   
-  public Usuario validar(String u, String p) ;
+  public Usuario validar(String u, String p) throws Exception ;
   
 }

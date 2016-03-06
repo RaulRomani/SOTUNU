@@ -23,88 +23,73 @@
           <h1 class="row" style="color: #269abc">Programación de tutores / Consejeria académica</h1>
 
           <h:form id="cargarProgramacionForm">
-            
+
             <div class="row">
               <div class="col-sm-3" />
-              <div class="col-sm-6">
-                  <div class="form-group">
-                    <p:outputLabel class="col-sm-2 form-control-label" value="#{bundle.ListProgramacionTitle_ciclo}"/>
-                    <div class="col-sm-4">
-                      <p:inputText  class="form-control" value="#{programacionTutores.ciclo}"/>
-                    </div>
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <p:outputLabel class="col-sm-2 form-control-label" value="#{bundle.ListProgramacionTitle_ciclo}"/>
 
-                    <div class="col-sm-3">
-                      <p:commandButton value="Cargar datos" 
-                               id="ajax" 
-                               actionListener="#{programacionTutores.cargarProgramacionTutores()}" 
-                               styleClass="ui-priority-primary" 
-                               update="ProgramacionListForm:datalist,:growl"
-                               ajax="true"/>
-                    </div>
+                  <div class="col-sm-4">
+                    <p:selectOneMenu style="width: "  id="ciclos" value="#{programacionTutores.idCicloAcademico}">
+                      <f:selectItem itemLabel="Seleccione" itemValue="" />
+                      <f:selectItems  value="#{programacionTutores.cicloAcademicoList}"/>
+                    </p:selectOneMenu>
+
                   </div>
+
+
+                  <div class="col-sm-3">
+                    <p:commandButton value="Cargar datos" 
+                                     id="ajax" 
+                                     actionListener="#{programacionTutores.cargarProgramacionTutores()}" 
+                                     styleClass="ui-priority-primary" 
+                                     update="ProgramacionListForm:datalist,:growl"
+                                     ajax="true"/>
+                  </div>
+                </div>
               </div>
-              <div class="col-sm-offset-3" />
+              <div class="col-sm-offset-1" />
             </div>
           </h:form>
-            
-          
-          
+
+
+
 
           <h:form id="ProgramacionListForm">
-            
-            
-            <p:panel header="#{bundle.ListProgramacionTitle}">
-              <p:dataTable id="datalist" value="#{programacionTutores.items}" var="item"
-                           selectionMode="single" selection="#{programacionTutores.progTutores}"
-                           paginator="true"
-                           rowKey="#{item.idProgramacion}"
-                           rows="10"
-                           rowsPerPageTemplate="10,20,30,40,50"
-                           >
-
-                
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramacionTitle_idProgramacion}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.idProgramacion}"/>
-                </p:column>
-
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramacionTitle_salon}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.salon}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramacionTitle_pabellon}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.pabellon}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramacionTitle_nroEstudiantes}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.nroEstudiantes}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramacionTitle_delegado}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.delegado}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramacionTitle_idUsuario}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.idUsuario}"/>
-                </p:column>
-                <f:facet name="footer">
-                  
+            <p:dataTable id="datalist" value="#{programacionTutores.items}" var="item"
+                         selectionMode="single" selection="#{programacionTutores.progTutores}"
+                         rowKey="#{item.idProgramacion}"
+                         >
+              <p:column>
+                <f:facet name="header">
+                  <h:outputText value="#{bundle.ListProgramacionTitle_salon}"/>
                 </f:facet>
-              </p:dataTable>
-            </p:panel>
+                <h:outputText value="#{item.salon}"/>
+              </p:column>
+              <p:column>
+                <f:facet name="header">
+                  <h:outputText value="#{bundle.ListProgramacionTitle_pabellon}"/>
+                </f:facet>
+                <h:outputText value="#{item.pabellon}"/>
+              </p:column>
+              <p:column>
+                <f:facet name="header">
+                  <h:outputText value="#{bundle.ListProgramacionTitle_nroEstudiantes}"/>
+                </f:facet>
+                <h:outputText value="#{item.nroEstudiantes}"/>
+              </p:column>
+              <p:column>
+                <f:facet name="header">
+                  <h:outputText value="#{bundle.ListProgramacionTitle_delegado}"/>
+                </f:facet>
+                <h:outputText value="#{item.delegado}"/>
+              </p:column>
+
+              <f:facet name="footer">
+
+              </f:facet>
+            </p:dataTable>
           </h:form>
 
         </div>

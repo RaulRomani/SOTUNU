@@ -31,18 +31,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
   }
   
   @Override
-  public Usuario validar(String u, String p) {
+  public Usuario validar(String u, String p) throws Exception{
+    
+    Usuario usuario;
+    
+    try {
     Query q = getEntityManager().createNamedQuery("Usuario.validar");
     
     q.setParameter("usuario", u);
     q.setParameter("clave", p);
     
-    Usuario usuario;
-    try {
+    
       usuario = (Usuario) q.getSingleResult();
-      
-    } catch (NoResultException e) {
+    } catch (Exception e) {
       usuario = null;
+      throw e;
     }
     return usuario;
   }

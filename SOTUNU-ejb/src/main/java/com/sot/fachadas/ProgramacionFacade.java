@@ -5,7 +5,9 @@
  */
 package com.sot.fachadas;
 
+import com.sot.entidades.Cicloacademico;
 import com.sot.entidades.Programacion;
+import com.sot.entidades.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,6 +47,23 @@ public class ProgramacionFacade extends AbstractFacade<Programacion> implements 
       list = null;
     }
     return list;
+  }
+
+  @Override
+  public List<Programacion> findProgramacionDirector(Usuario idUsuario, Cicloacademico idCicloAcademico) {
+    
+    TypedQuery<Programacion> q = getEntityManager().createNamedQuery("Programacion.findProgramacionDirector", Programacion.class);
+    q.setParameter("idUsuario", idUsuario);
+    q.setParameter("idCicloAcademico", idCicloAcademico);
+    List<Programacion> list;
+    try {
+      list = q.getResultList();
+      
+    } catch (NoResultException e) {
+      list = null;
+    }
+    return list;
+    
   }
   
 }

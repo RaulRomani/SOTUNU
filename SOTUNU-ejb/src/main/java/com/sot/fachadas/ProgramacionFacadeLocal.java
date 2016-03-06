@@ -5,7 +5,9 @@
  */
 package com.sot.fachadas;
 
+import com.sot.entidades.Cicloacademico;
 import com.sot.entidades.Programacion;
+import com.sot.entidades.Usuario;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -25,6 +27,8 @@ public interface ProgramacionFacadeLocal {
   Programacion find(Object id);
   
   List<Programacion> findByCiclo(String ciclo);
+  
+  List<Programacion> findProgramacionDirector(Usuario idUsuario,Cicloacademico idCicloAcademico);
 
   List<Programacion> findAll();
 
