@@ -54,13 +54,11 @@ public class Escuelaprofesional implements Serializable {
   private String especialidad;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscuelaProfesional")
   private List<Tutorado> tutoradoList;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscuelaProfesional")
+  @OneToMany(mappedBy = "idEscuelaProfesional")
   private List<Personal> personalList;
   @JoinColumn(name = "idFacultad", referencedColumnName = "idFacultad")
   @ManyToOne(optional = false)
   private Facultad idFacultad;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscuelaProfesional")
-  private List<Programacion> programacionList;
 
   public Escuelaprofesional() {
   }
@@ -122,15 +120,6 @@ public class Escuelaprofesional implements Serializable {
 
   public void setIdFacultad(Facultad idFacultad) {
     this.idFacultad = idFacultad;
-  }
-
-  @XmlTransient
-  public List<Programacion> getProgramacionList() {
-    return programacionList;
-  }
-
-  public void setProgramacionList(List<Programacion> programacionList) {
-    this.programacionList = programacionList;
   }
 
   @Override

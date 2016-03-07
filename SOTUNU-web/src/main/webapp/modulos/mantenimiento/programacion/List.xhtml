@@ -35,39 +35,11 @@
             </p:column>
             <p:column>
               <f:facet name="header">
-                <h:outputText value="#{bundle.ListProgramacionTitle_ciclo}"/>
+                <h:outputText value="#{bundle.ListProgramacionTitle_fechaHora}"/>
               </f:facet>
-              <h:outputText value="#{item.ciclo}"/>
-            </p:column>
-            <p:column>
-              <f:facet name="header">
-                <h:outputText value="#{bundle.ListProgramacionTitle_salon}"/>
-              </f:facet>
-              <h:outputText value="#{item.salon}"/>
-            </p:column>
-            <p:column>
-              <f:facet name="header">
-                <h:outputText value="#{bundle.ListProgramacionTitle_pabellon}"/>
-              </f:facet>
-              <h:outputText value="#{item.pabellon}"/>
-            </p:column>
-            <p:column>
-              <f:facet name="header">
-                <h:outputText value="#{bundle.ListProgramacionTitle_nroEstudiantes}"/>
-              </f:facet>
-              <h:outputText value="#{item.nroEstudiantes}"/>
-            </p:column>
-            <p:column>
-              <f:facet name="header">
-                <h:outputText value="#{bundle.ListProgramacionTitle_delegado}"/>
-              </f:facet>
-              <h:outputText value="#{item.delegado}"/>
-            </p:column>
-            <p:column>
-              <f:facet name="header">
-                <h:outputText value="#{bundle.ListProgramacionTitle_idEscuelaProfesional}"/>
-              </f:facet>
-              <h:outputText value="#{item.idEscuelaProfesional}"/>
+              <h:outputText value="#{item.fechaHora}">
+                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+              </h:outputText>
             </p:column>
             <p:column>
               <f:facet name="header">

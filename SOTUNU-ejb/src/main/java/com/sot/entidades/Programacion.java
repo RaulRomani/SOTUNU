@@ -6,6 +6,7 @@
 package com.sot.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,8 +21,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,13 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
   @NamedQuery(name = "Programacion.findAll", query = "SELECT p FROM Programacion p"),
   @NamedQuery(name = "Programacion.findByIdProgramacion", query = "SELECT p FROM Programacion p WHERE p.idProgramacion = :idProgramacion"),
-  @NamedQuery(name = "Programacion.findByCiclo", query = "SELECT p FROM Programacion p WHERE p.ciclo = :ciclo"),
-  @NamedQuery(name = "Programacion.findBySalon", query = "SELECT p FROM Programacion p WHERE p.salon = :salon"),
-  @NamedQuery(name = "Programacion.findByPabellon", query = "SELECT p FROM Programacion p WHERE p.pabellon = :pabellon"),
-  @NamedQuery(name = "Programacion.findByNroEstudiantes", query = "SELECT p FROM Programacion p WHERE p.nroEstudiantes = :nroEstudiantes"),
-  @NamedQuery(name = "Programacion.findByDelegado", query = "SELECT p FROM Programacion p WHERE p.delegado = :delegado"),
-  @NamedQuery(name = "Programacion.findProgramacionDirector", query = "SELECT p FROM Programacion p WHERE p.idUsuario = :idUsuario AND  p.idCicloAcademico = :idCicloAcademico")
-  })
+  @NamedQuery(name = "Programacion.findByFechaHora", query = "SELECT p FROM Programacion p WHERE p.fechaHora = :fechaHora"),
+  @NamedQuery(name = "Programacion.findProgramacionDirector", query = "SELECT p FROM Programacion p WHERE p.idUsuario = :idUsuario AND  p.idCicloAcademico = :idCicloAcademico")})
 public class Programacion implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
@@ -51,39 +48,17 @@ public class Programacion implements Serializable {
   private Integer idProgramacion;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 3)
-  @Column(name = "ciclo")
-  private String ciclo;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 3)
-  @Column(name = "salon")
-  private String salon;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 3)
-  @Column(name = "pabellon")
-  private String pabellon;
-  @Basic(optional = false)
-  @NotNull
-  @Column(name = "nroEstudiantes")
-  private int nroEstudiantes;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 80)
-  @Column(name = "delegado")
-  private String delegado;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProgramacion")
-  private List<Tutoria> tutoriaList;
-  @JoinColumn(name = "idEscuelaProfesional", referencedColumnName = "idEscuelaProfesional")
-  @ManyToOne(optional = false)
-  private Escuelaprofesional idEscuelaProfesional;
+  @Column(name = "fechaHora")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date fechaHora;
   @JoinColumn(name = "idCicloAcademico", referencedColumnName = "idCicloAcademico")
   @ManyToOne(optional = false)
   private Cicloacademico idCicloAcademico;
   @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
   @ManyToOne(optional = false)
   private Usuario idUsuario;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProgramacion")
+  private List<Programaciontutor> programaciontutorList;
 
   public Programacion() {
   }
@@ -92,13 +67,9 @@ public class Programacion implements Serializable {
     this.idProgramacion = idProgramacion;
   }
 
-  public Programacion(Integer idProgramacion, String ciclo, String salon, String pabellon, int nroEstudiantes, String delegado) {
+  public Programacion(Integer idProgramacion, Date fechaHora) {
     this.idProgramacion = idProgramacion;
-    this.ciclo = ciclo;
-    this.salon = salon;
-    this.pabellon = pabellon;
-    this.nroEstudiantes = nroEstudiantes;
-    this.delegado = delegado;
+    this.fechaHora = fechaHora;
   }
 
   public Integer getIdProgramacion() {
@@ -109,61 +80,12 @@ public class Programacion implements Serializable {
     this.idProgramacion = idProgramacion;
   }
 
-  public String getCiclo() {
-    return ciclo;
+  public Date getFechaHora() {
+    return fechaHora;
   }
 
-  public void setCiclo(String ciclo) {
-    this.ciclo = ciclo;
-  }
-
-  public String getSalon() {
-    return salon;
-  }
-
-  public void setSalon(String salon) {
-    this.salon = salon;
-  }
-
-  public String getPabellon() {
-    return pabellon;
-  }
-
-  public void setPabellon(String pabellon) {
-    this.pabellon = pabellon;
-  }
-
-  public int getNroEstudiantes() {
-    return nroEstudiantes;
-  }
-
-  public void setNroEstudiantes(int nroEstudiantes) {
-    this.nroEstudiantes = nroEstudiantes;
-  }
-
-  public String getDelegado() {
-    return delegado;
-  }
-
-  public void setDelegado(String delegado) {
-    this.delegado = delegado;
-  }
-
-  @XmlTransient
-  public List<Tutoria> getTutoriaList() {
-    return tutoriaList;
-  }
-
-  public void setTutoriaList(List<Tutoria> tutoriaList) {
-    this.tutoriaList = tutoriaList;
-  }
-
-  public Escuelaprofesional getIdEscuelaProfesional() {
-    return idEscuelaProfesional;
-  }
-
-  public void setIdEscuelaProfesional(Escuelaprofesional idEscuelaProfesional) {
-    this.idEscuelaProfesional = idEscuelaProfesional;
+  public void setFechaHora(Date fechaHora) {
+    this.fechaHora = fechaHora;
   }
 
   public Cicloacademico getIdCicloAcademico() {
@@ -180,6 +102,15 @@ public class Programacion implements Serializable {
 
   public void setIdUsuario(Usuario idUsuario) {
     this.idUsuario = idUsuario;
+  }
+
+  @XmlTransient
+  public List<Programaciontutor> getProgramaciontutorList() {
+    return programaciontutorList;
+  }
+
+  public void setProgramaciontutorList(List<Programaciontutor> programaciontutorList) {
+    this.programaciontutorList = programaciontutorList;
   }
 
   @Override

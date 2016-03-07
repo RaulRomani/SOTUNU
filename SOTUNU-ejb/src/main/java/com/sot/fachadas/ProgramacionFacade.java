@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -21,6 +22,7 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class ProgramacionFacade extends AbstractFacade<Programacion> implements ProgramacionFacadeLocal {
+
   @PersistenceContext(unitName = "com.sot_SOTUNU-ejb_ejb_1.0PU")
   private EntityManager em;
 
@@ -32,38 +34,32 @@ public class ProgramacionFacade extends AbstractFacade<Programacion> implements 
   public ProgramacionFacade() {
     super(Programacion.class);
   }
-  
-  @Override
-  public List<Programacion> findByCiclo(String ciclo) {
-    //Query q = getEntityManager().createNamedQuery("Programacion.findByCiclo");
-    
-    TypedQuery<Programacion> q = getEntityManager().createNamedQuery("Programacion.findByCiclo", Programacion.class);
-    q.setParameter("ciclo", ciclo);
-    List<Programacion> list;
-    try {
-      list = q.getResultList();
-      
-    } catch (NoResultException e) {
-      list = null;
-    }
-    return list;
-  }
 
   @Override
-  public List<Programacion> findProgramacionDirector(Usuario idUsuario, Cicloacademico idCicloAcademico) {
-    
-    TypedQuery<Programacion> q = getEntityManager().createNamedQuery("Programacion.findProgramacionDirector", Programacion.class);
-    q.setParameter("idUsuario", idUsuario);
-    q.setParameter("idCicloAcademico", idCicloAcademico);
-    List<Programacion> list;
+  public Programacion findProgramacionDirector(Usuario idUsuario, Cicloacademico idCicloAcademico) {
+
+//    TypedQuery<Programacion> q = getEntityManager().createNamedQuery("Programacion.findProgramacionDirector", Programacion.class);
+//    q.setParameter("idUsuario", idUsuario);
+//    q.setParameter("idCicloAcademico", idCicloAcademico);
+//    List<Programacion> list;
+//    try {
+//      list = q.getResultList();
+//      
+//    } catch (NoResultException e) {
+//      list = null;
+//    }
+//    return list;
+    Programacion programacion;
+
     try {
-      list = q.getResultList();
-      
+      Query q = getEntityManager().createNamedQuery("Programacion.findProgramacionDirector");
+      q.setParameter("idUsuario", idUsuario);
+      q.setParameter("idCicloAcademico", idCicloAcademico);
+      programacion = (Programacion) q.getSingleResult();
     } catch (NoResultException e) {
-      list = null;
+      programacion = null;
     }
-    return list;
-    
+    return programacion;
+
   }
-  
 }

@@ -5,6 +5,7 @@
  */
 package com.sot.fachadas;
 
+import com.sot.entidades.Escuelaprofesional;
 import com.sot.entidades.Personal;
 import java.util.List;
 import javax.ejb.Local;
@@ -23,7 +24,9 @@ public interface PersonalFacadeLocal {
   void remove(Personal personal);
 
   Personal find(Object id);
-
+  
+  List<Personal> findByEscuelaProfesional(Escuelaprofesional escuelaProfesional, String cargo);
+  
   List<Personal> findAll();
 
   List<Personal> findRange(int[] range);

@@ -91,9 +91,9 @@ public class Tutoria implements Serializable {
   @Size(max = 250)
   @Column(name = "observaciones")
   private String observaciones;
-  @JoinColumn(name = "idProgramacion", referencedColumnName = "idProgramacion")
+  @JoinColumn(name = "idProgramacionTutor", referencedColumnName = "idProgramacionTutor")
   @ManyToOne(optional = false)
-  private Programacion idProgramacion;
+  private Programaciontutor idProgramacionTutor;
   @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
   @ManyToOne(optional = false)
   private Usuario idUsuario;
@@ -208,12 +208,12 @@ public class Tutoria implements Serializable {
     this.observaciones = observaciones;
   }
 
-  public Programacion getIdProgramacion() {
-    return idProgramacion;
+  public Programaciontutor getIdProgramacionTutor() {
+    return idProgramacionTutor;
   }
 
-  public void setIdProgramacion(Programacion idProgramacion) {
-    this.idProgramacion = idProgramacion;
+  public void setIdProgramacionTutor(Programaciontutor idProgramacionTutor) {
+    this.idProgramacionTutor = idProgramacionTutor;
   }
 
   public Usuario getIdUsuario() {

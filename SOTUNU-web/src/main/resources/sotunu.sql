@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-03-2016 a las 07:54:27
+-- Tiempo de generación: 07-03-2016 a las 08:33:36
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.5.30
 
@@ -74,7 +74,8 @@ CREATE TABLE `escuelaprofesional` (
 --
 
 INSERT INTO `escuelaprofesional` (`idEscuelaProfesional`, `idFacultad`, `nombre`, `especialidad`) VALUES
-(1, 1, 'Ingeniería de sistemas', NULL);
+(1, 1, 'Ingeniería de sistemas', NULL),
+(2, 1, 'Ingeniería civil', NULL);
 
 -- --------------------------------------------------------
 
@@ -92,7 +93,7 @@ CREATE TABLE `facultad` (
 --
 
 INSERT INTO `facultad` (`idFacultad`, `nombre`) VALUES
-(1, 'Ingeniería de sistemas e ingeniería civil');
+(1, 'Ingenieria de sistemas e ingenieria civil');
 
 -- --------------------------------------------------------
 
@@ -102,7 +103,7 @@ INSERT INTO `facultad` (`idFacultad`, `nombre`) VALUES
 
 CREATE TABLE `personal` (
   `idPersonal` int(11) UNSIGNED NOT NULL,
-  `idEscuelaProfesional` int(11) UNSIGNED NOT NULL,
+  `idEscuelaProfesional` int(11) UNSIGNED DEFAULT NULL COMMENT 'Es null cuando se registra un administrador o auditor',
   `nombre` varchar(40) NOT NULL,
   `apellido` varchar(40) NOT NULL,
   `direccion` varchar(100) NOT NULL,
@@ -117,7 +118,9 @@ CREATE TABLE `personal` (
 --
 
 INSERT INTO `personal` (`idPersonal`, `idEscuelaProfesional`, `nombre`, `apellido`, `direccion`, `email`, `telefono`, `celular`, `cargo`) VALUES
-(1, 1, 'Arturo', 'Yupanqui Villanueva', '', NULL, NULL, NULL, 'director');
+(1, 1, 'Arturo', 'Yupanqui Villanueva', '', NULL, NULL, NULL, 'director'),
+(2, 1, 'Cesar', 'Agurto Cherres', '', NULL, NULL, NULL, 'tutor'),
+(3, 2, '', 'Roman', '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -129,20 +132,41 @@ CREATE TABLE `programacion` (
   `idProgramacion` int(11) UNSIGNED NOT NULL,
   `idUsuario` int(11) UNSIGNED NOT NULL,
   `idCicloAcademico` int(11) UNSIGNED NOT NULL,
-  `idEscuelaProfesional` int(11) UNSIGNED NOT NULL,
-  `ciclo` varchar(3) NOT NULL,
-  `salon` varchar(3) NOT NULL,
-  `pabellon` varchar(3) NOT NULL,
-  `nroEstudiantes` int(3) NOT NULL,
-  `delegado` varchar(80) NOT NULL
+  `fechaHora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'fecha automático tanto en inserciones pero NO en actualizaciones'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `programacion`
 --
 
-INSERT INTO `programacion` (`idProgramacion`, `idUsuario`, `idCicloAcademico`, `idEscuelaProfesional`, `ciclo`, `salon`, `pabellon`, `nroEstudiantes`, `delegado`) VALUES
-(1, 1, 1, 1, '5', '12', '2', 13, 'Cante Torres Ramirez');
+INSERT INTO `programacion` (`idProgramacion`, `idUsuario`, `idCicloAcademico`, `fechaHora`) VALUES
+(1, 1, 1, '2016-03-06 10:30:48');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `programaciontutor`
+--
+
+CREATE TABLE `programaciontutor` (
+  `idProgramacionTutor` int(11) UNSIGNED NOT NULL,
+  `idPersonal` int(11) UNSIGNED NOT NULL,
+  `idProgramacion` int(11) UNSIGNED NOT NULL,
+  `ciclo` varchar(3) NOT NULL,
+  `aula` varchar(3) NOT NULL,
+  `pabellon` varchar(3) NOT NULL,
+  `nroEstudiantes` int(3) NOT NULL,
+  `delegado` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `programaciontutor`
+--
+
+INSERT INTO `programaciontutor` (`idProgramacionTutor`, `idPersonal`, `idProgramacion`, `ciclo`, `aula`, `pabellon`, `nroEstudiantes`, `delegado`) VALUES
+(1, 2, 1, '1', '4', '1', 13, 'Moises Cante Ramirez'),
+(2, 2, 1, '1', '5', '1', 15, 'Carlos Perez Acero'),
+(3, 2, 1, '1', '1', '2', 13, 'Sosa Medina Chavez');
 
 -- --------------------------------------------------------
 
@@ -180,7 +204,7 @@ CREATE TABLE `tutorado` (
 CREATE TABLE `tutoria` (
   `idTutoria` int(11) UNSIGNED NOT NULL,
   `idUsuario` int(11) UNSIGNED NOT NULL,
-  `idProgramacion` int(11) UNSIGNED NOT NULL,
+  `idProgramacionTutor` int(11) UNSIGNED NOT NULL,
   `fecha` date NOT NULL,
   `horaInicio` time NOT NULL,
   `horaFin` time NOT NULL,
@@ -259,8 +283,15 @@ ALTER TABLE `personal`
 ALTER TABLE `programacion`
   ADD PRIMARY KEY (`idProgramacion`),
   ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idCicloAcademico` (`idCicloAcademico`),
-  ADD KEY `idEscuelaProfesional` (`idEscuelaProfesional`);
+  ADD KEY `idCicloAcademico` (`idCicloAcademico`);
+
+--
+-- Indices de la tabla `programaciontutor`
+--
+ALTER TABLE `programaciontutor`
+  ADD PRIMARY KEY (`idProgramacionTutor`),
+  ADD KEY `idPersonal` (`idPersonal`),
+  ADD KEY `idProgramacion` (`idProgramacion`);
 
 --
 -- Indices de la tabla `tutorado`
@@ -276,7 +307,7 @@ ALTER TABLE `tutorado`
 ALTER TABLE `tutoria`
   ADD PRIMARY KEY (`idTutoria`),
   ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idProgramacion` (`idProgramacion`);
+  ADD KEY `idProgramacionTutor` (`idProgramacionTutor`);
 
 --
 -- Indices de la tabla `usuario`
@@ -303,7 +334,7 @@ ALTER TABLE `correo`
 -- AUTO_INCREMENT de la tabla `escuelaprofesional`
 --
 ALTER TABLE `escuelaprofesional`
-  MODIFY `idEscuelaProfesional` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idEscuelaProfesional` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `facultad`
 --
@@ -313,12 +344,17 @@ ALTER TABLE `facultad`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `idPersonal` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPersonal` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `programacion`
 --
 ALTER TABLE `programacion`
   MODIFY `idProgramacion` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `programaciontutor`
+--
+ALTER TABLE `programaciontutor`
+  MODIFY `idProgramacionTutor` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tutorado`
 --
@@ -361,8 +397,14 @@ ALTER TABLE `personal`
 --
 ALTER TABLE `programacion`
   ADD CONSTRAINT `programacion_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`),
-  ADD CONSTRAINT `programacion_ibfk_2` FOREIGN KEY (`idCicloAcademico`) REFERENCES `cicloacademico` (`idCicloAcademico`),
-  ADD CONSTRAINT `programacion_ibfk_3` FOREIGN KEY (`idEscuelaProfesional`) REFERENCES `escuelaprofesional` (`idEscuelaProfesional`);
+  ADD CONSTRAINT `programacion_ibfk_2` FOREIGN KEY (`idCicloAcademico`) REFERENCES `cicloacademico` (`idCicloAcademico`);
+
+--
+-- Filtros para la tabla `programaciontutor`
+--
+ALTER TABLE `programaciontutor`
+  ADD CONSTRAINT `programaciontutor_ibfk_1` FOREIGN KEY (`idPersonal`) REFERENCES `personal` (`idPersonal`),
+  ADD CONSTRAINT `programaciontutor_ibfk_2` FOREIGN KEY (`idProgramacion`) REFERENCES `programacion` (`idProgramacion`);
 
 --
 -- Filtros para la tabla `tutorado`
@@ -376,7 +418,7 @@ ALTER TABLE `tutorado`
 --
 ALTER TABLE `tutoria`
   ADD CONSTRAINT `tutoria_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`),
-  ADD CONSTRAINT `tutoria_ibfk_2` FOREIGN KEY (`idProgramacion`) REFERENCES `programacion` (`idProgramacion`);
+  ADD CONSTRAINT `tutoria_ibfk_2` FOREIGN KEY (`idProgramacionTutor`) REFERENCES `programaciontutor` (`idProgramacionTutor`);
 
 --
 -- Filtros para la tabla `usuario`

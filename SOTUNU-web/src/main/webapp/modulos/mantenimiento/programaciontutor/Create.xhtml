@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="ProgramaciontutorCreateDlg" widgetVar="ProgramaciontutorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateProgramaciontutorTitle}">
+      <h:form id="ProgramaciontutorCreateForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{programaciontutorController.selected != null}">
+            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_idProgramacionTutor}" for="idProgramacionTutor" />
+            <p:inputText id="idProgramacionTutor" value="#{programaciontutorController.selected.idProgramacionTutor}" title="#{bundle.CreateProgramaciontutorTitle_idProgramacionTutor}" required="true" requiredMessage="#{bundle.CreateProgramaciontutorRequiredMessage_idProgramacionTutor}"/>
+            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_ciclo}" for="ciclo" />
+            <p:inputText id="ciclo" value="#{programaciontutorController.selected.ciclo}" title="#{bundle.CreateProgramaciontutorTitle_ciclo}" required="true" requiredMessage="#{bundle.CreateProgramaciontutorRequiredMessage_ciclo}"/>
+            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_aula}" for="aula" />
+            <p:inputText id="aula" value="#{programaciontutorController.selected.aula}" title="#{bundle.CreateProgramaciontutorTitle_aula}" required="true" requiredMessage="#{bundle.CreateProgramaciontutorRequiredMessage_aula}"/>
+            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_pabellon}" for="pabellon" />
+            <p:inputText id="pabellon" value="#{programaciontutorController.selected.pabellon}" title="#{bundle.CreateProgramaciontutorTitle_pabellon}" required="true" requiredMessage="#{bundle.CreateProgramaciontutorRequiredMessage_pabellon}"/>
+            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_nroEstudiantes}" for="nroEstudiantes" />
+            <p:inputText id="nroEstudiantes" value="#{programaciontutorController.selected.nroEstudiantes}" title="#{bundle.CreateProgramaciontutorTitle_nroEstudiantes}" required="true" requiredMessage="#{bundle.CreateProgramaciontutorRequiredMessage_nroEstudiantes}"/>
+            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_delegado}" for="delegado" />
+            <p:inputText id="delegado" value="#{programaciontutorController.selected.delegado}" title="#{bundle.CreateProgramaciontutorTitle_delegado}" required="true" requiredMessage="#{bundle.CreateProgramaciontutorRequiredMessage_delegado}"/>
+            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_idProgramacion}" for="idProgramacion" />
+            <p:selectOneMenu id="idProgramacion" value="#{programaciontutorController.selected.idProgramacion}" required="true" requiredMessage="#{bundle.EditProgramaciontutorRequiredMessage_idProgramacion}">
+              <f:selectItems value="#{programacionController.itemsAvailableSelectOne}"
+                             var="idProgramacionItem"
+                             itemValue="#{idProgramacionItem}"/>
+            </p:selectOneMenu>
+            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_idPersonal}" for="idPersonal" />
+            <p:selectOneMenu id="idPersonal" value="#{programaciontutorController.selected.idPersonal}" required="true" requiredMessage="#{bundle.EditProgramaciontutorRequiredMessage_idPersonal}">
+              <f:selectItems value="#{personalController.itemsAvailableSelectOne}"
+                             var="idPersonalItem"
+                             itemValue="#{idPersonalItem}"/>
+            </p:selectOneMenu>
+          </p:panelGrid>
+          <p:commandButton actionListener="#{programaciontutorController.create}" value="#{bundle.Save}" update="display,:ProgramaciontutorListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProgramaciontutorCreateDialog');"/>
+          <p:commandButton value="#{bundle.Cancel}" onclick="ProgramaciontutorCreateDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

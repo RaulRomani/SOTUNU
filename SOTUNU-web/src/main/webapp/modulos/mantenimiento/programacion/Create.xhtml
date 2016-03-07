@@ -14,22 +14,8 @@
           <p:panelGrid columns="2" rendered="#{programacionController.selected != null}">
             <p:outputLabel value="#{bundle.CreateProgramacionLabel_idProgramacion}" for="idProgramacion" />
             <p:inputText id="idProgramacion" value="#{programacionController.selected.idProgramacion}" title="#{bundle.CreateProgramacionTitle_idProgramacion}" required="true" requiredMessage="#{bundle.CreateProgramacionRequiredMessage_idProgramacion}"/>
-            <p:outputLabel value="#{bundle.CreateProgramacionLabel_ciclo}" for="ciclo" />
-            <p:inputText id="ciclo" value="#{programacionController.selected.ciclo}" title="#{bundle.CreateProgramacionTitle_ciclo}" required="true" requiredMessage="#{bundle.CreateProgramacionRequiredMessage_ciclo}"/>
-            <p:outputLabel value="#{bundle.CreateProgramacionLabel_salon}" for="salon" />
-            <p:inputText id="salon" value="#{programacionController.selected.salon}" title="#{bundle.CreateProgramacionTitle_salon}" required="true" requiredMessage="#{bundle.CreateProgramacionRequiredMessage_salon}"/>
-            <p:outputLabel value="#{bundle.CreateProgramacionLabel_pabellon}" for="pabellon" />
-            <p:inputText id="pabellon" value="#{programacionController.selected.pabellon}" title="#{bundle.CreateProgramacionTitle_pabellon}" required="true" requiredMessage="#{bundle.CreateProgramacionRequiredMessage_pabellon}"/>
-            <p:outputLabel value="#{bundle.CreateProgramacionLabel_nroEstudiantes}" for="nroEstudiantes" />
-            <p:inputText id="nroEstudiantes" value="#{programacionController.selected.nroEstudiantes}" title="#{bundle.CreateProgramacionTitle_nroEstudiantes}" required="true" requiredMessage="#{bundle.CreateProgramacionRequiredMessage_nroEstudiantes}"/>
-            <p:outputLabel value="#{bundle.CreateProgramacionLabel_delegado}" for="delegado" />
-            <p:inputText id="delegado" value="#{programacionController.selected.delegado}" title="#{bundle.CreateProgramacionTitle_delegado}" required="true" requiredMessage="#{bundle.CreateProgramacionRequiredMessage_delegado}"/>
-            <p:outputLabel value="#{bundle.CreateProgramacionLabel_idEscuelaProfesional}" for="idEscuelaProfesional" />
-            <p:selectOneMenu id="idEscuelaProfesional" value="#{programacionController.selected.idEscuelaProfesional}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_idEscuelaProfesional}">
-              <f:selectItems value="#{escuelaprofesionalController.itemsAvailableSelectOne}"
-                             var="idEscuelaProfesionalItem"
-                             itemValue="#{idEscuelaProfesionalItem}"/>
-            </p:selectOneMenu>
+            <p:outputLabel value="#{bundle.CreateProgramacionLabel_fechaHora}" for="fechaHora" />
+            <p:calendar id="fechaHora" pattern="MM/dd/yyyy HH:mm:ss" value="#{programacionController.selected.fechaHora}" title="#{bundle.EditProgramacionTitle_fechaHora}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_fechaHora}" showOn="button"/>
             <p:outputLabel value="#{bundle.CreateProgramacionLabel_idCicloAcademico}" for="idCicloAcademico" />
             <p:selectOneMenu id="idCicloAcademico" value="#{programacionController.selected.idCicloAcademico}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_idCicloAcademico}">
               <f:selectItems value="#{cicloacademicoController.itemsAvailableSelectOne}"

@@ -111,12 +111,8 @@ public class LoginController implements Serializable {
 
   public String validar() {
 
-    Usuario u = null;
-    try{
-      u = ejbFacade.validar(usuario.getUsuario(), usuario.getClave());
-    } catch (Exception e){
-      mensajeError = e.getMessage();
-    }
+    Usuario u = ejbFacade.validar(usuario.getUsuario(), usuario.getClave());
+    
     if (u != null) {
       setUsuario(u);
       personal = u.getIdPersonal();//ejbFacadePersonal.find(u.getIdPersonal());
@@ -125,19 +121,28 @@ public class LoginController implements Serializable {
       FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", u);
       
       RequestContext.getCurrentInstance().update("growl");
+      FacesContext context = FacesContext.getCurrentInstance();
+      context.addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Bienvenido: "+ personal.getNombre() + " " + personal.getApellido() ));
 
-      //FacesContext context = FacesContext.getCurrentInstance();
-      //context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error",personal.getNombres()));
       return "index?faces-redirect=true"; // Pagina a Redireccionar
     } else {
       RequestContext.getCurrentInstance().update("growl");
       FacesContext context = FacesContext.getCurrentInstance();
       context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Usuario o contraseña es invalido", "Usuario o contraseña es invalido"));
       return "";
-
-      //return "main?faces-redirect=true"; // Pagina a Redireccionar
     }
 
+  }
+  
+  public String validarPermisos(){
+    if(usuario.getRol().equals("tutor"))
+      return "tutor";
+    else if(usuario.getRol().equals("director"))
+      return "director";
+    else if(usuario.getRol().equals("administrador"))
+      return "administrador";
+    else
+      return "auditor";
   }
 
   /**

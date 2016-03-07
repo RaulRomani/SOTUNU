@@ -25,10 +25,6 @@ public interface ProgramacionFacadeLocal {
   void remove(Programacion programacion);
 
   Programacion find(Object id);
-  
-  List<Programacion> findByCiclo(String ciclo);
-  
-  List<Programacion> findProgramacionDirector(Usuario idUsuario,Cicloacademico idCicloAcademico);
 
   List<Programacion> findAll();
 
@@ -36,4 +32,5 @@ public interface ProgramacionFacadeLocal {
 
   int count();
   
+  Programacion findProgramacionDirector(Usuario idUsuario,Cicloacademico idCicloAcademico);
 }

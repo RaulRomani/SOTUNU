@@ -36,11 +36,11 @@
             <p:inputText id="asistencia" value="#{tutoriaController.selected.asistencia}" title="#{bundle.CreateTutoriaTitle_asistencia}" />
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_observaciones}" for="observaciones" />
             <p:inputText id="observaciones" value="#{tutoriaController.selected.observaciones}" title="#{bundle.CreateTutoriaTitle_observaciones}" />
-            <p:outputLabel value="#{bundle.CreateTutoriaLabel_idProgramacion}" for="idProgramacion" />
-            <p:selectOneMenu id="idProgramacion" value="#{tutoriaController.selected.idProgramacion}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_idProgramacion}">
-              <f:selectItems value="#{programacionController.itemsAvailableSelectOne}"
-                             var="idProgramacionItem"
-                             itemValue="#{idProgramacionItem}"/>
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_idProgramacionTutor}" for="idProgramacionTutor" />
+            <p:selectOneMenu id="idProgramacionTutor" value="#{tutoriaController.selected.idProgramacionTutor}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_idProgramacionTutor}">
+              <f:selectItems value="#{programaciontutorController.itemsAvailableSelectOne}"
+                             var="idProgramacionTutorItem"
+                             itemValue="#{idProgramacionTutorItem}"/>
             </p:selectOneMenu>
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_idUsuario}" for="idUsuario" />
             <p:selectOneMenu id="idUsuario" value="#{tutoriaController.selected.idUsuario}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_idUsuario}">

@@ -74,17 +74,19 @@
             </li> -->
             
             
-            
+            <h:panelGroup rendered="#{loginController.validarPermisos().equals('director')}">
             <li>
-              <h:link outcome="/modulos/tutoria/programacionTutores"><i class="fa fa-fw fa-history"></i> Programación</h:link>
+              <h:link outcome="/modulos/tutoria/programacionTutores"><i class="fa fa-fw fa-history"></i> Programación de tutores</h:link>
             </li>
+            </h:panelGroup>
             
+            <h:panelGroup rendered="#{loginController.validarPermisos().equals('tutor')}">
             <li>
               <h:link outcome="/modulos/tutoria/programacionTutorias"><i class="fa fa-fw fa-history"></i> Tutoria</h:link>
             </li>
-
+            </h:panelGroup>
             
-
+            <h:panelGroup rendered="#{loginController.validarPermisos().equals('administrador')}">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
                  aria-expanded="false"><i class="fa fa-fw fa-wrench  "></i> Mantenimiento <span class="caret"></span></a>
@@ -92,6 +94,7 @@
                 <li><h:link outcome="/modulos/mantenimiento/escuelaprofesional/List">Escuela Profesional</h:link></li>
                 <li><h:link outcome="/modulos/mantenimiento/personal/List">Personal</h:link></li>
                 <li><h:link outcome="/modulos/mantenimiento/programacion/List">Programación</h:link></li>
+                <li><h:link outcome="/modulos/mantenimiento/programaciontutor/List">ProgramaciónTutor</h:link></li>
                 <li><h:link outcome="/modulos/mantenimiento/tutorado/List">Tutorado</h:link></li>
                 <li><h:link outcome="/modulos/mantenimiento/tutoria/List">Tutoria</h:link></li>
                 <li><h:link outcome="/modulos/mantenimiento/usuario/List">Usuario</h:link></li>
@@ -100,6 +103,7 @@
                 <li><h:link outcome="/modulos/mantenimiento/facultad/List">Facultad</h:link></li>
               </ul>
             </li>
+            </h:panelGroup>
 
           </ul>
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="ProgramaciontutorViewDlg" widgetVar="ProgramaciontutorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewProgramaciontutorTitle}">
+      <h:form id="ProgramaciontutorViewForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{programaciontutorController.selected != null}">
+            <h:outputText value="#{bundle.ViewProgramaciontutorLabel_idProgramacionTutor}"/>
+            <h:outputText value="#{programaciontutorController.selected.idProgramacionTutor}" title="#{bundle.ViewProgramaciontutorTitle_idProgramacionTutor}"/>
+            <h:outputText value="#{bundle.ViewProgramaciontutorLabel_ciclo}"/>
+            <h:outputText value="#{programaciontutorController.selected.ciclo}" title="#{bundle.ViewProgramaciontutorTitle_ciclo}"/>
+            <h:outputText value="#{bundle.ViewProgramaciontutorLabel_aula}"/>
+            <h:outputText value="#{programaciontutorController.selected.aula}" title="#{bundle.ViewProgramaciontutorTitle_aula}"/>
+            <h:outputText value="#{bundle.ViewProgramaciontutorLabel_pabellon}"/>
+            <h:outputText value="#{programaciontutorController.selected.pabellon}" title="#{bundle.ViewProgramaciontutorTitle_pabellon}"/>
+            <h:outputText value="#{bundle.ViewProgramaciontutorLabel_nroEstudiantes}"/>
+            <h:outputText value="#{programaciontutorController.selected.nroEstudiantes}" title="#{bundle.ViewProgramaciontutorTitle_nroEstudiantes}"/>
+            <h:outputText value="#{bundle.ViewProgramaciontutorLabel_delegado}"/>
+            <h:outputText value="#{programaciontutorController.selected.delegado}" title="#{bundle.ViewProgramaciontutorTitle_delegado}"/>
+            <h:outputText value="#{bundle.ViewProgramaciontutorLabel_idProgramacion}"/>
+            <h:outputText value="#{programaciontutorController.selected.idProgramacion}" title="#{bundle.ViewProgramaciontutorTitle_idProgramacion}"/>
+            <h:outputText value="#{bundle.ViewProgramaciontutorLabel_idPersonal}"/>
+            <h:outputText value="#{programaciontutorController.selected.idPersonal}" title="#{bundle.ViewProgramaciontutorTitle_idPersonal}"/>
+          </p:panelGrid>
+          <p:commandButton value="#{bundle.Close}" onclick="ProgramaciontutorViewDialog.hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

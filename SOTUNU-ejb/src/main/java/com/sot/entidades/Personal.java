@@ -8,6 +8,7 @@ package com.sot.entidades;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
   @NamedQuery(name = "Personal.findByEmail", query = "SELECT p FROM Personal p WHERE p.email = :email"),
   @NamedQuery(name = "Personal.findByTelefono", query = "SELECT p FROM Personal p WHERE p.telefono = :telefono"),
   @NamedQuery(name = "Personal.findByCelular", query = "SELECT p FROM Personal p WHERE p.celular = :celular"),
-  @NamedQuery(name = "Personal.findByCargo", query = "SELECT p FROM Personal p WHERE p.cargo = :cargo")})
+  @NamedQuery(name = "Personal.findByCargo", query = "SELECT p FROM Personal p WHERE p.cargo = :cargo"),
+  @NamedQuery(name = "Personal.findByEscuelaProfesional", query = "SELECT p FROM Personal p WHERE p.idEscuelaProfesional = :idEscuelaProfesional AND p.cargo = :cargo")})
 public class Personal implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
@@ -77,10 +79,12 @@ public class Personal implements Serializable {
   @Column(name = "cargo")
   private String cargo;
   @JoinColumn(name = "idEscuelaProfesional", referencedColumnName = "idEscuelaProfesional")
-  @ManyToOne(optional = false)
+  @ManyToOne
   private Escuelaprofesional idEscuelaProfesional;
   @OneToMany(mappedBy = "idPersonal")
   private List<Usuario> usuarioList;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonal")
+  private List<Programaciontutor> programaciontutorList;
 
   public Personal() {
   }
@@ -175,6 +179,15 @@ public class Personal implements Serializable {
 
   public void setUsuarioList(List<Usuario> usuarioList) {
     this.usuarioList = usuarioList;
+  }
+
+  @XmlTransient
+  public List<Programaciontutor> getProgramaciontutorList() {
+    return programaciontutorList;
+  }
+
+  public void setProgramaciontutorList(List<Programaciontutor> programaciontutorList) {
+    this.programaciontutorList = programaciontutorList;
   }
 
   @Override

@@ -23,7 +23,7 @@ public interface EscuelaprofesionalFacadeLocal {
   void remove(Escuelaprofesional escuelaprofesional);
 
   Escuelaprofesional find(Object id);
-
+  
   List<Escuelaprofesional> findAll();
 
   List<Escuelaprofesional> findRange(int[] range);

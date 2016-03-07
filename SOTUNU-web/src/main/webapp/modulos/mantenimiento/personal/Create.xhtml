@@ -29,7 +29,7 @@
             <p:outputLabel value="#{bundle.CreatePersonalLabel_cargo}" for="cargo" />
             <p:inputText id="cargo" value="#{personalController.selected.cargo}" title="#{bundle.CreatePersonalTitle_cargo}" />
             <p:outputLabel value="#{bundle.CreatePersonalLabel_idEscuelaProfesional}" for="idEscuelaProfesional" />
-            <p:selectOneMenu id="idEscuelaProfesional" value="#{personalController.selected.idEscuelaProfesional}" required="true" requiredMessage="#{bundle.EditPersonalRequiredMessage_idEscuelaProfesional}">
+            <p:selectOneMenu id="idEscuelaProfesional" value="#{personalController.selected.idEscuelaProfesional}" >
               <f:selectItems value="#{escuelaprofesionalController.itemsAvailableSelectOne}"
                              var="idEscuelaProfesionalItem"
                              itemValue="#{idEscuelaProfesionalItem}"/>

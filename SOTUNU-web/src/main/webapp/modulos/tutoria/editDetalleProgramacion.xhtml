@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="ProgramaciontutorEditDlg" widgetVar="ProgramaciontutorEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProgramaciontutorTitle}">
+      <h:form id="ProgramaciontutorEditForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{programacionTutores.programacionTutorSelected != null}">
+            
+            <p:outputLabel value="#{bundle.EditProgramaciontutorLabel_ciclo}" for="ciclo" />
+            <p:inputText id="ciclo" value="#{programacionTutores.programacionTutorSelected.ciclo}" title="#{bundle.EditProgramaciontutorTitle_ciclo}" required="true" requiredMessage="#{bundle.EditProgramaciontutorRequiredMessage_ciclo}"/>
+            <p:outputLabel value="#{bundle.EditProgramaciontutorLabel_aula}" for="aula" />
+            <p:inputText id="aula" value="#{programacionTutores.programacionTutorSelected.aula}" title="#{bundle.EditProgramaciontutorTitle_aula}" required="true" requiredMessage="#{bundle.EditProgramaciontutorRequiredMessage_aula}"/>
+            <p:outputLabel value="#{bundle.EditProgramaciontutorLabel_pabellon}" for="pabellon" />
+            <p:inputText id="pabellon" value="#{programacionTutores.programacionTutorSelected.pabellon}" title="#{bundle.EditProgramaciontutorTitle_pabellon}" required="true" requiredMessage="#{bundle.EditProgramaciontutorRequiredMessage_pabellon}"/>
+            <p:outputLabel value="#{bundle.EditProgramaciontutorLabel_nroEstudiantes}" for="nroEstudiantes" />
+            <p:inputText id="nroEstudiantes" value="#{programacionTutores.programacionTutorSelected.nroEstudiantes}" title="#{bundle.EditProgramaciontutorTitle_nroEstudiantes}" required="true" requiredMessage="#{bundle.EditProgramaciontutorRequiredMessage_nroEstudiantes}"/>
+            <p:outputLabel value="#{bundle.EditProgramaciontutorLabel_delegado}" for="delegado" />
+            <p:inputText id="delegado" value="#{programacionTutores.programacionTutorSelected.delegado}" title="#{bundle.EditProgramaciontutorTitle_delegado}" required="true" requiredMessage="#{bundle.EditProgramaciontutorRequiredMessage_delegado}"/>
+            
+            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_idPersonal}" for="idTutor" />
+            <p:selectOneMenu  id="idTutor" value="#{programacionTutores.idTutor}">
+              <f:selectItem itemLabel="Seleccione" itemValue="" />
+              <f:selectItems  value="#{programacionTutores.tutorList}"/>
+            </p:selectOneMenu>
+          </p:panelGrid>
+          <p:commandButton actionListener="#{programacionTutores.update}" value="#{bundle.Save}" update="display,:ProgramaciontutorListForm:datalist,:growl" />
+          <p:commandButton value="Cerrar" oncomplete="PF('ProgramaciontutorEditDialog').hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+  </ui:composition>
+</html>

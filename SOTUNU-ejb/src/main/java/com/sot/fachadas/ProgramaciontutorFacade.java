@@ -5,8 +5,9 @@
  */
 package com.sot.fachadas;
 
-import com.sot.entidades.Escuelaprofesional;
 import com.sot.entidades.Personal;
+import com.sot.entidades.Programacion;
+import com.sot.entidades.Programaciontutor;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,7 +20,7 @@ import javax.persistence.TypedQuery;
  * @author Raul
  */
 @Stateless
-public class PersonalFacade extends AbstractFacade<Personal> implements PersonalFacadeLocal {
+public class ProgramaciontutorFacade extends AbstractFacade<Programaciontutor> implements ProgramaciontutorFacadeLocal {
   @PersistenceContext(unitName = "com.sot_SOTUNU-ejb_ejb_1.0PU")
   private EntityManager em;
 
@@ -28,16 +29,15 @@ public class PersonalFacade extends AbstractFacade<Personal> implements Personal
     return em;
   }
 
-  public PersonalFacade() {
-    super(Personal.class);
+  public ProgramaciontutorFacade() {
+    super(Programaciontutor.class);
   }
-  
+
   @Override
-  public List<Personal> findByEscuelaProfesional(Escuelaprofesional escuelaProfesional, String cargo) {
-    TypedQuery<Personal> q = getEntityManager().createNamedQuery("Personal.findByEscuelaProfesional", Personal.class);
-    q.setParameter("idEscuelaProfesional", escuelaProfesional);
-    q.setParameter("cargo", cargo);
-    List<Personal> list;
+  public List<Programaciontutor> findByIdProgramacion(Programacion idProgramacion) {
+    TypedQuery<Programaciontutor> q = getEntityManager().createNamedQuery("Programaciontutor.findByIdProgramacion", Programaciontutor.class);
+    q.setParameter("idProgramacion", idProgramacion);
+    List<Programaciontutor> list;
     try {
       list = q.getResultList();
     } catch (NoResultException e) {
@@ -45,4 +45,5 @@ public class PersonalFacade extends AbstractFacade<Personal> implements Personal
     }
     return list;
   }
+  
 }
