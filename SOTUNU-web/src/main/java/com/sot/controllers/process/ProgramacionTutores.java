@@ -7,26 +7,48 @@ package com.sot.controllers.process;
 
 import com.sot.controllers.LoginController;
 import com.sot.controllers.PersonalController;
+import com.sot.controllers.util.AccesoDB;
 import com.sot.controllers.util.JsfUtil;
 import com.sot.controllers.util.JsfUtil.PersistAction;
 import com.sot.controllers.util.Log4jConfig;
 import com.sot.entidades.Cicloacademico;
 import com.sot.entidades.Escuelaprofesional;
+import com.sot.entidades.Facultad;
 import com.sot.entidades.Personal;
 import com.sot.entidades.Programacion;
 import com.sot.entidades.Programaciontutor;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+import javax.sql.DataSource;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.log4j.Logger;
 
 /**
@@ -52,10 +74,10 @@ public class ProgramacionTutores implements Serializable {
 
   @EJB
   private com.sot.fachadas.CicloacademicoFacadeLocal ejbFacadeCiclo;
-  
+
   @EJB
   private com.sot.fachadas.PersonalFacadeLocal ejbFacadePersonal;
-  
+
   @EJB
   private com.sot.fachadas.ProgramaciontutorFacadeLocal ejbFacadeProgramacionTutor;
 
@@ -63,22 +85,21 @@ public class ProgramacionTutores implements Serializable {
   private LoginController login;
 
   private Programacion progTutores;
-  private Programacion programacion=null;
+  private Programacion programacion = null;
   private List<Programaciontutor> programacionTutorList = null;
   private Programaciontutor programacionTutorSelected;
-  
+
   private String ciclo; // 2016-
   private Integer idCicloAcademico = null; // 2016-
-  private List<SelectItem> cicloAcademicoList=null;
-  
-  private Integer idTutor = null; 
-  private List<SelectItem> TutorList=null;
+  private List<SelectItem> cicloAcademicoList = null;
+
+  private Integer idTutor = null;
+  private List<SelectItem> TutorList = null;
 
   @PostConstruct
   void init() {
     progTutores = new Programacion();
   }
-
 
   public void cargarProgramacionTutores() {
 
@@ -87,7 +108,7 @@ public class ProgramacionTutores implements Serializable {
       ca.setIdCicloAcademico(idCicloAcademico);
       // Busqueda por usuario y ciclo académico
       programacion = ejbFacadeProgramacion.findProgramacionDirector(login.getUsuario(), ca);  //Una programacion por ciclo
-      
+
       if (programacion == null) {
         programacionTutorList = null;
         logger.info("No ENCONTRO PROGRAMACION DEL TUTOR");
@@ -97,7 +118,7 @@ public class ProgramacionTutores implements Serializable {
       }
     }
   }
-  
+
   public void crearDetalleProgramacion() {
     programacionTutorSelected.setIdProgramacion(programacion);
     Personal tutor = new Personal();
@@ -108,7 +129,7 @@ public class ProgramacionTutores implements Serializable {
       programacionTutorList = null;    // Invalidate list of items to trigger re-query.
     }
   }
-  
+
   public Programaciontutor prepareCreate() {
     programacionTutorSelected = new Programaciontutor();
     return programacionTutorSelected;
@@ -125,7 +146,7 @@ public class ProgramacionTutores implements Serializable {
       programacionTutorList = null;    // Invalidate list of items to trigger re-query.
     }
   }
-  
+
   private void persist(PersistAction persistAction, String successMessage) {
     if (programacionTutorSelected != null) {
       try {
@@ -180,8 +201,6 @@ public class ProgramacionTutores implements Serializable {
   public Programacion getProgramacion() {
     return programacion;
   }
-  
-  
 
   public List<SelectItem> getCicloAcademicoList() {
     if (cicloAcademicoList == null) {
@@ -202,7 +221,7 @@ public class ProgramacionTutores implements Serializable {
 
     return cicloAcademicoList;
   }
-  
+
   public List<SelectItem> getTutorList() {
     if (TutorList == null) {
       try {
@@ -213,7 +232,7 @@ public class ProgramacionTutores implements Serializable {
         for (Personal p : lista) {
           SelectItem option = new SelectItem();
           option.setValue(p.getIdPersonal());
-          option.setLabel(p.getNombre()+ " " + p.getApellido());
+          option.setLabel(p.getNombre() + " " + p.getApellido());
           TutorList.add(option);
         }
       } catch (Exception e) {
@@ -236,8 +255,9 @@ public class ProgramacionTutores implements Serializable {
 //    if(programacionTutorList!=null){
 //      programacionTutorList = ejbFacadeProgramacionTutor.findAll();// (idProgramacion)
 //    }
-    if(idCicloAcademico != null && programacion != null)
+    if (idCicloAcademico != null && programacion != null) {
       programacionTutorList = ejbFacadeProgramacionTutor.findByIdProgramacion(programacion);
+    }
     return programacionTutorList;
   }
 
@@ -248,6 +268,44 @@ public class ProgramacionTutores implements Serializable {
   public void setProgramacionTutorSelected(Programaciontutor programacionTutorSelected) {
     this.programacionTutorSelected = programacionTutorSelected;
   }
-  
+
+  public void exportarPDF() throws JRException, IOException, NamingException, SQLException, Exception {
+    
+    Map<String, Object> parametro = new HashMap<>();
+    Cicloacademico ca = ejbFacadeCiclo.find(idCicloAcademico);
+    Personal director = login.getUsuario().getIdPersonal();
+    Escuelaprofesional escuela = director.getIdEscuelaProfesional();
+    Facultad facultad = escuela.getIdFacultad();
+    
+    
+    parametro.put("idProgramacion", programacion.getIdProgramacion());
+    parametro.put("cicloAcademico", ca.getAño()+ "-"+ ca.getPeriodo());
+    parametro.put("facultad", facultad.getNombre());
+    parametro.put("escuelaProfesional", escuela.getNombre());
+    parametro.put("director", director.getNombre() + " " + director.getApellido());
+    
+    //ejbFacadeProgramacionTutor.
+    File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/programacionTutores/programacionTutores.jasper"));
+    logger.info("OK exportarPDF, idProg: " + programacion.getIdProgramacion());
+    
+    
+    Connection con = AccesoDB.getConnection();
+    //java.sql.Connection co = em.unwrap(java.sql.Connection.class);
+    JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con );
+    
+    HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+    response.addHeader("Content-disposition", "attachment; filename=Programacion Tutores.pdf");
+    ServletOutputStream stream = response.getOutputStream();
+    
+
+    JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+    JasperExportManager.exportReportToPdfFile(jasperPrint, "D://programacionTutores.pdf");
+    stream.flush();
+    stream.close();
+    
+
+    FacesContext.getCurrentInstance().responseComplete();
+    //con.close();
+  }
 
 }

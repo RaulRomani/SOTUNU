@@ -7,8 +7,10 @@ package com.sot.fachadas;
 
 import com.sot.entidades.Programacion;
 import com.sot.entidades.Programaciontutor;
+import java.sql.Connection;
 import java.util.List;
 import javax.ejb.Local;
+import javax.persistence.EntityManager;
 
 /**
  *
