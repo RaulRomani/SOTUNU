@@ -6,7 +6,6 @@
 package com.sot.controllers.process;
 
 import com.sot.controllers.LoginController;
-import com.sot.controllers.PersonalController;
 import com.sot.controllers.util.AccesoDB;
 import com.sot.controllers.util.JsfUtil;
 import com.sot.controllers.util.JsfUtil.PersistAction;
@@ -17,7 +16,6 @@ import com.sot.entidades.Facultad;
 import com.sot.entidades.Personal;
 import com.sot.entidades.Programacion;
 import com.sot.entidades.Programaciontutor;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -29,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
-import javax.sql.DataSource;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -38,17 +35,13 @@ import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.persistence.EntityManager;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.log4j.Logger;
 
 /**

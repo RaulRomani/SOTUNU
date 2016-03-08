@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-03-2016 a las 08:33:36
+-- Tiempo de generación: 08-03-2016 a las 22:00:02
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.5.30
 
@@ -165,8 +165,7 @@ CREATE TABLE `programaciontutor` (
 
 INSERT INTO `programaciontutor` (`idProgramacionTutor`, `idPersonal`, `idProgramacion`, `ciclo`, `aula`, `pabellon`, `nroEstudiantes`, `delegado`) VALUES
 (1, 2, 1, '1', '4', '1', 13, 'Moises Cante Ramirez'),
-(2, 2, 1, '1', '5', '1', 15, 'Carlos Perez Acero'),
-(3, 2, 1, '1', '1', '2', 13, 'Sosa Medina Chavez');
+(2, 2, 1, '1', '5', '1', 16, 'Carlos Perez Acero');
 
 -- --------------------------------------------------------
 
@@ -238,7 +237,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `idPersonal`, `usuario`, `clave`, `rol`, `estado`) VALUES
-(1, 1, 'yupanqui', 'yupanqui', 'director', 'activo');
+(1, 1, 'yupanqui', 'yupanqui', 'director', 'activo'),
+(2, 2, 'agurto', 'agurto', 'tutor', 'activo');
 
 --
 -- Índices para tablas volcadas
@@ -354,7 +354,7 @@ ALTER TABLE `programacion`
 -- AUTO_INCREMENT de la tabla `programaciontutor`
 --
 ALTER TABLE `programaciontutor`
-  MODIFY `idProgramacionTutor` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idProgramacionTutor` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tutorado`
 --
@@ -369,7 +369,7 @@ ALTER TABLE `tutoria`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuario` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --
