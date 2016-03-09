@@ -24,8 +24,8 @@
             <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_delegado}" for="delegado" />
             <p:inputText id="delegado" value="#{programacionTutores.programacionTutorSelected.delegado}" title="#{bundle.CreateProgramaciontutorTitle_delegado}" required="true" requiredMessage="#{bundle.CreateProgramaciontutorRequiredMessage_delegado}"/>
 
-            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_idPersonal}" for="idTutor" />
-            <p:selectOneMenu  id="idTutor" value="#{programacionTutores.idTutor}">
+            <p:outputLabel value="Tutor" for="idTutor" />
+            <p:selectOneMenu  id="idTutor" value="#{programacionTutores.idTutor}" rendered="true" requiredMessage="El campo Tutor es requerido">
               <f:selectItem itemLabel="Seleccione" itemValue="" />
               <f:selectItems  value="#{programacionTutores.tutorList}"/>
             </p:selectOneMenu>

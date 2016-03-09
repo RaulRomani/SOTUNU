@@ -21,6 +21,27 @@
 
         <div class="container main-content">
           <h1 class="row" style="color: #269abc">Programación de tutores / Consejeria académica</h1>
+          
+          
+          <div class="row facultad-escuela">
+            <div class="col-lg-1"/>
+            <div class="col-lg-8">
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Facultad</label>
+                  <div class="col-sm-9">
+                    <p:outputLabel class="form-control" value="#{programacionTutores.escuelaProfesional.idFacultad.nombre}" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Escuela Académico Profesional</label>
+                  <div class="col-sm-9">
+                    <p:outputLabel class="form-control" value="#{programacionTutores.escuelaProfesional.nombre}" />
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-offset-3"/>
+          </div>
+          
 
           <h:form id="cargarProgramacionForm">
 
@@ -28,6 +49,7 @@
               <div class="col-sm-3" />
               <div class="col-sm-8">
                 <div class="form-group">
+                  
                   <p:outputLabel class="col-sm-2 form-control-label" value="Ciclo académico" for="ciclos"/>
 
                   <div class="col-sm-2">
@@ -39,9 +61,9 @@
 
                   <div class="col-sm-3">
                     <p:commandButton value="Cargar datos" 
-                                     id="ajax" 
                                      actionListener="#{programacionTutores.cargarProgramacionTutores()}" 
-                                     styleClass="ui-priority-primary" 
+                                     styleClass="ui" 
+                                     class="btn btn-success"
                                      icon="fa fa-download"
                                      update="ProgramaciontutorListForm:datalist,:growl"
                                      ajax="true"/>
@@ -59,6 +81,7 @@
             <p:dataTable id="datalist" value="#{programacionTutores.programacionTutorList}" var="item"
                          selectionMode="single" selection="#{programacionTutores.programacionTutorSelected}"
                          rowKey="#{item.idProgramacionTutor}"
+                         emptyMessage="No hay registros"
                          >
 
               <p:ajax event="rowSelect"   update="createButton editButton deleteButton reporteButton"/>
@@ -112,7 +135,7 @@
                                  actionListener="#{programacionTutores.exportarPDF()}" 
                                  styleClass="ui-priority-success" 
                                  icon="fa fa-file-pdf-o"
-                                 disabled="#{empty programacionTutores.idCicloAcademico}"
+                                 disabled="#{empty programacionTutores.programacionTutorList}"
                                  ajax="false"
                                  />
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-03-2016 a las 22:00:02
+-- Tiempo de generación: 09-03-2016 a las 18:04:49
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.5.30
 
@@ -40,7 +40,8 @@ CREATE TABLE `cicloacademico` (
 
 INSERT INTO `cicloacademico` (`idCicloAcademico`, `año`, `periodo`) VALUES
 (1, '2015', '1'),
-(2, '2015', '2');
+(2, '2015', '2'),
+(3, '2016', '3');
 
 -- --------------------------------------------------------
 
@@ -132,6 +133,7 @@ CREATE TABLE `programacion` (
   `idProgramacion` int(11) UNSIGNED NOT NULL,
   `idUsuario` int(11) UNSIGNED NOT NULL,
   `idCicloAcademico` int(11) UNSIGNED NOT NULL,
+  `idEscuelaProfesional` int(11) UNSIGNED NOT NULL,
   `fechaHora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'fecha automático tanto en inserciones pero NO en actualizaciones'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -139,8 +141,9 @@ CREATE TABLE `programacion` (
 -- Volcado de datos para la tabla `programacion`
 --
 
-INSERT INTO `programacion` (`idProgramacion`, `idUsuario`, `idCicloAcademico`, `fechaHora`) VALUES
-(1, 1, 1, '2016-03-06 10:30:48');
+INSERT INTO `programacion` (`idProgramacion`, `idUsuario`, `idCicloAcademico`, `idEscuelaProfesional`, `fechaHora`) VALUES
+(1, 1, 1, 1, '2016-03-06 15:30:48'),
+(2, 1, 2, 1, '2016-03-09 07:23:39');
 
 -- --------------------------------------------------------
 
@@ -165,7 +168,9 @@ CREATE TABLE `programaciontutor` (
 
 INSERT INTO `programaciontutor` (`idProgramacionTutor`, `idPersonal`, `idProgramacion`, `ciclo`, `aula`, `pabellon`, `nroEstudiantes`, `delegado`) VALUES
 (1, 2, 1, '1', '4', '1', 13, 'Moises Cante Ramirez'),
-(2, 2, 1, '1', '5', '1', 16, 'Carlos Perez Acero');
+(2, 2, 1, '1', '5', '1', 16, 'Carlos Perez Acero'),
+(3, 2, 1, '1', '1', '1', 12, 'ABC'),
+(4, 2, 2, '1', '1', '1', 11, 'Guillermo Torres Ramirez');
 
 -- --------------------------------------------------------
 
@@ -208,13 +213,19 @@ CREATE TABLE `tutoria` (
   `horaInicio` time NOT NULL,
   `horaFin` time NOT NULL,
   `tema` varchar(50) DEFAULT NULL,
-  `atencion` char(10) DEFAULT NULL,
+  `atencion` char(10) DEFAULT NULL COMMENT 'Individual o grupal',
+  `nombreTutorado` varchar(50) DEFAULT NULL COMMENT 'Solo si es individual',
+  `resumenCaso` varchar(250) DEFAULT NULL,
   `refDocente` varchar(80) DEFAULT NULL COMMENT 'Referencia del docente que asistio a la tutoria',
   `refAsignatura` varchar(30) DEFAULT NULL,
   `refDato` varchar(30) DEFAULT NULL,
   `notas` varchar(250) DEFAULT NULL,
   `asistencia` varchar(250) DEFAULT NULL,
-  `observaciones` varchar(250) DEFAULT NULL
+  `observaciones` varchar(250) DEFAULT NULL,
+  `respuestaTutor` varchar(250) DEFAULT NULL COMMENT 'Entrevista/pregunta al tutor',
+  `acciones` varchar(250) DEFAULT NULL,
+  `conclusiones` varchar(250) DEFAULT NULL,
+  `efectividadTutoria` tinyint(1) DEFAULT NULL COMMENT 'Pregunta al tutorado'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -283,7 +294,8 @@ ALTER TABLE `personal`
 ALTER TABLE `programacion`
   ADD PRIMARY KEY (`idProgramacion`),
   ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idCicloAcademico` (`idCicloAcademico`);
+  ADD KEY `idCicloAcademico` (`idCicloAcademico`),
+  ADD KEY `idEscuelaProfesional` (`idEscuelaProfesional`);
 
 --
 -- Indices de la tabla `programaciontutor`
@@ -324,7 +336,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cicloacademico`
 --
 ALTER TABLE `cicloacademico`
-  MODIFY `idCicloAcademico` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idCicloAcademico` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `correo`
 --
@@ -349,12 +361,12 @@ ALTER TABLE `personal`
 -- AUTO_INCREMENT de la tabla `programacion`
 --
 ALTER TABLE `programacion`
-  MODIFY `idProgramacion` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idProgramacion` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `programaciontutor`
 --
 ALTER TABLE `programaciontutor`
-  MODIFY `idProgramacionTutor` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idProgramacionTutor` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tutorado`
 --
@@ -397,7 +409,8 @@ ALTER TABLE `personal`
 --
 ALTER TABLE `programacion`
   ADD CONSTRAINT `programacion_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`),
-  ADD CONSTRAINT `programacion_ibfk_2` FOREIGN KEY (`idCicloAcademico`) REFERENCES `cicloacademico` (`idCicloAcademico`);
+  ADD CONSTRAINT `programacion_ibfk_2` FOREIGN KEY (`idCicloAcademico`) REFERENCES `cicloacademico` (`idCicloAcademico`),
+  ADD CONSTRAINT `programacion_ibfk_3` FOREIGN KEY (`idEscuelaProfesional`) REFERENCES `escuelaprofesional` (`idEscuelaProfesional`);
 
 --
 -- Filtros para la tabla `programaciontutor`

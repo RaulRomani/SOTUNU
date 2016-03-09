@@ -39,12 +39,18 @@ import javax.xml.bind.annotation.XmlRootElement;
   @NamedQuery(name = "Tutoria.findByHoraFin", query = "SELECT t FROM Tutoria t WHERE t.horaFin = :horaFin"),
   @NamedQuery(name = "Tutoria.findByTema", query = "SELECT t FROM Tutoria t WHERE t.tema = :tema"),
   @NamedQuery(name = "Tutoria.findByAtencion", query = "SELECT t FROM Tutoria t WHERE t.atencion = :atencion"),
+  @NamedQuery(name = "Tutoria.findByNombreTutorado", query = "SELECT t FROM Tutoria t WHERE t.nombreTutorado = :nombreTutorado"),
+  @NamedQuery(name = "Tutoria.findByResumenCaso", query = "SELECT t FROM Tutoria t WHERE t.resumenCaso = :resumenCaso"),
   @NamedQuery(name = "Tutoria.findByRefDocente", query = "SELECT t FROM Tutoria t WHERE t.refDocente = :refDocente"),
   @NamedQuery(name = "Tutoria.findByRefAsignatura", query = "SELECT t FROM Tutoria t WHERE t.refAsignatura = :refAsignatura"),
   @NamedQuery(name = "Tutoria.findByRefDato", query = "SELECT t FROM Tutoria t WHERE t.refDato = :refDato"),
   @NamedQuery(name = "Tutoria.findByNotas", query = "SELECT t FROM Tutoria t WHERE t.notas = :notas"),
   @NamedQuery(name = "Tutoria.findByAsistencia", query = "SELECT t FROM Tutoria t WHERE t.asistencia = :asistencia"),
-  @NamedQuery(name = "Tutoria.findByObservaciones", query = "SELECT t FROM Tutoria t WHERE t.observaciones = :observaciones")})
+  @NamedQuery(name = "Tutoria.findByObservaciones", query = "SELECT t FROM Tutoria t WHERE t.observaciones = :observaciones"),
+  @NamedQuery(name = "Tutoria.findByRespuestaTutor", query = "SELECT t FROM Tutoria t WHERE t.respuestaTutor = :respuestaTutor"),
+  @NamedQuery(name = "Tutoria.findByAcciones", query = "SELECT t FROM Tutoria t WHERE t.acciones = :acciones"),
+  @NamedQuery(name = "Tutoria.findByConclusiones", query = "SELECT t FROM Tutoria t WHERE t.conclusiones = :conclusiones"),
+  @NamedQuery(name = "Tutoria.findByEfectividadTutoria", query = "SELECT t FROM Tutoria t WHERE t.efectividadTutoria = :efectividadTutoria")})
 public class Tutoria implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
@@ -73,6 +79,12 @@ public class Tutoria implements Serializable {
   @Size(max = 10)
   @Column(name = "atencion")
   private String atencion;
+  @Size(max = 50)
+  @Column(name = "nombreTutorado")
+  private String nombreTutorado;
+  @Size(max = 250)
+  @Column(name = "resumenCaso")
+  private String resumenCaso;
   @Size(max = 80)
   @Column(name = "refDocente")
   private String refDocente;
@@ -91,6 +103,17 @@ public class Tutoria implements Serializable {
   @Size(max = 250)
   @Column(name = "observaciones")
   private String observaciones;
+  @Size(max = 250)
+  @Column(name = "respuestaTutor")
+  private String respuestaTutor;
+  @Size(max = 250)
+  @Column(name = "acciones")
+  private String acciones;
+  @Size(max = 250)
+  @Column(name = "conclusiones")
+  private String conclusiones;
+  @Column(name = "efectividadTutoria")
+  private Boolean efectividadTutoria;
   @JoinColumn(name = "idProgramacionTutor", referencedColumnName = "idProgramacionTutor")
   @ManyToOne(optional = false)
   private Programaciontutor idProgramacionTutor;
@@ -160,6 +183,22 @@ public class Tutoria implements Serializable {
     this.atencion = atencion;
   }
 
+  public String getNombreTutorado() {
+    return nombreTutorado;
+  }
+
+  public void setNombreTutorado(String nombreTutorado) {
+    this.nombreTutorado = nombreTutorado;
+  }
+
+  public String getResumenCaso() {
+    return resumenCaso;
+  }
+
+  public void setResumenCaso(String resumenCaso) {
+    this.resumenCaso = resumenCaso;
+  }
+
   public String getRefDocente() {
     return refDocente;
   }
@@ -206,6 +245,38 @@ public class Tutoria implements Serializable {
 
   public void setObservaciones(String observaciones) {
     this.observaciones = observaciones;
+  }
+
+  public String getRespuestaTutor() {
+    return respuestaTutor;
+  }
+
+  public void setRespuestaTutor(String respuestaTutor) {
+    this.respuestaTutor = respuestaTutor;
+  }
+
+  public String getAcciones() {
+    return acciones;
+  }
+
+  public void setAcciones(String acciones) {
+    this.acciones = acciones;
+  }
+
+  public String getConclusiones() {
+    return conclusiones;
+  }
+
+  public void setConclusiones(String conclusiones) {
+    this.conclusiones = conclusiones;
+  }
+
+  public Boolean getEfectividadTutoria() {
+    return efectividadTutoria;
+  }
+
+  public void setEfectividadTutoria(Boolean efectividadTutoria) {
+    this.efectividadTutoria = efectividadTutoria;
   }
 
   public Programaciontutor getIdProgramacionTutor() {

@@ -6,6 +6,7 @@
 package com.sot.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -47,10 +48,12 @@ public class Programacion implements Serializable {
   @Column(name = "idProgramacion")
   private Integer idProgramacion;
   @Basic(optional = false)
-  @NotNull
   @Column(name = "fechaHora")
   @Temporal(TemporalType.TIMESTAMP)
   private Date fechaHora;
+  @JoinColumn(name = "idEscuelaProfesional", referencedColumnName = "idEscuelaProfesional")
+  @ManyToOne(optional = false)
+  private Escuelaprofesional idEscuelaProfesional;
   @JoinColumn(name = "idCicloAcademico", referencedColumnName = "idCicloAcademico")
   @ManyToOne(optional = false)
   private Cicloacademico idCicloAcademico;
@@ -88,6 +91,14 @@ public class Programacion implements Serializable {
     this.fechaHora = fechaHora;
   }
 
+  public Escuelaprofesional getIdEscuelaProfesional() {
+    return idEscuelaProfesional;
+  }
+
+  public void setIdEscuelaProfesional(Escuelaprofesional idEscuelaProfesional) {
+    this.idEscuelaProfesional = idEscuelaProfesional;
+  }
+
   public Cicloacademico getIdCicloAcademico() {
     return idCicloAcademico;
   }
@@ -106,6 +117,8 @@ public class Programacion implements Serializable {
 
   @XmlTransient
   public List<Programaciontutor> getProgramaciontutorList() {
+    if(programaciontutorList == null) 
+      programaciontutorList = new ArrayList<>();
     return programaciontutorList;
   }
 

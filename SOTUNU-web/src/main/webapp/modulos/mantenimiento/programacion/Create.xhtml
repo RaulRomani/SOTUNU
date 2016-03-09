@@ -16,6 +16,12 @@
             <p:inputText id="idProgramacion" value="#{programacionController.selected.idProgramacion}" title="#{bundle.CreateProgramacionTitle_idProgramacion}" required="true" requiredMessage="#{bundle.CreateProgramacionRequiredMessage_idProgramacion}"/>
             <p:outputLabel value="#{bundle.CreateProgramacionLabel_fechaHora}" for="fechaHora" />
             <p:calendar id="fechaHora" pattern="MM/dd/yyyy HH:mm:ss" value="#{programacionController.selected.fechaHora}" title="#{bundle.EditProgramacionTitle_fechaHora}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_fechaHora}" showOn="button"/>
+            <p:outputLabel value="#{bundle.CreateProgramacionLabel_idEscuelaProfesional}" for="idEscuelaProfesional" />
+            <p:selectOneMenu id="idEscuelaProfesional" value="#{programacionController.selected.idEscuelaProfesional}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_idEscuelaProfesional}">
+              <f:selectItems value="#{escuelaprofesionalController.itemsAvailableSelectOne}"
+                             var="idEscuelaProfesionalItem"
+                             itemValue="#{idEscuelaProfesionalItem}"/>
+            </p:selectOneMenu>
             <p:outputLabel value="#{bundle.CreateProgramacionLabel_idCicloAcademico}" for="idCicloAcademico" />
             <p:selectOneMenu id="idCicloAcademico" value="#{programacionController.selected.idCicloAcademico}" required="true" requiredMessage="#{bundle.EditProgramacionRequiredMessage_idCicloAcademico}">
               <f:selectItems value="#{cicloacademicoController.itemsAvailableSelectOne}"

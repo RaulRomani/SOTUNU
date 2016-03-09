@@ -77,21 +77,20 @@ public class ProgramacionTutores implements Serializable {
   @Inject
   private LoginController login;
 
-  private Programacion progTutores;
   private Programacion programacion = null;
   private List<Programaciontutor> programacionTutorList = null;
   private Programaciontutor programacionTutorSelected;
 
-  private String ciclo; // 2016-
   private Integer idCicloAcademico = null; // 2016-
   private List<SelectItem> cicloAcademicoList = null;
 
   private Integer idTutor = null;
   private List<SelectItem> TutorList = null;
 
+  private Escuelaprofesional escuelaProfesional;
+
   @PostConstruct
   void init() {
-    progTutores = new Programacion();
   }
 
   public void cargarProgramacionTutores() {
@@ -99,10 +98,10 @@ public class ProgramacionTutores implements Serializable {
     if (idCicloAcademico != null) { //si ciclo academico no ha sido seteado
       Cicloacademico ca = new Cicloacademico();
       ca.setIdCicloAcademico(idCicloAcademico);
-      // Busqueda por usuario y ciclo académico
+      // Busqueda por usuario(Director) y ciclo académico
       programacion = ejbFacadeProgramacion.findProgramacionDirector(login.getUsuario(), ca);  //Una programacion por ciclo
 
-      if (programacion == null) {
+      if (programacion == null) {  //Si no hay programacion de un Director - CicloAcadémico
         programacionTutorList = null;
         logger.info("No ENCONTRO PROGRAMACION DEL TUTOR");
       } else {
@@ -113,14 +112,52 @@ public class ProgramacionTutores implements Serializable {
   }
 
   public void crearDetalleProgramacion() {
-    programacionTutorSelected.setIdProgramacion(programacion);
+
+//    Escuelaprofesional ep = new Escuelaprofesional();
+//    ep.setIdEscuelaProfesional(getEscuelaProfesional().getIdEscuelaProfesional());
+    logger.info("Escuela: " + getEscuelaProfesional().getNombre());
+
     Personal tutor = new Personal();
     tutor.setIdPersonal(idTutor);
     programacionTutorSelected.setIdPersonal(tutor);
-    persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ProgramaciontutorCreated"));
-    if (!JsfUtil.isValidationFailed()) {
-      programacionTutorList = null;    // Invalidate list of items to trigger re-query.
+
+    if (programacion == null) {  //Cuando no hay ninguna programacion del director en un ciclo académico
+
+      programacion = new Programacion();
+      programacion.setIdEscuelaProfesional(getEscuelaProfesional());
+      programacion.setIdUsuario(login.getUsuario());
+      programacion.setIdCicloAcademico(new Cicloacademico(idCicloAcademico));
+
+      //Lista de programacion de un tutor
+      List<Programaciontutor> ptList = new ArrayList<>();
+      ptList.add(programacionTutorSelected);
+      
+      
+      programacion.setProgramaciontutorList(ptList);
+      
+      //Una programacion de tutor esta asociado con una programación de Director
+      programacionTutorSelected.setIdProgramacion(programacion);
+      
+      
+      //programacion.getProgramaciontutorList().add(programacionTutorSelected);
+      
+      //save jpa many to one
+      ejbFacadeProgramacion.create(programacion);
+      //ejbFacadeProgramacionTutor.create(programacionTutorSelected);
+
+      logger.info("SE AGREGO UNA PROGRAMACIÓN Y SU DETALLE");
+    } else {
+
+      programacionTutorSelected.setIdProgramacion(programacion);
+
+      logger.info("SE AGREGO UN DETALLE DE PROGRAMACION EXISTENTE");
+
+      persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ProgramaciontutorCreated"));
+      if (!JsfUtil.isValidationFailed()) {
+        programacionTutorList = null;    // Invalidate list of items to trigger re-query.
+      }
     }
+
   }
 
   public Programaciontutor prepareCreate() {
@@ -167,22 +204,6 @@ public class ProgramacionTutores implements Serializable {
     }
   }
 
-  public String getCiclo() {
-    return ciclo;
-  }
-
-  public void setCiclo(String ciclo) {
-    this.ciclo = ciclo;
-  }
-
-  public Programacion getProgTutores() {
-    return progTutores;
-  }
-
-  public void setProgTutores(Programacion progTutores) {
-    this.progTutores = progTutores;
-  }
-
   public Integer getIdCicloAcademico() {
     return idCicloAcademico;
   }
@@ -193,6 +214,10 @@ public class ProgramacionTutores implements Serializable {
 
   public Programacion getProgramacion() {
     return programacion;
+  }
+
+  public void setProgramacion(Programacion programacion) {
+    this.programacion = programacion;
   }
 
   public List<SelectItem> getCicloAcademicoList() {
@@ -219,7 +244,7 @@ public class ProgramacionTutores implements Serializable {
     if (TutorList == null) {
       try {
         TutorList = new ArrayList<>();
-        Escuelaprofesional escuela = login.getUsuario().getIdPersonal().getIdEscuelaProfesional();
+        Escuelaprofesional escuela = getEscuelaProfesional();
         List<Personal> lista = ejbFacadePersonal.findByEscuelaProfesional(escuela, "tutor");
         logger.info("getTutorList OK");
         for (Personal p : lista) {
@@ -234,6 +259,14 @@ public class ProgramacionTutores implements Serializable {
     }
 
     return TutorList;
+  }
+
+  public Escuelaprofesional getEscuelaProfesional() {
+    if (escuelaProfesional == null) {
+      escuelaProfesional = login.getUsuario().getIdPersonal().getIdEscuelaProfesional();
+    }
+
+    return escuelaProfesional;
   }
 
   public Integer getIdTutor() {
@@ -263,39 +296,35 @@ public class ProgramacionTutores implements Serializable {
   }
 
   public void exportarPDF() throws JRException, IOException, NamingException, SQLException, Exception {
-    
+
     Map<String, Object> parametro = new HashMap<>();
     Cicloacademico ca = ejbFacadeCiclo.find(idCicloAcademico);
     Personal director = login.getUsuario().getIdPersonal();
     Escuelaprofesional escuela = director.getIdEscuelaProfesional();
     Facultad facultad = escuela.getIdFacultad();
-    
-    
+
     parametro.put("idProgramacion", programacion.getIdProgramacion());
-    parametro.put("cicloAcademico", ca.getAño()+ "-"+ ca.getPeriodo());
+    parametro.put("cicloAcademico", ca.getAño() + "-" + ca.getPeriodo());
     parametro.put("facultad", facultad.getNombre());
     parametro.put("escuelaProfesional", escuela.getNombre());
     parametro.put("director", director.getNombre() + " " + director.getApellido());
-    
+
     //ejbFacadeProgramacionTutor.
     File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/programacionTutores/programacionTutores.jasper"));
     logger.info("OK exportarPDF, idProg: " + programacion.getIdProgramacion());
-    
-    
+
     Connection con = AccesoDB.getConnection();
     //java.sql.Connection co = em.unwrap(java.sql.Connection.class);
-    JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con );
-    
+    JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con);
+
     HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
     response.addHeader("Content-disposition", "attachment; filename=Programacion Tutores.pdf");
     ServletOutputStream stream = response.getOutputStream();
-    
 
     JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
     JasperExportManager.exportReportToPdfFile(jasperPrint, "D://programacionTutores.pdf");
     stream.flush();
     stream.close();
-    
 
     FacesContext.getCurrentInstance().responseComplete();
     //con.close();
