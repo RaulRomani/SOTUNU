@@ -14,13 +14,13 @@
           <p:panelGrid columns="2" rendered="#{programacionTutorias.tutoriaSelected != null}">
             
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_fecha}" for="fecha" />
-            <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{programacionTutorias.tutoriaSelected.fecha}" title="#{bundle.EditTutoriaTitle_fecha}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_fecha}" showOn="button"/>
+            <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{programacionTutorias.tutoriaSelected.fecha}" title="#{bundle.EditTutoriaTitle_fecha}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_fecha}" showOn="button" locale="es"/>
             
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_horaInicio}" for="horaInicio" />
-            <p:calendar id="horaInicio" pattern="HH:mm:ss" value="#{programacionTutorias.tutoriaSelected.horaInicio}" title="#{bundle.EditTutoriaTitle_horaInicio}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_horaInicio}" showOn="button"/>
+            <p:calendar id="horaInicio" pattern="HH:mm:ss" value="#{programacionTutorias.tutoriaSelected.horaInicio}" title="#{bundle.EditTutoriaTitle_horaInicio}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_horaInicio}" showOn="button" timeOnly="true" locale="es"/>
             
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_horaFin}" for="horaFin" />
-            <p:calendar id="horaFin" pattern="HH:mm:ss" value="#{programacionTutorias.tutoriaSelected.horaFin}" title="#{bundle.EditTutoriaTitle_horaFin}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_horaFin}" showOn="button"/>
+            <p:calendar id="horaFin" pattern="HH:mm:ss" value="#{programacionTutorias.tutoriaSelected.horaFin}" title="#{bundle.EditTutoriaTitle_horaFin}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_horaFin}" showOn="button" timeOnly="true" locale="es"/>
             
           </p:panelGrid>
           <p:commandButton actionListener="#{programacionTutorias.updateTutoria()}" value="#{bundle.Save}" update="display,:TutoriaListForm:datalist,:growl" />

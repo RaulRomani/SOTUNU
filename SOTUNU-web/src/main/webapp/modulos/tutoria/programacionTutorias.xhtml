@@ -133,7 +133,7 @@
                                oncomplete="PF('RegistroTutoriaEditDialog').show()">
                   <h:graphicImage url="/resources/images/iconos/registrar.png" width="32" height="32"/>
                   <h:outputText value="Registrar" />
-                  
+
                 </p:commandLink>
                 <p:commandLink id="editRegistroTutoria"
                                rendered="#{item.atencion != null}"
@@ -146,22 +146,22 @@
               </p:column>
 
               <f:facet name="footer">
-                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                <p:commandButton id="createButton" icon="fa fa-plus"   value="#{bundle.Create}" 
                                  actionListener="#{programacionTutorias.prepareCreateTutoria()}" 
                                  update=":ProgramacionTutoriaCreateForm" 
                                  oncomplete="PF('ProgramacionTutoriaCreateDialog').show()" 
                                  disabled="#{empty programacionTutorias.idProgramacionTutor}"/>
-                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                <p:commandButton id="editButton"  icon="fa fa-pencil" value="#{bundle.Edit}" 
                                  update=":ProgramacionTutoriaEditForm" 
                                  oncomplete="PF('ProgramacionTutoriaEditDialog').show()" 
                                  disabled="#{empty programacionTutorias.tutoriaSelected}"/>
-                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                <p:commandButton id="deleteButton" icon="fa fa-trash"  value="#{bundle.Delete}" 
                                  actionListener="#{programacionTutorias.destroyTutoria()}" 
                                  update=":growl,datalist" 
                                  disabled="#{empty programacionTutorias.tutoriaSelected}">
                   <p:confirm header="Confirmación" message="¿Estas seguro(a) de eliminar este registro?" icon="ui-icon-alert"/>
                 </p:commandButton>
-                
+
                 <p:commandButton value="Programacion de visitas" 
                                  id="reporteProgrmacionVisitas" 
                                  actionListener="#{programacionTutorias.reporteProgramacionVisitasPDF()}" 
@@ -170,7 +170,7 @@
                                  disabled="#{empty programacionTutorias.tutoriaList}"
                                  ajax="false"
                                  />
-                
+
                 <p:commandButton value="Registro de tutorias" 
                                  id="reporteRegistro" 
                                  actionListener="#{programacionTutorias.reporteRegistroTutoriasPDF()}" 
@@ -204,6 +204,8 @@
 
       </ui:define>
     </ui:composition>
+
+
   </h:body>
 </html>
 
