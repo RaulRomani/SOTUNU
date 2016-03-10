@@ -6,6 +6,7 @@
 package com.sot.fachadas;
 
 import com.sot.entidades.Cicloacademico;
+import com.sot.entidades.Escuelaprofesional;
 import com.sot.entidades.Programacion;
 import com.sot.entidades.Usuario;
 import java.util.List;
@@ -33,4 +34,6 @@ public interface ProgramacionFacadeLocal {
   int count();
   
   Programacion findProgramacionDirector(Usuario idUsuario,Cicloacademico idCicloAcademico);
+  
+  Programacion findByEscuelaCiclo(Escuelaprofesional escuelaProfesional,Cicloacademico cicloAcademico);
 }

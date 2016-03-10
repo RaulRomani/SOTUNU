@@ -6,6 +6,7 @@
 package com.sot.fachadas;
 
 import com.sot.entidades.Cicloacademico;
+import com.sot.entidades.Escuelaprofesional;
 import com.sot.entidades.Programacion;
 import com.sot.entidades.Usuario;
 import java.util.List;
@@ -61,5 +62,20 @@ public class ProgramacionFacade extends AbstractFacade<Programacion> implements 
     }
     return programacion;
 
+  }
+
+  @Override
+  public Programacion findByEscuelaCiclo(Escuelaprofesional escuelaProfesional, Cicloacademico cicloAcademico) {
+    Programacion programacion;
+
+    try {
+      Query q = getEntityManager().createNamedQuery("Programacion.findByEscuelaCiclo");
+      q.setParameter("idEscuelaProfesional", escuelaProfesional);
+      q.setParameter("idCicloAcademico", cicloAcademico);
+      programacion = (Programacion) q.getSingleResult();
+    } catch (NoResultException e) {
+      programacion = null;
+    }
+    return programacion;
   }
 }

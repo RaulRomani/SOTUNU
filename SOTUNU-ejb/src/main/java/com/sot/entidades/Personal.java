@@ -75,7 +75,7 @@ public class Personal implements Serializable {
   @Size(max = 20)
   @Column(name = "celular")
   private String celular;
-  @Size(max = 8)
+  @Size(max = 13)
   @Column(name = "cargo")
   private String cargo;
   @JoinColumn(name = "idEscuelaProfesional", referencedColumnName = "idEscuelaProfesional")

@@ -5,6 +5,7 @@
  */
 package com.sot.fachadas;
 
+import com.sot.entidades.Personal;
 import com.sot.entidades.Programacion;
 import com.sot.entidades.Programaciontutor;
 import java.sql.Connection;
@@ -28,6 +29,8 @@ public interface ProgramaciontutorFacadeLocal {
   Programaciontutor find(Object id);
   
   List<Programaciontutor> findByIdProgramacion(Programacion idProgramacion);
+  
+  List<Programaciontutor> findByProgramacionTutor(Programacion Programacion, Personal tutor);
 
   List<Programaciontutor> findAll();
 

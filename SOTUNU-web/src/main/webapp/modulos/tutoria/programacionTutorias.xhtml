@@ -20,230 +20,182 @@
         <div class="container main-content">
           <h1 class="row" style="color: #269abc">Programación de visitas a salones</h1>
 
-          <h:form id="cargarProgramacionForm">
+
+          <div class="row facultad-escuela">
+            <div class="col-lg-1"/>
+            <div class="col-lg-8">
+              <div class="form-group row">
+                <label class="col-sm-3 form-control-label">Facultad</label>
+                <div class="col-sm-9">
+                  <h:outputText class="text-primary" style="font-size: 1.3em" value="#{programacionTutorias.escuelaProfesional.idFacultad.nombre}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 form-control-label">Escuela Académico Profesional</label>
+                <div class="col-sm-9">
+                  <h:outputText class="text-primary" style="font-size: 1.3em" value="#{programacionTutorias.escuelaProfesional.nombre}" />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-offset-3"/>
+          </div>
+
+          <h:form id="cargarProgramacionTutorForm">
 
             <div class="row">
-              <div class="col-sm-3" />
+              <div class="col-sm-1" />
               <div class="col-sm-8">
                 <div class="form-group">
-                  <p:outputLabel class="col-sm-2 form-control-label" value="Ciclo académico" for="ciclos"/>
 
+                  <p:outputLabel class="col-sm-2 form-control-label" value="Ciclo académico" for="ciclos"/>
                   <div class="col-sm-2">
                     <p:selectOneMenu id="ciclos" 
                                      value="#{programacionTutorias.idCicloAcademico}" 
                                      required="true" 
                                      requiredMessage="Seleccione un ciclo académico"
-                                     valueChangeListener="#{programacionTutorias.cargaPabellonAula}">
+                                     >
                       <f:selectItem itemLabel="Seleccione" itemValue="" />
+                      <p:ajax listener="#{programacionTutorias.cargarPabellonAula}" update="programacionTutor" />
                       <f:selectItems  value="#{programacionTutorias.cicloAcademicoList}"/>
                     </p:selectOneMenu>
                   </div>
 
+                  <p:outputLabel class="col-sm-2 form-control-label" value="Pabellón/Aula" for="programacionTutor"/>
+                  <div class="col-sm-2">
+                    <p:selectOneMenu id="programacionTutor" 
+                                     value="#{programacionTutorias.idProgramacionTutor}" 
+                                     required="true" 
+                                     requiredMessage="Seleccione un Pabellón/Aula">
+                      <f:selectItem itemLabel="Seleccione" itemValue="" />
+                      <f:selectItems  value="#{programacionTutorias.programacionTutorList}"/>
+                    </p:selectOneMenu>
+                  </div>
+
                   <div class="col-sm-3">
-                    <p:commandButton value="Cargar datos" 
-                                     actionListener="#{programacionTutores.cargarProgramacionTutores()}" 
+                    <p:commandButton value="Cargar tutorias" 
+                                     actionListener="#{programacionTutorias.cargarTutorias}" 
                                      styleClass="ui" 
                                      class="btn btn-success"
                                      icon="fa fa-download"
-                                     update="ProgramaciontutorListForm:datalist,:growl"
+                                     update="TutoriaListForm:datalist,:growl"
                                      ajax="true"/>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-offset-3" />
+              <div class="col-sm-offset-4" />
             </div>
 
           </h:form>
 
 
 
-          <h:form id="ProgramaciontutorListForm">
-            <p:panel header="#{bundle.ListProgramaciontutorTitle}">
-              <p:dataTable id="datalist" value="#{programaciontutorController.items}" var="item"
-                           selectionMode="single" selection="#{programaciontutorController.selected}"
-                           paginator="true"
-                           rowKey="#{item.idProgramacionTutor}"
-                           rows="10"
-                           rowsPerPageTemplate="10,20,30,40,50"
-                           >
+          <h:form id="TutoriaListForm">
+            <p:dataTable id="datalist" value="#{programacionTutorias.tutoriaList}" var="item"
+                         selectionMode="single" selection="#{programacionTutorias.tutoriaSelected}"
+                         rowKey="#{item.idTutoria}"
+                         emptyMessage="No hay registros"
+                         >
 
+              <p:ajax event="rowSelect"   update="createButton editButton deleteButton reporteProgrmacionVisitas reporteRegistro"/>
+              <p:ajax event="rowUnselect" update="createButton editButton deleteButton reporteProgrmacionVisitas reporteRegistro"/>
 
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramaciontutorTitle_idProgramacionTutor}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.idProgramacionTutor}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramaciontutorTitle_ciclo}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.ciclo}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramaciontutorTitle_aula}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.aula}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramaciontutorTitle_pabellon}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.pabellon}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramaciontutorTitle_nroEstudiantes}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.nroEstudiantes}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramaciontutorTitle_delegado}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.delegado}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramaciontutorTitle_idProgramacion}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.idProgramacion}"/>
-                </p:column>
-                <p:column>
-                  <f:facet name="header">
-                    <h:outputText value="#{bundle.ListProgramaciontutorTitle_idPersonal}"/>
-                  </f:facet>
-                  <h:outputText value="#{item.idPersonal}"/>
-                </p:column>
-                <f:facet name="footer">
-                  
+              <p:column>
+                <f:facet name="header">
+                  <h:outputText value="#{bundle.ListTutoriaTitle_fecha}"/>
                 </f:facet>
-              </p:dataTable>
-            </p:panel>
+                <h:outputText value="#{item.fecha}">
+                  <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+              </p:column>
+              <p:column>
+                <f:facet name="header">
+                  <h:outputText value="#{bundle.ListTutoriaTitle_horaInicio}"/>
+                </f:facet>
+                <h:outputText value="#{item.horaInicio}">
+                  <f:convertDateTime pattern="HH:mm:ss" />
+                </h:outputText>
+              </p:column>
+              <p:column>
+                <f:facet name="header">
+                  <h:outputText value="#{bundle.ListTutoriaTitle_horaFin}"/>
+                </f:facet>
+                <h:outputText value="#{item.horaFin}">
+                  <f:convertDateTime pattern="HH:mm:ss" />
+                </h:outputText>
+              </p:column>
+              <p:column>
+                <f:facet name="header">
+                  <h:outputText value="Tutoria"/>
+                </f:facet>
+                <p:commandLink rendered="#{item.atencion == null}"
+                               actionListener="#{programacionTutorias.loadTutoriaSelected(item.idTutoria)}"
+                               update=":RegistroTutoriaEditDlg,RegistroTutoriaEditForm" 
+                               oncomplete="PF('RegistroTutoriaEditDialog').show()">
+                  <h:graphicImage url="/resources/images/iconos/registrar.png" width="32" height="32"/>
+                  <h:outputText value="Registrar" />
+                  
+                </p:commandLink>
+                <p:commandLink id="editRegistroTutoria"
+                               rendered="#{item.atencion != null}"
+                               actionListener="#{programacionTutorias.loadTutoriaSelected(item.idTutoria)}"
+                               update=":RegistroTutoriaEditDlg,RegistroTutoriaEditForm" 
+                               oncomplete="PF('RegistroTutoriaEditDialog').show()">
+                  <h:graphicImage url="/resources/images/iconos/editar.png" width="32" height="32"/>
+                  <h:outputText value="Editar" />
+                </p:commandLink>
+              </p:column>
+
+              <f:facet name="footer">
+                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                 actionListener="#{programacionTutorias.prepareCreateTutoria()}" 
+                                 update=":ProgramacionTutoriaCreateForm" 
+                                 oncomplete="PF('ProgramacionTutoriaCreateDialog').show()" 
+                                 disabled="#{empty programacionTutorias.idProgramacionTutor}"/>
+                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                 update=":ProgramacionTutoriaEditForm" 
+                                 oncomplete="PF('ProgramacionTutoriaEditDialog').show()" 
+                                 disabled="#{empty programacionTutorias.tutoriaSelected}"/>
+                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                 actionListener="#{programacionTutorias.destroyTutoria()}" 
+                                 update=":growl,datalist" 
+                                 disabled="#{empty programacionTutorias.tutoriaSelected}">
+                  <p:confirm header="Confirmación" message="¿Estas seguro(a) de eliminar este registro?" icon="ui-icon-alert"/>
+                </p:commandButton>
+                
+                <p:commandButton value="Programacion de visitas" 
+                                 id="reporteProgrmacionVisitas" 
+                                 actionListener="#{programacionTutorias.reporteProgramacionVisitasPDF()}" 
+                                 styleClass="ui-priority-success" 
+                                 icon="fa fa-file-pdf-o"
+                                 disabled="#{empty programacionTutorias.tutoriaList}"
+                                 ajax="false"
+                                 />
+                
+                <p:commandButton value="Registro de tutorias" 
+                                 id="reporteRegistro" 
+                                 actionListener="#{programacionTutorias.reporteRegistroTutoriasPDF()}" 
+                                 styleClass="ui-priority-success" 
+                                 icon="fa fa-file-pdf-o"
+                                 disabled="#{empty programacionTutorias.tutoriaList}"
+                                 ajax="false"
+                                 />
+
+                <p:confirmDialog global="true">
+                  <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                  <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
+              </f:facet>
+            </p:dataTable>
           </h:form>
 
+          <ui:include src="addProgramacionTutoria.xhtml"/>
+          <!--<ui:include src="addRegistroTutoria.xhtml"/>-->
+          <ui:include src="editProgramacionTutoria.xhtml"/>
+          <ui:include src="editRegistroTutoria.xhtml"/>
 
 
 
-          <h:form>
-            <div class="row">
-              <h2>Datos personales</h2>
-              <div class="col-lg-3">
-                <p:growl id="messages" showDetail="true" />
-                <h:graphicImage url="/resources/fotos/foto.jpg" alt="Foto" id="blah" height="150px" width="200px" />
-                <p:fileUpload id="imgTmp"
-                              value="#{historia.file}" 
-                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                              mode="simple" skinSimple="true"
-                              label="Elegir"/>
-              </div>
 
-              <div class="col-lg-4">
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Nombre</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Apellidos</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">DNI</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Dirección</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Lugar de nacimiento</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Edad</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Celular</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Sexo</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4">
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Edad</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Raza</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Grado de institución</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Ocupación</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Religión</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Estado civil</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 form-control-label">Fecha de apertura</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" />
-                  </div>
-                </div>
-
-
-
-              </div>
-
-              <div class="col-lg-offset-1"/>
-            </div>
-
-
-          </h:form>
         </div>
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="8ea5f271-b3a6-4d4f-9e25-16a1b8af86c4">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="241"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
@@ -78,7 +78,7 @@ WHERE
 	<title>
 		<band height="182" splitType="Stretch">
 			<image>
-				<reportElement x="1" y="20" width="106" height="94" uuid="ca3309ca-e32c-423d-b59c-3049db5e1f3c"/>
+				<reportElement x="14" y="22" width="106" height="94" uuid="ca3309ca-e32c-423d-b59c-3049db5e1f3c"/>
 				<imageExpression><![CDATA["logounu.jpeg"]]></imageExpression>
 			</image>
 			<staticText>
@@ -89,47 +89,47 @@ WHERE
 				<text><![CDATA[Programación de tutores]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="217" y="96" width="113" height="20" uuid="18097ce4-747e-41ae-860b-688b56c64287"/>
+				<reportElement x="231" y="96" width="113" height="20" uuid="18097ce4-747e-41ae-860b-688b56c64287"/>
 				<textFieldExpression><![CDATA[$P{cicloAcademico}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="217" y="116" width="229" height="20" uuid="a7ed2b2e-6268-448f-a076-4bb4f58b0693"/>
+				<reportElement x="231" y="116" width="229" height="20" uuid="a7ed2b2e-6268-448f-a076-4bb4f58b0693"/>
 				<textFieldExpression><![CDATA[$P{facultad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="217" y="136" width="229" height="20" uuid="3f7beb20-b263-444b-952b-adf10d4d1778"/>
+				<reportElement x="231" y="136" width="229" height="20" uuid="3f7beb20-b263-444b-952b-adf10d4d1778"/>
 				<textFieldExpression><![CDATA[$P{escuelaProfesional}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="120" y="96" width="91" height="20" uuid="f78b2271-db52-4955-9be8-9bbea6c9544a"/>
+				<reportElement x="134" y="96" width="91" height="20" uuid="f78b2271-db52-4955-9be8-9bbea6c9544a"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ciclo Académico:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="161" y="116" width="50" height="20" uuid="d4059f5d-7923-4858-87a1-32cee5629260"/>
+				<reportElement x="175" y="116" width="50" height="20" uuid="d4059f5d-7923-4858-87a1-32cee5629260"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Facultad:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="105" y="136" width="106" height="20" uuid="f54ad6b7-027d-4c1f-b1d0-267f169014ea"/>
+				<reportElement x="69" y="136" width="156" height="20" uuid="f54ad6b7-027d-4c1f-b1d0-267f169014ea"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Escuela profesional:]]></text>
+				<text><![CDATA[Escuela Académico profesional:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="106" y="76" width="106" height="20" uuid="6cfb4e55-9e25-4458-889e-649ef64919aa"/>
+				<reportElement x="120" y="76" width="106" height="20" uuid="6cfb4e55-9e25-4458-889e-649ef64919aa"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Director:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="217" y="76" width="229" height="20" uuid="399d6531-510b-4b63-88d3-dce3f0bc7f4b"/>
+				<reportElement x="231" y="76" width="229" height="20" uuid="399d6531-510b-4b63-88d3-dce3f0bc7f4b"/>
 				<textFieldExpression><![CDATA[$P{director}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -153,14 +153,14 @@ WHERE
 				<text><![CDATA[Tutor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="55" y="0" width="36" height="15" forecolor="#000000" uuid="21edae4f-bad3-48c6-9b37-6d19a1965a8d"/>
+				<reportElement style="Column header" x="133" y="0" width="36" height="15" forecolor="#000000" uuid="21edae4f-bad3-48c6-9b37-6d19a1965a8d"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<text><![CDATA[Aula]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="105" y="0" width="58" height="15" forecolor="#000000" uuid="e17a3025-7256-481c-b1dd-2b02c3e60517"/>
+				<reportElement style="Column header" x="72" y="0" width="58" height="15" forecolor="#000000" uuid="e17a3025-7256-481c-b1dd-2b02c3e60517"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
@@ -181,7 +181,7 @@ WHERE
 				<text><![CDATA[Delegado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="0" y="1" width="29" height="16" forecolor="#000000" uuid="4ab519ec-da19-42fb-8b2e-4a278869cfc3"/>
+				<reportElement style="Column header" x="31" y="1" width="29" height="16" forecolor="#000000" uuid="4ab519ec-da19-42fb-8b2e-4a278869cfc3"/>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -194,10 +194,24 @@ WHERE
 				</textElement>
 				<text><![CDATA[Ciclo]]></text>
 			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="1" y="1" width="29" height="16" forecolor="#000000" uuid="6ae0e40f-2801-4284-8275-8571843ee3f9"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="15" splitType="Stretch">
+		<band height="17" splitType="Stretch">
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="1" y="0" width="534" height="15" uuid="5ee47582-b6c6-40a9-b3c1-5f4d7589f29a"/>
 				<textField isStretchWithOverflow="true">
@@ -208,14 +222,14 @@ WHERE
 					<textFieldExpression><![CDATA[$F{personal_nombre} +" " + $F{personal_apellido}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="55" y="0" width="25" height="15" uuid="09408cfc-fb80-4db0-9cc5-68c135aeb687"/>
+					<reportElement style="Detail" x="133" y="0" width="25" height="15" uuid="09408cfc-fb80-4db0-9cc5-68c135aeb687"/>
 					<textElement textAlignment="Center">
 						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{programaciontutor_aula}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="105" y="0" width="47" height="15" uuid="bd03eee6-b77c-4220-bd5c-ba47c19b5ee9"/>
+					<reportElement style="Detail" x="72" y="0" width="47" height="15" uuid="bd03eee6-b77c-4220-bd5c-ba47c19b5ee9"/>
 					<textElement textAlignment="Center">
 						<font fontName="SansSerif" size="11"/>
 					</textElement>
@@ -235,9 +249,16 @@ WHERE
 					</textElement>
 					<textFieldExpression><![CDATA[$F{programaciontutor_delegado}]]></textFieldExpression>
 				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="0" y="0" width="29" height="15" uuid="72e3acdd-250b-46a4-b2f5-f58bd034f91e"/>
+					<textElement textAlignment="Center">
+						<font fontName="SansSerif" size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" x="0" y="0" width="29" height="15" uuid="ee271d45-6441-4296-a59e-ad231c198402"/>
+				<reportElement style="Detail" x="31" y="0" width="29" height="15" uuid="ee271d45-6441-4296-a59e-ad231c198402"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="11"/>
 				</textElement>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition>
+
+    <p:dialog id="RegistroTutoriaEditDlg" widgetVar="RegistroTutoriaEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+              header="#{empty programacionTutorias.tutoriaSelected.atencion? 'Crear registro de tutoria-'.concat(programacionTutorias.tutoriaSelected.atencion):'Editar registro de tutoria'}">
+      <h:form id="RegistroTutoriaEditForm">
+        <h:panelGroup id="display">
+          <p:panelGrid columns="2" rendered="#{programacionTutorias.tutoriaSelected.idTutoria != null}">
+            <p:outputLabel value="#{bundle.EditTutoriaLabel_tema}" for="tema" />
+            <p:inputText id="tema" value="#{programacionTutorias.tutoriaSelected.tema}" title="#{bundle.EditTutoriaTitle_tema}" />
+            <p:outputLabel value="#{bundle.EditTutoriaLabel_atencion}" for="atencion" />
+            <p:inputText id="atencion" value="#{programacionTutorias.tutoriaSelected.atencion}" title="#{bundle.EditTutoriaTitle_atencion}" />
+            <p:outputLabel value="#{bundle.EditTutoriaLabel_refDocente}" for="refDocente" />
+            <p:inputText id="refDocente" value="#{programacionTutorias.tutoriaSelected.refDocente}" title="#{bundle.EditTutoriaTitle_refDocente}" />
+            <p:outputLabel value="#{bundle.EditTutoriaLabel_refAsignatura}" for="refAsignatura" />
+            <p:inputText id="refAsignatura" value="#{programacionTutorias.tutoriaSelected.refAsignatura}" title="#{bundle.EditTutoriaTitle_refAsignatura}" />
+            <p:outputLabel value="#{bundle.EditTutoriaLabel_refDato}" for="refDato" />
+            <p:inputText id="refDato" value="#{programacionTutorias.tutoriaSelected.refDato}" title="#{bundle.EditTutoriaTitle_refDato}" />
+            <p:outputLabel value="#{bundle.EditTutoriaLabel_notas}" for="notas" />
+            <p:inputText id="notas" value="#{programacionTutorias.tutoriaSelected.notas}" title="#{bundle.EditTutoriaTitle_notas}" />
+            <p:outputLabel value="#{bundle.EditTutoriaLabel_asistencia}" for="asistencia" />
+            <p:inputText id="asistencia" value="#{programacionTutorias.tutoriaSelected.asistencia}" title="#{bundle.EditTutoriaTitle_asistencia}" />
+            <p:outputLabel value="#{bundle.EditTutoriaLabel_observaciones}" for="observaciones" />
+            <p:inputText id="observaciones" value="#{programacionTutorias.tutoriaSelected.observaciones}" title="#{bundle.EditTutoriaTitle_observaciones}" />
+          </p:panelGrid>
+          <p:commandButton actionListener="#{programacionTutorias.updateTutoria()}" value="#{bundle.Save}" update="display,:TutoriaListForm:datalist,:growl" />
+          <p:commandButton value="Cerrar" oncomplete="PF('RegistroTutoriaEditDialog').hide()"/>
+        </h:panelGroup>
+      </h:form>
+    </p:dialog>
+
+  </ui:composition>
+</html>

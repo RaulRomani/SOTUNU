@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-03-2016 a las 18:04:49
+-- Tiempo de generación: 10-03-2016 a las 08:46:01
 -- Versión del servidor: 10.1.8-MariaDB
 -- Versión de PHP: 5.5.30
 
@@ -41,7 +41,7 @@ CREATE TABLE `cicloacademico` (
 INSERT INTO `cicloacademico` (`idCicloAcademico`, `año`, `periodo`) VALUES
 (1, '2015', '1'),
 (2, '2015', '2'),
-(3, '2016', '3');
+(3, '2016', '1');
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ CREATE TABLE `personal` (
   `email` varchar(50) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `celular` varchar(20) DEFAULT NULL,
-  `cargo` varchar(8) DEFAULT NULL
+  `cargo` varchar(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -121,7 +121,8 @@ CREATE TABLE `personal` (
 INSERT INTO `personal` (`idPersonal`, `idEscuelaProfesional`, `nombre`, `apellido`, `direccion`, `email`, `telefono`, `celular`, `cargo`) VALUES
 (1, 1, 'Arturo', 'Yupanqui Villanueva', '', NULL, NULL, NULL, 'director'),
 (2, 1, 'Cesar', 'Agurto Cherres', '', NULL, NULL, NULL, 'tutor'),
-(3, 2, '', 'Roman', '', NULL, NULL, NULL, NULL);
+(3, 2, '', 'Roman', '', NULL, NULL, NULL, NULL),
+(4, NULL, 'Raúl', 'Romaní Flores', 'Jr. Libertad 234', 'romanidev@gmail.com', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -143,7 +144,8 @@ CREATE TABLE `programacion` (
 
 INSERT INTO `programacion` (`idProgramacion`, `idUsuario`, `idCicloAcademico`, `idEscuelaProfesional`, `fechaHora`) VALUES
 (1, 1, 1, 1, '2016-03-06 15:30:48'),
-(2, 1, 2, 1, '2016-03-09 07:23:39');
+(2, 1, 2, 1, '2016-03-09 07:23:39'),
+(4, 1, 3, 1, '2016-03-09 17:46:36');
 
 -- --------------------------------------------------------
 
@@ -169,8 +171,9 @@ CREATE TABLE `programaciontutor` (
 INSERT INTO `programaciontutor` (`idProgramacionTutor`, `idPersonal`, `idProgramacion`, `ciclo`, `aula`, `pabellon`, `nroEstudiantes`, `delegado`) VALUES
 (1, 2, 1, '1', '4', '1', 13, 'Moises Cante Ramirez'),
 (2, 2, 1, '1', '5', '1', 16, 'Carlos Perez Acero'),
-(3, 2, 1, '1', '1', '1', 12, 'ABC'),
-(4, 2, 2, '1', '1', '1', 11, 'Guillermo Torres Ramirez');
+(3, 2, 1, '1', '1', '1', 12, 'ABCDEF'),
+(4, 2, 2, '1', '1', '1', 11, 'Guillermo Torres Ramirez'),
+(6, 2, 4, '1', '1', '1', 11, 'Guillermo Torres Ramirez');
 
 -- --------------------------------------------------------
 
@@ -228,6 +231,14 @@ CREATE TABLE `tutoria` (
   `efectividadTutoria` tinyint(1) DEFAULT NULL COMMENT 'Pregunta al tutorado'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tutoria`
+--
+
+INSERT INTO `tutoria` (`idTutoria`, `idUsuario`, `idProgramacionTutor`, `fecha`, `horaInicio`, `horaFin`, `tema`, `atencion`, `nombreTutorado`, `resumenCaso`, `refDocente`, `refAsignatura`, `refDato`, `notas`, `asistencia`, `observaciones`, `respuestaTutor`, `acciones`, `conclusiones`, `efectividadTutoria`) VALUES
+(1, 2, 1, '2016-03-11', '10:00:00', '12:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 2, 1, '2016-03-11', '14:00:00', '17:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -249,7 +260,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idUsuario`, `idPersonal`, `usuario`, `clave`, `rol`, `estado`) VALUES
 (1, 1, 'yupanqui', 'yupanqui', 'director', 'activo'),
-(2, 2, 'agurto', 'agurto', 'tutor', 'activo');
+(2, 2, 'agurto', 'agurto', 'tutor', 'activo'),
+(3, 4, 'raul', 'raul', 'administrador', 'activo');
 
 --
 -- Índices para tablas volcadas
@@ -356,17 +368,17 @@ ALTER TABLE `facultad`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `idPersonal` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idPersonal` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `programacion`
 --
 ALTER TABLE `programacion`
-  MODIFY `idProgramacion` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idProgramacion` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `programaciontutor`
 --
 ALTER TABLE `programaciontutor`
-  MODIFY `idProgramacionTutor` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idProgramacionTutor` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tutorado`
 --
@@ -376,12 +388,12 @@ ALTER TABLE `tutorado`
 -- AUTO_INCREMENT de la tabla `tutoria`
 --
 ALTER TABLE `tutoria`
-  MODIFY `idTutoria` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idTutoria` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUsuario` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --

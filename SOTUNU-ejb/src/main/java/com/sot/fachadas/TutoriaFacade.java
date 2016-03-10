@@ -5,10 +5,14 @@
  */
 package com.sot.fachadas;
 
+import com.sot.entidades.Programaciontutor;
 import com.sot.entidades.Tutoria;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,6 +30,19 @@ public class TutoriaFacade extends AbstractFacade<Tutoria> implements TutoriaFac
 
   public TutoriaFacade() {
     super(Tutoria.class);
+  }
+
+  @Override
+  public List<Tutoria> findByProgramacionTutor(Programaciontutor programacionTutor) {
+    TypedQuery<Tutoria> q = getEntityManager().createNamedQuery("Tutoria.findByProgramacionTutor", Tutoria.class);
+    q.setParameter("idProgramacionTutor", programacionTutor);
+    List<Tutoria> list;
+    try {
+      list = q.getResultList();
+    } catch (NoResultException e) {
+      list = null;
+    }
+    return list;
   }
   
 }

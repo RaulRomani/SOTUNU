@@ -131,20 +131,15 @@ public class ProgramacionTutores implements Serializable {
       //Lista de programacion de un tutor
       List<Programaciontutor> ptList = new ArrayList<>();
       ptList.add(programacionTutorSelected);
-      
-      
+
       programacion.setProgramaciontutorList(ptList);
-      
+
       //Una programacion de tutor esta asociado con una programación de Director
       programacionTutorSelected.setIdProgramacion(programacion);
-      
-      
-      //programacion.getProgramaciontutorList().add(programacionTutorSelected);
-      
+
       //save jpa many to one
       ejbFacadeProgramacion.create(programacion);
-      //ejbFacadeProgramacionTutor.create(programacionTutorSelected);
-
+      JsfUtil.addSuccessMessage("Se agregó un registro correctamente.");
       logger.info("SE AGREGO UNA PROGRAMACIÓN Y SU DETALLE");
     } else {
 

@@ -1,0 +1,6 @@
+
+
+
+JASPER REPORT
+  Cuando el reporte sale con pagina en blanco
+    el problema esta en el paso de parametros

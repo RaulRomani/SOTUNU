@@ -50,7 +50,8 @@ import javax.xml.bind.annotation.XmlRootElement;
   @NamedQuery(name = "Tutoria.findByRespuestaTutor", query = "SELECT t FROM Tutoria t WHERE t.respuestaTutor = :respuestaTutor"),
   @NamedQuery(name = "Tutoria.findByAcciones", query = "SELECT t FROM Tutoria t WHERE t.acciones = :acciones"),
   @NamedQuery(name = "Tutoria.findByConclusiones", query = "SELECT t FROM Tutoria t WHERE t.conclusiones = :conclusiones"),
-  @NamedQuery(name = "Tutoria.findByEfectividadTutoria", query = "SELECT t FROM Tutoria t WHERE t.efectividadTutoria = :efectividadTutoria")})
+  @NamedQuery(name = "Tutoria.findByEfectividadTutoria", query = "SELECT t FROM Tutoria t WHERE t.efectividadTutoria = :efectividadTutoria"),
+  @NamedQuery(name = "Tutoria.findByProgramacionTutor", query = "SELECT t FROM Tutoria t WHERE t.idProgramacionTutor = :idProgramacionTutor")})
 public class Tutoria implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id

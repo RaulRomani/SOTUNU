@@ -47,4 +47,18 @@ public class ProgramaciontutorFacade extends AbstractFacade<Programaciontutor> i
     return list;
   }
 
+  @Override
+  public List<Programaciontutor> findByProgramacionTutor(Programacion Programacion, Personal tutor) {
+    TypedQuery<Programaciontutor> q = getEntityManager().createNamedQuery("Programaciontutor.findByProgramacionTutor", Programaciontutor.class);
+    q.setParameter("idProgramacion", Programacion);
+    q.setParameter("idPersonal", tutor);
+    List<Programaciontutor> list;
+    try {
+      list = q.getResultList();
+    } catch (NoResultException e) {
+      list = null;
+    }
+    return list;
+  }
+
 }

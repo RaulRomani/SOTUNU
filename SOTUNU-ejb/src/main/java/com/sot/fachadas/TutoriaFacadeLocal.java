@@ -5,6 +5,7 @@
  */
 package com.sot.fachadas;
 
+import com.sot.entidades.Programaciontutor;
 import com.sot.entidades.Tutoria;
 import java.util.List;
 import javax.ejb.Local;
@@ -23,6 +24,8 @@ public interface TutoriaFacadeLocal {
   void remove(Tutoria tutoria);
 
   Tutoria find(Object id);
+  
+  List<Tutoria> findByProgramacionTutor(Programaciontutor programacionTutor);
 
   List<Tutoria> findAll();
 

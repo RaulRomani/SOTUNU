@@ -14,6 +14,8 @@ Sistema de orientación y tutoria para la Universidad Nacional de Ucayali
 
 ### Frontend
 + Primefaces 5
++ Ajax
 + JSF 2.2
-+ Boostrap 
++ Font Awesome Icons
++ Boostrap 3
 
