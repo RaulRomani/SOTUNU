@@ -5,6 +5,7 @@
  */
 package com.sot.controllers;
 
+import com.sot.controllers.util.JsfUtil;
 import com.sot.controllers.util.Log4jConfig;
 import com.sot.entidades.Personal;
 import com.sot.entidades.Usuario;
@@ -13,11 +14,15 @@ import java.io.IOException;
 //import com.sot.fachadas.PersonalFacadeLocal;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 //import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -67,7 +72,7 @@ public class LoginController implements Serializable {
   //@Inject
   //private transient Logger logger;
   @EJB
-  private com.sot.fachadas.UsuarioFacadeLocal ejbFacade;
+  private com.sot.fachadas.UsuarioFacadeLocal ejbFacadeUsuario;
 
   @EJB
   private com.sot.fachadas.PersonalFacadeLocal ejbFacadePersonal;
@@ -111,10 +116,10 @@ public class LoginController implements Serializable {
 
   public String validar() {
 
-    Usuario u = ejbFacade.validar(usuario.getUsuario(), usuario.getClave());
+    Usuario u = ejbFacadeUsuario.validar(usuario.getUsuario(), usuario.getClave());
     
     if (u != null) {
-      setUsuario(u);
+      usuario = u;
       personal = u.getIdPersonal();//ejbFacadePersonal.find(u.getIdPersonal());
 
       //creamos una sesion jsf usuario
@@ -169,6 +174,45 @@ public class LoginController implements Serializable {
       session.invalidate();
     }
     return "/login?faces-redirect=true";
+  }
+  
+  
+  
+  public void update() {
+//    List<Usuario> usuarioList = new ArrayList<>();
+//    usuarioList.add(usuario);
+//    personal.setUsuarioList(usuarioList);
+//    usuario.setIdPersonal(personal);
+    persist(JsfUtil.PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+  }
+  
+  private void persist(JsfUtil.PersistAction persistAction, String successMessage) {
+    if (personal != null) {
+      try {
+        if (persistAction != JsfUtil.PersistAction.DELETE) {
+          ejbFacadePersonal.edit(personal);
+          ejbFacadeUsuario.edit(usuario);
+          logger.info("persist loginController OK");
+        } else {
+          ejbFacadePersonal.remove(personal);
+        }
+        JsfUtil.addSuccessMessage(successMessage);
+      } catch (EJBException ex) {
+        String msg = "";
+        Throwable cause = ex.getCause();
+        if (cause != null) {
+          msg = cause.getLocalizedMessage();
+        }
+        if (msg.length() > 0) {
+          JsfUtil.addErrorMessage(msg);
+        } else {
+          JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+      } catch (Exception ex) {
+        java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+      }
+    }
   }
 
   public Usuario getUsuario() {

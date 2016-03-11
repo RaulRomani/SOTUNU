@@ -25,15 +25,22 @@
             <div class="col-lg-1"/>
             <div class="col-lg-8">
               <div class="form-group row">
-                <label class="col-sm-3 form-control-label">Facultad</label>
+                <div class="col-sm-3">
+                  <label class="form-control-label">Facultad</label>
+                  <b class="hidden-xs" style="float: right">:</b>
+                </div>
                 <div class="col-sm-9">
-                  <h:outputText class="text-primary" style="font-size: 1.3em" value="#{programacionTutorias.escuelaProfesional.idFacultad.nombre}" />
+                  <h:outputText value="#{programacionTutorias.escuelaProfesional.idFacultad.nombre}" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-3 form-control-label">Escuela Académico Profesional</label>
+                <div class="col-sm-3">
+                  <label class="form-control-label">Escuela Profesional</label>
+                  <b class="hidden-xs" style="float: right">:</b>
+                </div>
+
                 <div class="col-sm-9">
-                  <h:outputText class="text-primary" style="font-size: 1.3em" value="#{programacionTutorias.escuelaProfesional.nombre}" />
+                  <h:outputText value="#{programacionTutorias.escuelaProfesional.nombre}" />
                 </div>
               </div>
             </div>

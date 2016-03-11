@@ -9,21 +9,61 @@
   <h:body>
     <ui:composition template="./templates/templateCool.xhtml">
       <ui:define name="body">
+        <div class="container">
+          <div class="row">
+            <h1 align="center">Bienvenido al sistema de orientación y tutoria</h1>
 
-        Bienvenido!
-        <br />
-        <h:link outcome="/modulos/mantenimiento/escuelaprofesional/List" value="Mostrar lista de escuelaprofesional"/>
-        <br />
-        <h:link outcome="/modulos/mantenimiento/personal/List" value="Mostrar lista de personal"/>
-        <br />
-        <h:link outcome="/modulos/mantenimiento/programacion/List" value="Mostrar lista de progrmacion"/>
-        <br />
-        <h:link outcome="/modulos/mantenimiento/tutorado/List" value="Mostrar lista de tutorado"/>
-        <br />
-        <h:link outcome="/modulos/mantenimiento/tutoria/List" value="Mostrar lista de tutoria"/>
-        <br />
-        <h:link outcome="/modulos/mantenimiento/usuario/List" value="Mostrar lista de usuario"/>
-        
+            <div class="col-sm-12" align="center">
+              <h:graphicImage url="/resources/images/logounu.jpeg" alt="Foto"  height="150px"  />
+            </div>
+          </div>
+          
+          <br/>
+          <h:panelGroup rendered="#{!empty programacionTutorias.escuelaProfesional.nombre}">
+          <div class="row">
+            <div class="col-sm-2" />
+            <div class="col-sm-3" >
+              <p:outputLabel value="Facultad"/>
+              <b class="hidden-xs" style="float: right">:</b>
+            </div>
+            <div class="col-sm-7" >
+              <h:outputText value="#{programacionTutorias.escuelaProfesional.idFacultad.nombre}" />
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-2" />
+            <div class="col-sm-3" >
+              <p:outputLabel value="Escuela Académico Profesional"/>
+              <b class="hidden-xs" style="float: right">:</b>
+            </div>
+            <div class="col-sm-7" >
+              <h:outputText value="#{programacionTutorias.escuelaProfesional.nombre}" />
+            </div>
+          </div>
+          </h:panelGroup>
+
+          <div class="row">
+            <div class="col-sm-2" />
+            <div class="col-sm-3" >
+              <p:outputLabel value="#{loginController.usuario.rol eq 'director'? 'Director':'' }"
+                             rendered="#{loginController.usuario.rol eq 'director'}"/>
+              <p:outputLabel value="#{loginController.usuario.rol eq 'tutor'? 'Tutor':'' }"
+                             rendered="#{loginController.usuario.rol eq 'tutor'}"/>
+              <p:outputLabel value="#{loginController.usuario.rol eq 'administrador'? 'Administrador':'' }"
+                             rendered="#{loginController.usuario.rol eq 'administrador'}"/>
+              <b class="hidden-xs" style="float: right">:</b>
+            </div>
+            <div class="col-sm-7" >
+              <h:outputText value="#{loginController.usuario.idPersonal.nombre}" />&nbsp;
+              <h:outputText value="#{loginController.usuario.idPersonal.apellido}" />
+            </div>
+          </div>
+
+
+        </div>
+
       </ui:define>
     </ui:composition>
   </h:body>

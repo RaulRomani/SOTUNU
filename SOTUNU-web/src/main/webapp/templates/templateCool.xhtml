@@ -15,9 +15,8 @@
 
 
     <!-- Bootstrap Core CSS -->
+
     <h:outputStylesheet name="./plantilla/css/bootstrap.min.css"/>
-
-
 
     <!-- Morris Charts CSS -->
     <!--<h:outputStylesheet name="./plantilla/css/plugins/morris.css"/>-->
@@ -44,145 +43,140 @@
   </h:head>
 
   <h:body>
-    <!-- Custom CSS -->
-    <h:outputStylesheet name="/css/custom.css"/>
+    <div class="container-wrapper">
+      <!-- Custom CSS -->
+      <h:outputStylesheet name="/css/custom.css"/>
+
+      <p:growl id="growl" sticky="true"  />
+
+      <h:form>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <!--<a class="navbar-brand" href="/index.xhtml">Clinica Dental</a>-->
+              <h:link class="navbar-brand" outcome="/index">
+                <h:graphicImage class="logoSOT" url="/resources/images/logoSOT.JPG" />
+              </h:link>
 
 
-    <h:form>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <!--<a class="navbar-brand" href="/index.xhtml">Clinica Dental</a>-->
-            <h:link class="navbar-brand" outcome="/index" value="SOT"/>
-          </div>
+            </div>
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
 
-              <!--
-              <li class="active">
-                <a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-              </li> -->
+                <li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}">
+                  <h:link outcome="/index">
+                    <i class="fa fa-fw fa-home"></i> Inicio <span class="sr-only">(current)</span>
+                  </h:link>
+                </li> 
 
 
-              <h:panelGroup rendered="#{loginController.validarPermisos().equals('director')}">
-                <li>
-                  <h:link outcome="/modulos/programacion/programacionTutores"><i class="fa fa-calendar-check-o"/> Programación de tutores</h:link>
-                </li>
-              </h:panelGroup>
+                <h:panelGroup rendered="#{loginController.validarPermisos().equals('director')}">
 
-              <h:panelGroup rendered="#{loginController.validarPermisos().equals('tutor')}">
+                  <li class="#{view.viewId eq '/modulos/programacion/programacionTutores.xhtml' ? 'active' : ''}">
+                    <h:link outcome="/modulos/programacion/programacionTutores">
+                      <i class="fa fa-calendar-check-o"/> Programación de tutores
+                    </h:link>
+                  </li>
+                </h:panelGroup>
 
-                <li>
-                  <h:link outcome="/modulos/tutoria/programacionTutorias"><i class="fa fa-clock-o "></i>Programación&nbsp;<i class="fa fa-file-text"></i>Registro de tutorias</h:link>
-                </li>
 
-              </h:panelGroup>
+                <h:panelGroup rendered="#{loginController.validarPermisos().equals('tutor')}">
 
-              <h:panelGroup rendered="#{loginController.validarPermisos().equals('administrador')}">
+                  <li class="#{view.viewId eq '/modulos/tutoria/programacionTutorias.xhtml' ? 'active' : ''}">
+                    <h:link outcome="/modulos/tutoria/programacionTutorias">
+                      <i class="fa fa-clock-o "></i>Programación&nbsp;
+                      <i class="fa fa-file-text"></i>Registro de tutorias
+                    </h:link>
+                  </li>
+
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{loginController.validarPermisos().equals('administrador')}">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                       aria-expanded="false"><i class="fa fa-fw fa-wrench  "></i> Mantenimiento <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><h:link outcome="/modulos/mantenimiento/escuelaprofesional/List">Escuela Profesional</h:link></li>
+                      <li><h:link outcome="/modulos/mantenimiento/personal/List">Personal</h:link></li>
+                      <li><h:link outcome="/modulos/mantenimiento/programacion/List">Programación</h:link></li>
+                      <li><h:link outcome="/modulos/mantenimiento/programaciontutor/List">ProgramaciónTutor</h:link></li>
+                      <li><h:link outcome="/modulos/mantenimiento/tutorado/List">Tutorado</h:link></li>
+                      <li><h:link outcome="/modulos/mantenimiento/tutoria/List">Tutoria</h:link></li>
+                      <li><h:link outcome="/modulos/mantenimiento/usuario/List">Usuario</h:link></li>
+                      <li><h:link outcome="/modulos/mantenimiento/cicloacademico/List">Ciclo Académico</h:link></li>
+                      <li><h:link outcome="/modulos/mantenimiento/correo/List">Correo</h:link></li>
+                      <li><h:link outcome="/modulos/mantenimiento/facultad/List">Facultad</h:link></li>
+                    </ul>
+                  </li>
+                </h:panelGroup>
+
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                <!--<li><a href="#">Link</a></li>-->
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
-                     aria-expanded="false"><i class="fa fa-fw fa-wrench  "></i> Mantenimiento <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                     aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user"></i>&nbsp;
+                    <h:outputLabel value="#{loginController.personal.nombre}"/>&nbsp;
+                    <h:outputLabel value="#{loginController.personal.apellido}"/> <span class="caret"></span></a>
+
                   <ul class="dropdown-menu">
-                    <li><h:link outcome="/modulos/mantenimiento/escuelaprofesional/List">Escuela Profesional</h:link></li>
-                    <li><h:link outcome="/modulos/mantenimiento/personal/List">Personal</h:link></li>
-                    <li><h:link outcome="/modulos/mantenimiento/programacion/List">Programación</h:link></li>
-                    <li><h:link outcome="/modulos/mantenimiento/programaciontutor/List">ProgramaciónTutor</h:link></li>
-                    <li><h:link outcome="/modulos/mantenimiento/tutorado/List">Tutorado</h:link></li>
-                    <li><h:link outcome="/modulos/mantenimiento/tutoria/List">Tutoria</h:link></li>
-                    <li><h:link outcome="/modulos/mantenimiento/usuario/List">Usuario</h:link></li>
-                    <li><h:link outcome="/modulos/mantenimiento/cicloacademico/List">Ciclo Académico</h:link></li>
-                    <li><h:link outcome="/modulos/mantenimiento/correo/List">Correo</h:link></li>
-                    <li><h:link outcome="/modulos/mantenimiento/facultad/List">Facultad</h:link></li>
+
+
+
+                    <li class="#{view.viewId eq '/perfil.xhtml' ? 'active' : ''}">
+                      <h:link outcome="/perfil">
+                        <i class="fa fa-fw fa-user"/> Perfil
+                      </h:link>
+                    </li>
+
+                    <li>
+                      <a href="#"><i class="fa fa-fw fa-gear"></i> Configuraciones</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <p:commandLink actionListener="#{loginController.logout()}" ajax="false">
+                        <i class="fa fa-fw fa-power-off"></i> Cerrar sesión
+                      </p:commandLink>
+                    </li>
+
                   </ul>
                 </li>
-              </h:panelGroup>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>  
+      </h:form>
 
-            </ul>
+      <div class="content">
+        <ui:insert name="body"></ui:insert>
+      </div>
 
-            <ul class="nav navbar-nav navbar-right">
-              <!--<li><a href="#">Link</a></li>-->
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
-                   aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user"></i>&nbsp;
-                  <h:outputLabel value="#{loginController.personal.nombre}"/>&nbsp;
-                  <h:outputLabel value="#{loginController.personal.apellido}"/> <span class="caret"></span></a>
-
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
-                  </li>
-
-                  <li>
-                    <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <p:commandLink actionListener="#{loginController.logout()}" ajax="false">
-                      <i class="fa fa-fw fa-power-off"></i> Cerrar sesión
-                    </p:commandLink>
-                  </li>
-
-                </ul>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>  
-    </h:form>
-
-    <p:growl id="growl" sticky="true"  />  
-
-    <ui:insert name="body"></ui:insert>
-
-
-    <div class="container-fluid footer">
-      <div class="row">
-        <p align="center">Todos los derechos reservados.</p>
-
+      <div class="container-fluid">
+        <div class="row">
+          <div class="footer">
+            <div class="copyright">
+              <p class="" >Sistema creado y diseñado por Raúl Romaní Flores</p>
+              <p >Copyright © Todos los derechos reservados.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <p:ajaxExceptionHandler type="javax.faces.application.ViewExpiredException"
-                            update="exceptionDialog"
-                            onexception="PF('exceptionDialog').show();" />
-
-    <p:ajaxExceptionHandler type="java.lang.NullPointerException"
-                            update="exceptionDialog"
-                            onexception="PF('exceptionDialog').show();" />
-
-    <p:dialog id="exceptionDialog" header="Exception '#{pfExceptionHandler.type}' occured!" widgetVar="exceptionDialog"
-              height="500px">
-      Message: #{pfExceptionHandler.message} <br/>
-      StackTrace: <h:outputText value="#{pfExceptionHandler.formattedStackTrace}" escape="false" /> <br />
-
-      <p:button onclick="document.location.href = document.location.href;"
-                value="Reload!"
-                rendered="#{pfExceptionHandler.type == 'javax.faces.application.ViewExpiredException'}" />
-    </p:dialog>
-
-
-
-
-    <!-- jQuery -->
-    <!--<h:outputScript name="./plantilla/js/jquery.js"/>-->
-
     <!-- Bootstrap Core JavaScript -->
     <h:outputScript name="./plantilla/js/bootstrap.min.js"/>
-
-
-
-
   </h:body>
 
 </html>
