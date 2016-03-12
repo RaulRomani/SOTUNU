@@ -60,9 +60,12 @@ public class LoginController implements Serializable {
   
   private String mensaje = null;
   private String mensajeError = null;
+  
+  private String projectStage;
 
   @PostConstruct
   void init() {
+    projectStage = FacesContext.getCurrentInstance().getApplication().getProjectStage().toString();
     usuario = new Usuario();
     personal = new Personal();
     logger.info("Inicio login constructor");
@@ -183,6 +186,7 @@ public class LoginController implements Serializable {
 //    usuarioList.add(usuario);
 //    personal.setUsuarioList(usuarioList);
 //    usuario.setIdPersonal(personal);
+    
     persist(JsfUtil.PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
   }
   
@@ -241,6 +245,14 @@ public class LoginController implements Serializable {
 
   public void setMensajeError(String mensajeError) {
     this.mensajeError = mensajeError;
+  }
+
+  public String getProjectStage() {
+    return projectStage;
+  }
+
+  public void setProjectStage(String projectStage) {
+    this.projectStage = projectStage;
   }
   
   
