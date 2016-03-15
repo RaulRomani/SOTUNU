@@ -24,7 +24,7 @@
             <p:outputLabel value="#{bundle.EditProgramaciontutorLabel_delegado}" for="delegado" />
             <p:inputText id="delegado" value="#{programacionTutores.programacionTutorSelected.delegado}" title="#{bundle.EditProgramaciontutorTitle_delegado}" required="true" requiredMessage="#{bundle.EditProgramaciontutorRequiredMessage_delegado}"/>
             
-            <p:outputLabel value="#{bundle.CreateProgramaciontutorLabel_idPersonal}" for="idTutor" />
+            <p:outputLabel value="Tutor" for="idTutor" />
             <p:selectOneMenu  id="idTutor" value="#{programacionTutores.idTutor}">
               <f:selectItem itemLabel="Seleccione" itemValue="" />
               <f:selectItems  value="#{programacionTutores.tutorList}"/>

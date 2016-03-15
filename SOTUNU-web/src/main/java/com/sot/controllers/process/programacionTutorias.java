@@ -83,13 +83,14 @@ public class programacionTutorias implements Serializable {
   private Programaciontutor programacionTutor;
 
   private Integer idProgramacionTutor;
+  private Programaciontutor programacionTutorSelected;
   private List<SelectItem> programacionTutorList = null;
   
   private List<Tutoria> tutoriaList = null;
   private Tutoria tutoriaSelected ;
 
   private Escuelaprofesional escuelaProfesional;
-
+  
   public List<SelectItem> getCicloAcademicoList() {
     if (cicloAcademicoList == null) {
       try {
@@ -150,7 +151,8 @@ public class programacionTutorias implements Serializable {
 
   public void cargarTutorias() {
     
-    tutoriaList = ejbFacadeTutoria.findByProgramacionTutor(new Programaciontutor(idProgramacionTutor));
+    programacionTutorSelected = ejbFacadeProgramacionTutor.find(idProgramacionTutor);
+    tutoriaList = ejbFacadeTutoria.findByProgramacionTutor(programacionTutorSelected);
     tutoriaSelected = null;
     logger.info("cargarTutorias - true, tutoriaSelected=null");
   }
@@ -300,6 +302,12 @@ public class programacionTutorias implements Serializable {
     logger.info("loadTutoriaSelected OK");
   }
   
+  public void mostrarCampos(){
+      tutoriaSelected.getAtencion();
+      
+      //if( tutoriaSelected.getAtencion() )
+  }
+  
 
   public Integer getIdCicloAcademico() {
     return idCicloAcademico;
@@ -352,7 +360,13 @@ public class programacionTutorias implements Serializable {
   public void setTutoriaSelected(Tutoria tutoriaSelected) {
     this.tutoriaSelected = tutoriaSelected;
   }
-  
-  
+
+  public Programaciontutor getProgramacionTutorSelected() {
+    return programacionTutorSelected;
+  }
+
+  public void setProgramacionTutorSelected(Programaciontutor programacionTutorSelected) {
+    this.programacionTutorSelected = programacionTutorSelected;
+  }
 
 }

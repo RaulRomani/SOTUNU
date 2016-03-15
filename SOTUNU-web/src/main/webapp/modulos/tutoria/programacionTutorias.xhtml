@@ -44,8 +44,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-offset-3"/>
+            <div class="col-lg-offset-2"/>
           </div>
+
 
           <h:form id="cargarProgramacionTutorForm">
 
@@ -84,116 +85,157 @@
                                      styleClass="ui" 
                                      class="btn btn-success"
                                      icon="fa fa-download"
-                                     update="TutoriaListForm:datalist,:growl"
+                                     update="TutoriaListForm:datalist,:growl,:datosProgramacion"
                                      ajax="true"/>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-offset-4" />
+              <div class="col-sm-3"/>
             </div>
 
           </h:form>
 
+          <div class="row programacion-tutor">
+            <h:panelGroup id="datosProgramacion">
+              <h:panelGroup rendered="#{programacionTutorias.programacionTutorSelected != null}">
+                  <div class="col-lg-1"/>
+                  <div class="col-lg-11">
+                    <div class="form-group">
+                      <div class="col-sm-2">
+                        <label class="form-control-label">Ciclo</label>
+                        <b class="hidden-xs" style="float: right">:</b>
+                      </div>
+                      <div class="col-sm-1">
+                        <h:outputText value="#{programacionTutorias.programacionTutorSelected.ciclo}" />
+                      </div>
+                      <div class="col-sm-2">
+                        <label class="form-control-label">Nº de estudiantes</label>
+                        <b class="hidden-xs" style="float: right">:</b>
+                      </div>
+
+                      <div class="col-sm-1">
+                        <h:outputText value="#{programacionTutorias.programacionTutorSelected.nroEstudiantes}" />
+                      </div>
+
+                      <div class="col-sm-2">
+                        <label class="form-control-label">Delegado</label>
+                        <b class="hidden-xs" style="float: right">:</b>
+                      </div>
+
+                      <div class="col-sm-4">
+                        <h:outputText value="#{programacionTutorias.programacionTutorSelected.delegado}" />
+                      </div>
+                    </div>
+
+                  </div>
+              </h:panelGroup>
+            </h:panelGroup>
+
+          </div>
 
 
-          <h:form id="TutoriaListForm">
-            <p:dataTable id="datalist" value="#{programacionTutorias.tutoriaList}" var="item"
-                         selectionMode="single" selection="#{programacionTutorias.tutoriaSelected}"
-                         rowKey="#{item.idTutoria}"
-                         emptyMessage="No hay registros"
-                         >
 
-              <p:ajax event="rowSelect"   update="createButton editButton deleteButton reporteProgrmacionVisitas reporteRegistro"/>
-              <p:ajax event="rowUnselect" update="createButton editButton deleteButton reporteProgrmacionVisitas reporteRegistro"/>
+          <div class="row">
+            <h:form id="TutoriaListForm">
+              <p:dataTable id="datalist" value="#{programacionTutorias.tutoriaList}" var="item"
+                           selectionMode="single" selection="#{programacionTutorias.tutoriaSelected}"
+                           rowKey="#{item.idTutoria}"
+                           emptyMessage="No hay registros"
+                           resizableColumns="true"
+                           >
 
-              <p:column>
-                <f:facet name="header">
-                  <h:outputText value="#{bundle.ListTutoriaTitle_fecha}"/>
+                <p:ajax event="rowSelect"   update="createButton editButton deleteButton reporteProgrmacionVisitas reporteRegistro"/>
+                <p:ajax event="rowUnselect" update="createButton editButton deleteButton reporteProgrmacionVisitas reporteRegistro"/>
+
+                <p:column>
+                  <f:facet name="header">
+                    <h:outputText value="#{bundle.ListTutoriaTitle_fecha}"/>
+                  </f:facet>
+                  <h:outputText value="#{item.fecha}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                  </h:outputText>
+                </p:column>
+                <p:column>
+                  <f:facet name="header">
+                    <h:outputText value="#{bundle.ListTutoriaTitle_horaInicio}"/>
+                  </f:facet>
+                  <h:outputText value="#{item.horaInicio}">
+                    <f:convertDateTime pattern="HH:mm:ss" />
+                  </h:outputText>
+                </p:column>
+                <p:column>
+                  <f:facet name="header">
+                    <h:outputText value="#{bundle.ListTutoriaTitle_horaFin}"/>
+                  </f:facet>
+                  <h:outputText value="#{item.horaFin}">
+                    <f:convertDateTime pattern="HH:mm:ss" />
+                  </h:outputText>
+                </p:column>
+                <p:column>
+                  <f:facet name="header">
+                    <h:outputText value="Tutoria"/>
+                  </f:facet>
+                  <p:commandLink rendered="#{item.atencion == null}"
+                                 actionListener="#{programacionTutorias.loadTutoriaSelected(item.idTutoria)}"
+                                 update=":RegistroTutoriaEditDlg,RegistroTutoriaEditForm" 
+                                 oncomplete="PF('RegistroTutoriaEditDialog').show()">
+                    <h:graphicImage url="/resources/images/iconos/registrar.png" width="32" height="32"/>
+                    <h:outputText value="Registrar" />
+
+                  </p:commandLink>
+                  <p:commandLink id="editRegistroTutoria"
+                                 rendered="#{item.atencion != null}"
+                                 actionListener="#{programacionTutorias.loadTutoriaSelected(item.idTutoria)}"
+                                 update=":RegistroTutoriaEditDlg,RegistroTutoriaEditForm" 
+                                 oncomplete="PF('RegistroTutoriaEditDialog').show()">
+                    <h:graphicImage url="/resources/images/iconos/editar.png" width="32" height="32"/>
+                    <h:outputText value="Editar" />
+                  </p:commandLink>
+                </p:column>
+
+                <f:facet name="footer">
+                  <p:commandButton id="createButton" icon="fa fa-plus"   value="#{bundle.Create}" 
+                                   actionListener="#{programacionTutorias.prepareCreateTutoria()}" 
+                                   update=":ProgramacionTutoriaCreateForm" 
+                                   oncomplete="PF('ProgramacionTutoriaCreateDialog').show()" 
+                                   disabled="#{empty programacionTutorias.idProgramacionTutor}"/>
+                  <p:commandButton id="editButton"  icon="fa fa-pencil" value="#{bundle.Edit}" 
+                                   update=":ProgramacionTutoriaEditForm" 
+                                   oncomplete="PF('ProgramacionTutoriaEditDialog').show()" 
+                                   disabled="#{empty programacionTutorias.tutoriaSelected}"/>
+                  <p:commandButton id="deleteButton" icon="fa fa-trash"  value="#{bundle.Delete}" 
+                                   actionListener="#{programacionTutorias.destroyTutoria()}" 
+                                   update=":growl,datalist" 
+                                   disabled="#{empty programacionTutorias.tutoriaSelected}">
+                    <p:confirm header="Confirmación" message="¿Estas seguro(a) de eliminar este registro?" icon="ui-icon-alert"/>
+                  </p:commandButton>
+
+                  <p:commandButton value="Programacion de visitas" 
+                                   id="reporteProgrmacionVisitas" 
+                                   actionListener="#{programacionTutorias.reporteProgramacionVisitasPDF()}" 
+                                   styleClass="ui-priority-success" 
+                                   icon="fa fa-file-pdf-o"
+                                   disabled="#{empty programacionTutorias.tutoriaList}"
+                                   ajax="false"
+                                   />
+
+                  <p:commandButton value="Registro de tutorias" 
+                                   id="reporteRegistro" 
+                                   actionListener="#{programacionTutorias.reporteRegistroTutoriasPDF()}" 
+                                   styleClass="ui-priority-success" 
+                                   icon="fa fa-file-pdf-o"
+                                   disabled="#{empty programacionTutorias.tutoriaList}"
+                                   ajax="false"
+                                   />
+
+                  <p:confirmDialog global="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                  </p:confirmDialog>
                 </f:facet>
-                <h:outputText value="#{item.fecha}">
-                  <f:convertDateTime pattern="MM/dd/yyyy" />
-                </h:outputText>
-              </p:column>
-              <p:column>
-                <f:facet name="header">
-                  <h:outputText value="#{bundle.ListTutoriaTitle_horaInicio}"/>
-                </f:facet>
-                <h:outputText value="#{item.horaInicio}">
-                  <f:convertDateTime pattern="HH:mm:ss" />
-                </h:outputText>
-              </p:column>
-              <p:column>
-                <f:facet name="header">
-                  <h:outputText value="#{bundle.ListTutoriaTitle_horaFin}"/>
-                </f:facet>
-                <h:outputText value="#{item.horaFin}">
-                  <f:convertDateTime pattern="HH:mm:ss" />
-                </h:outputText>
-              </p:column>
-              <p:column>
-                <f:facet name="header">
-                  <h:outputText value="Tutoria"/>
-                </f:facet>
-                <p:commandLink rendered="#{item.atencion == null}"
-                               actionListener="#{programacionTutorias.loadTutoriaSelected(item.idTutoria)}"
-                               update=":RegistroTutoriaEditDlg,RegistroTutoriaEditForm" 
-                               oncomplete="PF('RegistroTutoriaEditDialog').show()">
-                  <h:graphicImage url="/resources/images/iconos/registrar.png" width="32" height="32"/>
-                  <h:outputText value="Registrar" />
-
-                </p:commandLink>
-                <p:commandLink id="editRegistroTutoria"
-                               rendered="#{item.atencion != null}"
-                               actionListener="#{programacionTutorias.loadTutoriaSelected(item.idTutoria)}"
-                               update=":RegistroTutoriaEditDlg,RegistroTutoriaEditForm" 
-                               oncomplete="PF('RegistroTutoriaEditDialog').show()">
-                  <h:graphicImage url="/resources/images/iconos/editar.png" width="32" height="32"/>
-                  <h:outputText value="Editar" />
-                </p:commandLink>
-              </p:column>
-
-              <f:facet name="footer">
-                <p:commandButton id="createButton" icon="fa fa-plus"   value="#{bundle.Create}" 
-                                 actionListener="#{programacionTutorias.prepareCreateTutoria()}" 
-                                 update=":ProgramacionTutoriaCreateForm" 
-                                 oncomplete="PF('ProgramacionTutoriaCreateDialog').show()" 
-                                 disabled="#{empty programacionTutorias.idProgramacionTutor}"/>
-                <p:commandButton id="editButton"  icon="fa fa-pencil" value="#{bundle.Edit}" 
-                                 update=":ProgramacionTutoriaEditForm" 
-                                 oncomplete="PF('ProgramacionTutoriaEditDialog').show()" 
-                                 disabled="#{empty programacionTutorias.tutoriaSelected}"/>
-                <p:commandButton id="deleteButton" icon="fa fa-trash"  value="#{bundle.Delete}" 
-                                 actionListener="#{programacionTutorias.destroyTutoria()}" 
-                                 update=":growl,datalist" 
-                                 disabled="#{empty programacionTutorias.tutoriaSelected}">
-                  <p:confirm header="Confirmación" message="¿Estas seguro(a) de eliminar este registro?" icon="ui-icon-alert"/>
-                </p:commandButton>
-
-                <p:commandButton value="Programacion de visitas" 
-                                 id="reporteProgrmacionVisitas" 
-                                 actionListener="#{programacionTutorias.reporteProgramacionVisitasPDF()}" 
-                                 styleClass="ui-priority-success" 
-                                 icon="fa fa-file-pdf-o"
-                                 disabled="#{empty programacionTutorias.tutoriaList}"
-                                 ajax="false"
-                                 />
-
-                <p:commandButton value="Registro de tutorias" 
-                                 id="reporteRegistro" 
-                                 actionListener="#{programacionTutorias.reporteRegistroTutoriasPDF()}" 
-                                 styleClass="ui-priority-success" 
-                                 icon="fa fa-file-pdf-o"
-                                 disabled="#{empty programacionTutorias.tutoriaList}"
-                                 ajax="false"
-                                 />
-
-                <p:confirmDialog global="true">
-                  <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-                  <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
-                </p:confirmDialog>
-              </f:facet>
-            </p:dataTable>
-          </h:form>
+              </p:dataTable>
+            </h:form>
+          </div>
 
           <ui:include src="addProgramacionTutoria.xhtml"/>
           <!--<ui:include src="addRegistroTutoria.xhtml"/>-->

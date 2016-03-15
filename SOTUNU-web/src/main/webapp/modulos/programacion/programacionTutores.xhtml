@@ -29,7 +29,7 @@
               <div class="form-group row">
                 <div class="col-xs-3">
                   <label class="form-control-label">Facultad</label>
-                  <b class="hidden-sm" style="float: right">:</b>
+                  <b class="hidden-xs" style="float: right">:</b>
                 </div>
                 <div class="col-sm-9">
                   <h:outputText value="#{programacionTutorias.escuelaProfesional.idFacultad.nombre}" />
@@ -38,7 +38,7 @@
               <div class="form-group row">
                 <div class="col-xs-3">
                   <label class="form-control-label">Escuela Profesional</label>
-                  <b class="hidden-sm" style="float: right">:</b>
+                  <b class="hidden-xs" style="float: right">:</b>
                 </div>
 
                 <div class="col-sm-9">
@@ -74,6 +74,7 @@
                                      icon="fa fa-download"
                                      update="ProgramaciontutorListForm:datalist,:growl"
                                      ajax="true"/>
+                    
                   </div>
                 </div>
               </div>
@@ -89,6 +90,7 @@
                          selectionMode="single" selection="#{programacionTutores.programacionTutorSelected}"
                          rowKey="#{item.idProgramacionTutor}"
                          emptyMessage="No hay registros"
+                         resizableColumns="true"
                          >
 
               <p:ajax event="rowSelect"   update="createButton editButton deleteButton reporteButton"/>

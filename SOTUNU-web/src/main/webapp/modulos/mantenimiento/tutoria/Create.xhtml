@@ -24,6 +24,10 @@
             <p:inputText id="tema" value="#{tutoriaController.selected.tema}" title="#{bundle.CreateTutoriaTitle_tema}" />
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_atencion}" for="atencion" />
             <p:inputText id="atencion" value="#{tutoriaController.selected.atencion}" title="#{bundle.CreateTutoriaTitle_atencion}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_nombreTutorado}" for="nombreTutorado" />
+            <p:inputText id="nombreTutorado" value="#{tutoriaController.selected.nombreTutorado}" title="#{bundle.CreateTutoriaTitle_nombreTutorado}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_resumenCaso}" for="resumenCaso" />
+            <p:inputText id="resumenCaso" value="#{tutoriaController.selected.resumenCaso}" title="#{bundle.CreateTutoriaTitle_resumenCaso}" />
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_refDocente}" for="refDocente" />
             <p:inputText id="refDocente" value="#{tutoriaController.selected.refDocente}" title="#{bundle.CreateTutoriaTitle_refDocente}" />
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_refAsignatura}" for="refAsignatura" />
@@ -36,6 +40,14 @@
             <p:inputText id="asistencia" value="#{tutoriaController.selected.asistencia}" title="#{bundle.CreateTutoriaTitle_asistencia}" />
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_observaciones}" for="observaciones" />
             <p:inputText id="observaciones" value="#{tutoriaController.selected.observaciones}" title="#{bundle.CreateTutoriaTitle_observaciones}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_respuestaTutor}" for="respuestaTutor" />
+            <p:inputText id="respuestaTutor" value="#{tutoriaController.selected.respuestaTutor}" title="#{bundle.CreateTutoriaTitle_respuestaTutor}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_acciones}" for="acciones" />
+            <p:inputText id="acciones" value="#{tutoriaController.selected.acciones}" title="#{bundle.CreateTutoriaTitle_acciones}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_conclusiones}" for="conclusiones" />
+            <p:inputText id="conclusiones" value="#{tutoriaController.selected.conclusiones}" title="#{bundle.CreateTutoriaTitle_conclusiones}" />
+            <p:outputLabel value="#{bundle.CreateTutoriaLabel_efectividadTutoria}" for="efectividadTutoria" />
+            <p:selectBooleanCheckbox id="efectividadTutoria" value="#{tutoriaController.selected.efectividadTutoria}" />
             <p:outputLabel value="#{bundle.CreateTutoriaLabel_idProgramacionTutor}" for="idProgramacionTutor" />
             <p:selectOneMenu id="idProgramacionTutor" value="#{tutoriaController.selected.idProgramacionTutor}" required="true" requiredMessage="#{bundle.EditTutoriaRequiredMessage_idProgramacionTutor}">
               <f:selectItems value="#{programaciontutorController.itemsAvailableSelectOne}"

@@ -15,7 +15,6 @@
 
     <ui:define name="body">
       <h:form id="ProgramaciontutorListForm">
-        <p:panel header="#{bundle.ListProgramaciontutorTitle}">
           <p:dataTable id="datalist" value="#{programaciontutorController.items}" var="item"
                        selectionMode="single" selection="#{programaciontutorController.selected}"
                        paginator="true"
@@ -82,7 +81,6 @@
               <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{programaciontutorController.destroy}" update=":growl,datalist" disabled="#{empty programaciontutorController.selected}"/>
             </f:facet>
           </p:dataTable>
-        </p:panel>
       </h:form>
 
       <ui:include src="Create.xhtml"/>

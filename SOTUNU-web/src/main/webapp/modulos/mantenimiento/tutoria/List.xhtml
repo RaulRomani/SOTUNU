@@ -15,7 +15,6 @@
 
     <ui:define name="body">
       <h:form id="TutoriaListForm">
-        <p:panel header="#{bundle.ListTutoriaTitle}">
           <p:dataTable id="datalist" value="#{tutoriaController.items}" var="item"
                        selectionMode="single" selection="#{tutoriaController.selected}"
                        paginator="true"
@@ -71,6 +70,18 @@
             </p:column>
             <p:column>
               <f:facet name="header">
+                <h:outputText value="#{bundle.ListTutoriaTitle_nombreTutorado}"/>
+              </f:facet>
+              <h:outputText value="#{item.nombreTutorado}"/>
+            </p:column>
+            <p:column>
+              <f:facet name="header">
+                <h:outputText value="#{bundle.ListTutoriaTitle_resumenCaso}"/>
+              </f:facet>
+              <h:outputText value="#{item.resumenCaso}"/>
+            </p:column>
+            <p:column>
+              <f:facet name="header">
                 <h:outputText value="#{bundle.ListTutoriaTitle_refDocente}"/>
               </f:facet>
               <h:outputText value="#{item.refDocente}"/>
@@ -107,6 +118,30 @@
             </p:column>
             <p:column>
               <f:facet name="header">
+                <h:outputText value="#{bundle.ListTutoriaTitle_respuestaTutor}"/>
+              </f:facet>
+              <h:outputText value="#{item.respuestaTutor}"/>
+            </p:column>
+            <p:column>
+              <f:facet name="header">
+                <h:outputText value="#{bundle.ListTutoriaTitle_acciones}"/>
+              </f:facet>
+              <h:outputText value="#{item.acciones}"/>
+            </p:column>
+            <p:column>
+              <f:facet name="header">
+                <h:outputText value="#{bundle.ListTutoriaTitle_conclusiones}"/>
+              </f:facet>
+              <h:outputText value="#{item.conclusiones}"/>
+            </p:column>
+            <p:column>
+              <f:facet name="header">
+                <h:outputText value="#{bundle.ListTutoriaTitle_efectividadTutoria}"/>
+              </f:facet>
+              <p:selectBooleanCheckbox value="#{item.efectividadTutoria}" disabled="true"/>
+            </p:column>
+            <p:column>
+              <f:facet name="header">
                 <h:outputText value="#{bundle.ListTutoriaTitle_idProgramacionTutor}"/>
               </f:facet>
               <h:outputText value="#{item.idProgramacionTutor}"/>
@@ -124,7 +159,6 @@
               <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tutoriaController.destroy}" update=":growl,datalist" disabled="#{empty tutoriaController.selected}"/>
             </f:facet>
           </p:dataTable>
-        </p:panel>
       </h:form>
 
       <ui:include src="Create.xhtml"/>

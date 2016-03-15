@@ -15,7 +15,6 @@
 
     <ui:define name="body">
       <h:form id="UsuarioListForm">
-        <p:panel header="#{bundle.ListUsuarioTitle}">
           <p:dataTable id="datalist" value="#{usuarioController.items}" var="item"
                        selectionMode="single" selection="#{usuarioController.selected}"
                        paginator="true"
@@ -70,7 +69,6 @@
               <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{usuarioController.destroy}" update=":growl,datalist" disabled="#{empty usuarioController.selected}"/>
             </f:facet>
           </p:dataTable>
-        </p:panel>
       </h:form>
 
       <ui:include src="Create.xhtml"/>

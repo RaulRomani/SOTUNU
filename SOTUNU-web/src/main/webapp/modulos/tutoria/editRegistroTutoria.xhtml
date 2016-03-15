@@ -9,31 +9,168 @@
   <ui:composition>
 
     <p:dialog id="RegistroTutoriaEditDlg" widgetVar="RegistroTutoriaEditDialog" modal="true" resizable="false" appendTo="@(body)" 
-              header="#{empty programacionTutorias.tutoriaSelected.atencion? 'Crear registro de tutoria-'.concat(programacionTutorias.tutoriaSelected.atencion):'Editar registro de tutoria'}">
-      <h:form id="RegistroTutoriaEditForm">
-        <h:panelGroup id="display">
-          <p:panelGrid columns="2" rendered="#{programacionTutorias.tutoriaSelected.idTutoria != null}">
-            <p:outputLabel value="#{bundle.EditTutoriaLabel_tema}" for="tema" />
-            <p:inputText id="tema" value="#{programacionTutorias.tutoriaSelected.tema}" title="#{bundle.EditTutoriaTitle_tema}" />
-            <p:outputLabel value="#{bundle.EditTutoriaLabel_atencion}" for="atencion" />
-            <p:inputText id="atencion" value="#{programacionTutorias.tutoriaSelected.atencion}" title="#{bundle.EditTutoriaTitle_atencion}" />
-            <p:outputLabel value="#{bundle.EditTutoriaLabel_refDocente}" for="refDocente" />
-            <p:inputText id="refDocente" value="#{programacionTutorias.tutoriaSelected.refDocente}" title="#{bundle.EditTutoriaTitle_refDocente}" />
-            <p:outputLabel value="#{bundle.EditTutoriaLabel_refAsignatura}" for="refAsignatura" />
-            <p:inputText id="refAsignatura" value="#{programacionTutorias.tutoriaSelected.refAsignatura}" title="#{bundle.EditTutoriaTitle_refAsignatura}" />
-            <p:outputLabel value="#{bundle.EditTutoriaLabel_refDato}" for="refDato" />
-            <p:inputText id="refDato" value="#{programacionTutorias.tutoriaSelected.refDato}" title="#{bundle.EditTutoriaTitle_refDato}" />
-            <p:outputLabel value="#{bundle.EditTutoriaLabel_notas}" for="notas" />
-            <p:inputText id="notas" value="#{programacionTutorias.tutoriaSelected.notas}" title="#{bundle.EditTutoriaTitle_notas}" />
-            <p:outputLabel value="#{bundle.EditTutoriaLabel_asistencia}" for="asistencia" />
-            <p:inputText id="asistencia" value="#{programacionTutorias.tutoriaSelected.asistencia}" title="#{bundle.EditTutoriaTitle_asistencia}" />
-            <p:outputLabel value="#{bundle.EditTutoriaLabel_observaciones}" for="observaciones" />
-            <p:inputText id="observaciones" value="#{programacionTutorias.tutoriaSelected.observaciones}" title="#{bundle.EditTutoriaTitle_observaciones}" />
-          </p:panelGrid>
-          <p:commandButton actionListener="#{programacionTutorias.updateTutoria()}" value="#{bundle.Save}" update="display,:TutoriaListForm:datalist,:growl" />
-          <p:commandButton value="Cerrar" oncomplete="PF('RegistroTutoriaEditDialog').hide()"/>
-        </h:panelGroup>
-      </h:form>
+              header="#{empty programacionTutorias.tutoriaSelected.atencion? 'Crear registro de tutoría/Consejería académica':'Editar registro de tutoría/Consejería académica'}">
+
+      <p:scrollPanel class="edit-registro-tutoria" mode="native" >
+        <h:form id="RegistroTutoriaEditForm">
+          <div class="container-fluid">
+            <div class="row">
+              
+              <br />
+              
+              <div class="col-lg-6">
+
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_tema}" for="tema" />
+                  <div class="col-sm-9">
+                    <p:inputText class="form-control" id="tema" value="#{programacionTutorias.tutoriaSelected.tema}" title="#{bundle.EditTutoriaTitle_tema}" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_atencion}" for="atencion" />
+                  <div class="col-sm-9">
+                    <p:selectOneRadio id="atencion" value="#{programacionTutorias.tutoriaSelected.atencion}"
+                                      onchange="">
+                      <f:selectItem itemLabel="Individual" itemValue="INDIVIDUAL" />
+                      <f:selectItem itemLabel="Grupal" itemValue="GRUPAL" />
+                      <p:ajax listener="#{programacionTutorias.mostrarCampos}" update="mostrarCampo" />
+                    </p:selectOneRadio>
+                  </div>
+                </div>
+                
+                <h:panelGroup id="mostrarCampo">
+                <h:panelGroup rendered="#{programacionTutorias.tutoriaSelected.atencion eq 'INDIVIDUAL'}">
+                  <div class="form-group row">
+                    <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_nombreTutorado}" for="nombreTutorado" />
+                    <div class="col-sm-9">
+                      <p:inputText class="form-control" id="nombreTutorado" value="#{programacionTutorias.tutoriaSelected.nombreTutorado}" title="#{bundle.EditTutoriaTitle_nombreTutorado}" />
+                    </div>
+                  </div>
+                </h:panelGroup>
+                </h:panelGroup>
+                
+              </div> <!-- End Columna 1 -->
+              
+              <div class="col-lg-6" >
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_resumenCaso}" for="resumenCaso" />
+                  <div class="col-sm-9">
+                    <p:inputTextarea class="form-control" id="resumenCaso" value="#{programacionTutorias.tutoriaSelected.resumenCaso}" title="#{bundle.EditTutoriaTitle_resumenCaso}" />
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="col-lg-12">  <!-- Start Columna 2 -->
+                
+                
+                
+                <h3>Referencia de algunos docente(s) del aula</h3>
+
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_refDocente}" for="refDocente" />
+                  <div class="col-sm-9">
+                    <p:inputText class="form-control" id="refDocente" value="#{programacionTutorias.tutoriaSelected.refDocente}" title="#{bundle.EditTutoriaTitle_refDocente}" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_refAsignatura}" for="refAsignatura" />
+                  <div class="col-sm-9">
+                    <p:inputText class="form-control" id="refAsignatura" value="#{programacionTutorias.tutoriaSelected.refAsignatura}" title="#{bundle.EditTutoriaTitle_refAsignatura}" />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_refDato}" for="refDato" />
+                  <div class="col-sm-9">
+                    <p:inputText class="form-control" id="refDato" value="#{programacionTutorias.tutoriaSelected.refDato}" title="#{bundle.EditTutoriaTitle_refDato}" />
+                  </div>
+                </div>
+
+
+
+                <h3>Otros datos del estudiante o del grupo</h3>
+
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_notas}" for="notas" />
+                  <div class="col-sm-9">
+                    <p:inputText class="form-control" id="notas" value="#{programacionTutorias.tutoriaSelected.notas}" title="#{bundle.EditTutoriaTitle_notas}" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_asistencia}" for="asistencia" />
+                  <div class="col-sm-9">
+                    <p:inputText class="form-control" id="asistencia" value="#{programacionTutorias.tutoriaSelected.asistencia}" title="#{bundle.EditTutoriaTitle_asistencia}" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_observaciones}" for="observaciones" />
+                  <div class="col-sm-9">
+                    <p:inputText class="form-control" id="observaciones" value="#{programacionTutorias.tutoriaSelected.observaciones}" title="#{bundle.EditTutoriaTitle_observaciones}" />
+                  </div>
+                </div>
+
+                <h3>ENTREVISTA</h3>
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_respuestaTutor}" for="respuestaTutor" />
+                  <div class="col-sm-9">
+                    <p:inputTextarea class="form-control" id="respuestaTutor" value="#{programacionTutorias.tutoriaSelected.respuestaTutor}" title="#{bundle.EditTutoriaTitle_respuestaTutor}" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_acciones}" for="acciones" />
+
+                  <div class="col-sm-9">
+                    <p:inputTextarea class="form-control" id="acciones" value="#{programacionTutorias.tutoriaSelected.acciones}" title="#{bundle.EditTutoriaTitle_acciones}" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-3 form-control-label" value="#{bundle.EditTutoriaLabel_conclusiones}" for="conclusiones" />
+                  <div class="col-sm-9">
+                    <p:inputTextarea class="form-control" id="conclusiones" value="#{programacionTutorias.tutoriaSelected.conclusiones}" title="#{bundle.EditTutoriaTitle_conclusiones}" />
+                  </div>
+                </div>
+                
+              </div>
+
+
+              <div class="col-lg-3"/>
+              <div class="col-lg-6">
+                <div class="form-group row">
+                  <p:outputLabel class="col-sm-6 form-control-label" value="#{bundle.EditTutoriaLabel_efectividadTutoria}" for="efectividadTutoria" />
+                  <div class="col-sm-3">
+                    <h:selectOneRadio id="efectividadTutoria" 
+                                      value="#{programacionTutorias.tutoriaSelected.efectividadTutoria}">
+                      <f:selectItem itemValue="#{true}" itemLabel="Si" />
+                      <f:selectItem itemValue="#{false}" itemLabel="No"/>
+                    </h:selectOneRadio>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3"/>
+              
+              <div align="center" class="col-lg-12">
+
+
+                
+
+                <p:commandButton icon="fa fa-save" 
+                                 actionListener="#{programacionTutorias.updateTutoria()}" 
+                                 value="#{bundle.Save}" 
+                                 update=":TutoriaListForm:datalist,:growl" />
+                <p:commandButton value="Cerrar" oncomplete="PF('RegistroTutoriaEditDialog').hide()"/>
+
+              </div>
+            </div>
+          </div>
+
+        </h:form>
+      </p:scrollPanel>
     </p:dialog>
 
   </ui:composition>

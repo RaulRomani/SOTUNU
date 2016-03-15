@@ -15,7 +15,6 @@
 
     <ui:define name="body">
       <h:form id="TutoradoListForm">
-        <p:panel header="#{bundle.ListTutoradoTitle}">
           <p:dataTable id="datalist" value="#{tutoradoController.items}" var="item"
                        selectionMode="single" selection="#{tutoradoController.selected}"
                        paginator="true"
@@ -144,7 +143,6 @@
               <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tutoradoController.destroy}" update=":growl,datalist" disabled="#{empty tutoradoController.selected}"/>
             </f:facet>
           </p:dataTable>
-        </p:panel>
       </h:form>
 
       <ui:include src="Create.xhtml"/>

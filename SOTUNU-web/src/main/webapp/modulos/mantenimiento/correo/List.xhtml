@@ -15,7 +15,6 @@
 
     <ui:define name="body">
       <h:form id="CorreoListForm">
-        <p:panel header="#{bundle.ListCorreoTitle}">
           <p:dataTable id="datalist" value="#{correoController.items}" var="item"
                        selectionMode="single" selection="#{correoController.selected}"
                        paginator="true"
@@ -64,7 +63,6 @@
               <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{correoController.destroy}" update=":growl,datalist" disabled="#{empty correoController.selected}"/>
             </f:facet>
           </p:dataTable>
-        </p:panel>
       </h:form>
 
       <ui:include src="Create.xhtml"/>
